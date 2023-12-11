@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   TextInput,
   FlatList,
-  KeyboardAvoidingView,
 } from "react-native";
 import { useState } from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -52,9 +51,43 @@ export default function IllnessesScreen({ navigation }) {
   );
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Ingredients Screen</Text>
-    </View>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <Text style={styles.questionText}>
+        Tell us about the ingredients you are{" "}
+        <Text style={styles.span}>allergic</Text> to and/or{" "}
+        <Text style={styles.span}>dislike</Text>:
+      </Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Type an ingredient..."
+        value={newWord}
+        onChangeText={(text) => setNewWord(text)}
+      />
+      <TouchableOpacity style={styles.addButton} onPress={addWord}>
+        <Text style={styles.addButtonText}>+</Text>
+      </TouchableOpacity>
+
+      <FlatList
+        data={wordList}
+        renderItem={renderWord}
+        keyExtractor={(item) => item}
+      />
+
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.previousButton}
+          onPress={handlePrevious}
+        >
+          <Text style={styles.previousButtonText}>Previous</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
+          <Text style={styles.nextButtonText}>Next</Text>
+        </TouchableOpacity>
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 
