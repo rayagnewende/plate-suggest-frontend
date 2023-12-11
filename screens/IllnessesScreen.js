@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import { CheckBox } from "react-native-elements";
 
-export default function IllnessesScreen() {
+export default function IllnessesScreen({ navigation }) {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleOptionSelect = (option) => {
