@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TextInput,
   FlatList,
+  KeyboardAvoidingView,
 } from "react-native";
 import { useState } from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
