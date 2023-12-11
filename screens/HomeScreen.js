@@ -36,7 +36,7 @@ export default function HomeScreen({ navigation }) {
         style={styles.button2}
         activeOpacity={0.8}
       >
-        <Text style={styles.textButton}>S'inscrire</Text>
+        <Text style={styles.textButton2}>S'inscrire</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );
@@ -68,26 +68,38 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
-    paddingTop: 8,
+    paddingTop: 10,
     width: "80%",
     marginTop: 70,
     backgroundColor: "#A41623",
     borderRadius: 10,
-    marginBottom: 80,
+    marginBottom: 50,
+    borderWidth: 2,
+    borderColor: "#A41623",
   },
   button2: {
     alignItems: "center",
     paddingTop: 8,
     width: "80%",
     marginTop: 0,
-    backgroundColor: "#A41623",
+    backgroundColor: "#fff",
     borderRadius: 10,
     marginBottom: 80,
+    borderWidth: 2,
+    borderColor: "#A41623",
   },
   textButton: {
     color: "#ffffff",
     height: 30,
     fontWeight: "600",
     fontSize: 20,
+    marginVertical: 8,
+  },
+  textButton2: {
+    color: "#A41623",
+    height: 30,
+    fontWeight: "600",
+    fontSize: 20,
+    marginVertical: 8,
   },
 });
