@@ -37,7 +37,10 @@ export default function IllnessesScreen() {
   );
 
   return (
-    <View style={styles.container} edges={["top", "bottom"]}>
+    <KeyboardAvoidingView
+    style={styles.container}
+    behavior={Platform.OS === "ios" ? "padding" : "height"}
+  >
       <Text style={styles.questionText}>
         Do you suffer from any of these illnesses?
       </Text>

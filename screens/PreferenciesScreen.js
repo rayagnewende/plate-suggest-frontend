@@ -34,7 +34,10 @@ export default function PreferenciesScreen({ navigation }) {
   );
 
   return (
-    <View style={styles.container} edges={["top", "bottom"]}>
+    <KeyboardAvoidingView
+    style={styles.container}
+    behavior={Platform.OS === "ios" ? "padding" : "height"}
+  >
       <Text style={styles.questionText}>
         How would you describe your food eating habits?
       </Text>

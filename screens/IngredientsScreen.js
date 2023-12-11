@@ -3,7 +3,10 @@ import { View, Text, StyleSheet } from "react-native";
 
 export default function IngredientsScreen() {
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+    style={styles.container}
+    behavior={Platform.OS === "ios" ? "padding" : "height"}
+  >
       <Text style={styles.text}>Ingredients Screen</Text>
     </View>
   );
