@@ -93,8 +93,11 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: "center",
     marginTop: 20,
-    height: 50,
+    height: 55,
     width: 300,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   nextButtonText: {
     color: "white",
