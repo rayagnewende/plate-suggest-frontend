@@ -1,9 +1,15 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+} from "react-native";
 import { useState } from "react";
 import { CheckBox } from "react-native-elements";
 
-export default function IllnessesScreen() {
+export default function IllnessesScreen({ navigation }) {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleOptionSelect = (option) => {
@@ -37,7 +43,10 @@ export default function IllnessesScreen() {
   );
 
   return (
-    <View style={styles.container} edges={["top", "bottom"]}>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
       <Text style={styles.questionText}>
         Do you suffer from any of these illnesses?
       </Text>
@@ -59,7 +68,7 @@ export default function IllnessesScreen() {
           <Text style={styles.nextButtonText}>Next</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
