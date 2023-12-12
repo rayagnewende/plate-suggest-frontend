@@ -8,12 +8,23 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { CheckBox } from "react-native-elements";
+import { addIllnesses, deleteIllness } from "../reducers/user";
+import { useDispatch } from "react-redux";
 
 export default function IllnessesScreen({ navigation }) {
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const dispatch = useDispatch();
 
   const handleOptionSelect = (option) => {
-    setSelectedOption(option);
+    setSelectedOptions((prevOptions) => {
+      if (prevOptions.includes(option)) {
+        dispatch(deleteIllness(option));
+        return prevOptions.filter((element) => element !== option);
+      } else {
+        dispatch(addIllnesses(option));
+        return [...prevOptions, option];
+      }
+    });
   };
   const handleNext = () => {
     navigation.navigate("Ingredients");
@@ -30,7 +41,7 @@ export default function IllnessesScreen({ navigation }) {
     >
       <View style={styles.checkboxContainer}>
         <CheckBox
-          checked={option === selectedOption}
+          checked={selectedOptions.includes(option)}
           onPress={() => handleOptionSelect(option)}
           style={styles.checkbox}
           checkedColor="#A41623"
@@ -50,6 +61,7 @@ export default function IllnessesScreen({ navigation }) {
       <Text style={styles.questionText}>
         Do you suffer from any of these illnesses?
       </Text>
+
       {renderOption("Diabetes")}
 
       {renderOption("Hypertension")}
@@ -82,7 +94,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   questionText: {
-    fontSize: 40,
+    fontSize: 20,
     fontWeight: "bold",
     marginBottom: 20,
     color: "#A41623",
@@ -140,8 +152,8 @@ const styles = StyleSheet.create({
   checkboxContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    width: 300,
+    justifyContent: "space-between",
+    width: 180,
   },
   checkbox: {
     marginRight: 10,

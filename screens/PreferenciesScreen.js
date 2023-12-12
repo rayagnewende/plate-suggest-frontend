@@ -9,10 +9,15 @@ import {
 import { useState } from "react";
 import { CheckBox } from "react-native-elements";
 
+import { selectRegime } from "../reducers/user";
+import { useDispatch } from "react-redux";
+
 export default function PreferenciesScreen({ navigation }) {
   const [selectedOption, setSelectedOption] = useState(null);
+  const dispatch = useDispatch();
 
   const handleOptionSelect = (option) => {
+    dispatch(selectRegime(option));
     setSelectedOption(option);
   };
   const handleNext = () => {
@@ -72,7 +77,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   questionText: {
-    fontSize: 40,
+    fontSize: 20,
     fontWeight: "bold",
     marginBottom: 20,
     color: "#A41623",
@@ -107,13 +112,15 @@ const styles = StyleSheet.create({
   checkboxContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    width: 300,
+    justifyContent: "space-between",
+    width: 180,
   },
   checkbox: {
     marginRight: 10,
     backgroundColor: "transparent",
     borderWidth: 0,
+    position: "relative",
+    left: 1,
   },
   optionText: {
     fontSize: 16,

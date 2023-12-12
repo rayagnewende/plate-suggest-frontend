@@ -10,28 +10,37 @@ import {
 } from "react-native";
 import { useState } from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { useDispatch } from "react-redux";
+import { addIngredient, deleteIngredient } from "../reducers/user";
 
 export default function IllnessesScreen({ navigation }) {
   const [newWord, setNewWord] = useState("");
   const [wordList, setWordList] = useState([]);
-
+  const dispatch = useDispatch();
   const addWord = () => {
     if (newWord.trim() !== "") {
-      setWordList((prevList) => [...prevList, newWord.trim()]);
+      setWordList((prevList) => [
+        ...prevList,
+        newWord
+          .trim()
+          .toLowerCase()
+          .split("")
+          .map((char, i) => (i === 0 ? char.toUpperCase() : char))
+          .join(""),
+      ]);
       setNewWord("");
+      dispatch(addIngredient(newWord.trim()));
     }
   };
   const removeWord = (wordToRemove) => {
     setWordList((prevWordList) =>
       prevWordList.filter((word) => word !== wordToRemove)
     );
+    dispatch(deleteIngredient(wordToRemove));
   };
 
-  const handleOptionSelect = (option) => {
-    setSelectedOption(option);
-  };
   const handleNext = () => {
-    navigation.navigate("Ingredients");
+    navigation.navigate("Welcome");
   };
   const handlePrevious = () => {
     navigation.navigate("Illness");
@@ -108,7 +117,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   questionText: {
-    fontSize: 40,
+    fontSize: 20,
     fontWeight: "bold",
     marginBottom: 20,
     color: "#A41623",
@@ -198,6 +207,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: "85%",
     borderRadius: 20,
+    height: 70,
   },
   addButton: {
     position: "relative",
