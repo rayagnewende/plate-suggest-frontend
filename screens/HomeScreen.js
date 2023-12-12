@@ -68,7 +68,8 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
-    paddingTop: 10,
+    justifyContent: "center",
+    alignItems: "center",
     width: "80%",
     marginTop: 70,
     backgroundColor: "#A41623",
@@ -79,7 +80,8 @@ const styles = StyleSheet.create({
   },
   button2: {
     alignItems: "center",
-    paddingTop: 8,
+    justifyContent: "center",
+    alignItems: "center",
     width: "80%",
     marginTop: 0,
     backgroundColor: "#fff",

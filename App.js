@@ -9,24 +9,30 @@ import SignUpScreen from "./screens/SignUpScreen";
 import PreferenciesScreen from "./screens/PreferenciesScreen";
 import IllnessesScreen from "./screens/IllnessesScreen";
 import IngredientsScreen from "./screens/IngredientsScreen";
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+import user from "./reducers/user";
+
+const store = configureStore({
+  reducer: { user },
+});
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{ headerShown: false }}
-        initialRouteName="Preferencies"
-      >
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="SignIn" component={SignInScreen} />
-        <Stack.Screen name="SignUp" component={SignUpScreen} />
-        <Stack.Screen name="Preferencies" component={PreferenciesScreen} />
-        <Stack.Screen name="Illness" component={IllnessesScreen} />
-        <Stack.Screen name="Ingredients" component={IngredientsScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="SignIn" component={SignInScreen} />
+          <Stack.Screen name="SignUp" component={SignUpScreen} />
+          <Stack.Screen name="Preferencies" component={PreferenciesScreen} />
+          <Stack.Screen name="Illness" component={IllnessesScreen} />
+          <Stack.Screen name="Ingredients" component={IngredientsScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
