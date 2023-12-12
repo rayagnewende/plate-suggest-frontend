@@ -9,6 +9,7 @@ import SignUpScreen from "./screens/SignUpScreen";
 import PreferenciesScreen from "./screens/PreferenciesScreen";
 import IllnessesScreen from "./screens/IllnessesScreen";
 import IngredientsScreen from "./screens/IngredientsScreen";
+import WelcomeScreen from "./screens/WelcomeScreen";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import user from "./reducers/user";
@@ -33,6 +34,7 @@ export default function App() {
           <Stack.Screen name="Preferencies" component={PreferenciesScreen} />
           <Stack.Screen name="Illness" component={IllnessesScreen} />
           <Stack.Screen name="Ingredients" component={IngredientsScreen} />
+          <Stack.Screen name="Welcome" component={WelcomeScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

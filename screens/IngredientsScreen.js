@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -16,20 +16,51 @@ import { addIngredient, deleteIngredient } from "../reducers/user";
 export default function IllnessesScreen({ navigation }) {
   const [newWord, setNewWord] = useState("");
   const [wordList, setWordList] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
+  const [suggestionSelected, setSuggestionSelected] = useState(false);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (suggestionSelected) {
+      addWord();
+      setSuggestionSelected(false);
+    }
+  });
+
+  useEffect(() => {
+    const fetchSuggestions = async () => {
+      try {
+        const response = await fetch(
+          `https://plate-suggest-backend.vercel.app/ingredients/${newWord}`
+        );
+        const data = await response.json();
+
+        const autoAnswer = data.ingredients.map((e) => e.name);
+
+        setSuggestions(autoAnswer);
+      } catch (error) {
+        console.error("Error fetching suggestions:", error);
+      }
+    };
+    if (newWord.trim() !== "") {
+      fetchSuggestions();
+    } else {
+      setSuggestions([]);
+    }
+  }, [newWord]);
+
   const addWord = () => {
     if (newWord.trim() !== "") {
-      setWordList((prevList) => [
-        ...prevList,
-        newWord
-          .trim()
-          .toLowerCase()
-          .split("")
-          .map((char, i) => (i === 0 ? char.toUpperCase() : char))
-          .join(""),
-      ]);
-      setNewWord("");
-      dispatch(addIngredient(newWord.trim()));
+      const formattedWord = newWord
+        .trim()
+        .toLowerCase()
+        .split("")
+        .map((char, i) => (i === 0 ? char.toUpperCase() : char))
+        .join("");
+
+      setWordList((prevList) => [...prevList, formattedWord]);
+      setNewWord(" ");
+      dispatch(addIngredient(formattedWord));
     }
   };
   const removeWord = (wordToRemove) => {
@@ -45,6 +76,17 @@ export default function IllnessesScreen({ navigation }) {
   const handlePrevious = () => {
     navigation.navigate("Illness");
   };
+
+  const renderSuggestion = ({ item }) => (
+    <TouchableOpacity
+      onPress={() => {
+        setNewWord(item);
+        setSuggestionSelected(true);
+      }}
+    >
+      <Text style={styles.suggestionItem}>{item}</Text>
+    </TouchableOpacity>
+  );
 
   const renderWord = ({ item }) => (
     <View style={styles.renderWord}>
@@ -84,6 +126,16 @@ export default function IllnessesScreen({ navigation }) {
           <FontAwesome name="plus-circle" size={40} color="#A41623" />
         </TouchableOpacity>
       </View>
+
+      {suggestions.length > 0 && (
+        <FlatList
+          style={styles.suggestionsList}
+          data={suggestions}
+          renderItem={renderSuggestion}
+          keyExtractor={(item) => item}
+          contentContainerStyle={styles.listContent}
+        />
+      )}
 
       <FlatList
         style={styles.list}
@@ -235,5 +287,18 @@ const styles = StyleSheet.create({
   },
   listContent: {
     justifyContent: "flex-start",
+  },
+  suggestionsList: {
+    marginVertical: 10,
+    width: "80%",
+    maxHeight: 200,
+    zIndex: 5,
+  },
+  suggestionItem: {
+    fontSize: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "lightgray",
   },
 });
