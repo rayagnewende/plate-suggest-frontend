@@ -18,9 +18,16 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    register: (state, action) => {},
+    register: (state, action) => {
+      state.value.username = action.payload.username;
+      state.value.email = action.payload.email;
+      state.value.password = action.payload.password;
+      state.value.token = action.payload.token;
+    },
     login: (state, action) => {},
-    logout: (state) => {},
+    logout: (state) => {
+      state.value.token = null;
+    },
     addRegime: (state, action) => {},
     updateRegime: (state, action) => {},
     deleteRegime: (state, action) => {},

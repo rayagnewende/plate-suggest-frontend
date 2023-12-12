@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -6,12 +7,36 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import { register } from "../reducers/user";
+import { useDispatch } from "react-redux";
 
 export default function SignInScreen({ navigation }) {
-  const goToSignup = () => {
-    navigation.navigate("SignUp");
-  };
-
+ 
+    
+   // const user = useSelector((state) => state.user.value);
+  
+    // Redirect to /home if logged in
+    //const router = useRouter();
+    //if (user.token) {
+    //  router.push('/');
+    // }
+    const dispatch = useDispatch();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+  
+    const handleSubmit = () => {
+      fetch('https://plate-suggest-backend.vercel.app/users/signin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      }).then(response => response.json())
+        .then(data => {
+          data.result && dispatch(register({ token: data.token, email: data.email, password: data.password }));
+          setEmail('');setPassword('');
+          navigation.navigate("Welcome");
+        });
+    };
+  
   return (
     <KeyboardAvoidingView
       style={styles.container}

@@ -1,10 +1,29 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { useDispatch } from "react-redux";
+import { logout } from "../reducers/user";
+import { useState } from "react";
 
-export default function IngredientsScreen() {
+export default function WelcomeScreen({ navigation}) {
+
+  const [isConnected, setIsconected] = useState(false)  
+  const dispatch = useDispatch(); 
+
+  const handledisconnect = () => {
+    
+     dispatch(logout())
+     setIsconected(true); 
+     navigation.navigate("Home"); 
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Ingredients Screen</Text>
+      <Text style={styles.text}>Welcome</Text>
+      <TouchableOpacity 
+       onPress={() => handledisconnect() } >
+        <Text>Se déconnecter</Text>
+        </TouchableOpacity>
     </View>
   );
 }
