@@ -23,7 +23,9 @@ export default function SignInScreen({ navigation }) {
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-  
+    const EMAIL_REGEX: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const [emailERROR, setEmailERROR] = useState(false);
+
     const handleSubmit = () => {
       fetch('https://plate-suggest-backend.vercel.app/users/signin', {
         method: 'POST',
@@ -32,8 +34,12 @@ export default function SignInScreen({ navigation }) {
       }).then(response => response.json())
         .then(data => {
           data.result && dispatch(register({ token: data.token, email: data.email, password: data.password }));
+          if(EMAIL_REGEX.test(email)) {
+          navigation.navigate("Welcome")
+          } else {
+            setEmailERROR(false)
+          }
           setEmail('');setPassword('');
-          navigation.navigate("Welcome");
         });
     };
   
@@ -45,8 +51,9 @@ export default function SignInScreen({ navigation }) {
       <Text style={styles.title}>Te revoilà!</Text>
       <Text style={styles.title2}>Connexion</Text>
 
-      <TextInput placeholder="Adresse email" style={styles.input} />
-      <TextInput placeholder="mot de passe" style={styles.input} />
+      <TextInput placeholder="Adresse email" textContentType="emailAdress"  style={styles.input} />
+      { emailERROR && <Text style={styles.error}>Adresse email invalide</Text>}
+      <TextInput placeholder="mot de passe" secureTextEntry={true} style={styles.input} />
       <TouchableOpacity
         onPress={() => handleSubmit()}
         style={styles.button}
@@ -114,5 +121,8 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     fontStyle: "italic",
   },
-
+  error:{
+    marginTop: 10,
+    color: "red",
+  }
 });
