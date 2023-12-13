@@ -7,24 +7,38 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import { register } from "../reducers/user";
+import { useDispatch } from "react-redux";
 
 export default function SignUpScreen({ navigation }) {
-  //   const [firstName, setFirstName] = useState("");
-  //   const [username, setUsername] = useState("");
-  //   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const [userERROR, setUserERROR] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-//   const handleSubmit = () => {
-//     fetch("http://localhost:3000/users/signup", {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify({ firstName, username, password }),
-//     })
-//       .then((response) => response.json())
-//       .then((data) => {
-//         data.result &&
-//           dispatch(login({ token: data.token, username, firstName }));
-//       });
-//   };
+  const handleSubmit = () => {
+    fetch("https://plate-suggest-backend.vercel.app/users/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, username, password }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result) {
+          dispatch(register({ token: data.token, username, email, password }));
+
+          navigation.navigate("Preferencies");
+        } else {
+          setErrorMessage(data.error);
+          setUserERROR(true);
+        }
+        setEmail("");
+        setPassword("");
+        setUsername("");
+      });
+  };
 
   return (
     <KeyboardAvoidingView
@@ -33,25 +47,27 @@ export default function SignUpScreen({ navigation }) {
     >
       <Text style={styles.title}>Bienvenue</Text>
       <Text style={styles.title2}>Creer un compte</Text>
-
       <TextInput
-        placeholder="Adresse email"
-        // onChangeText={(value) => setUsername(value)}
-        // value={username}
+        placeholder="Nom d'utilisateur"
+        onChangeText={(value) => setUsername(value)}
+        value={username}
         style={styles.input}
       />
       <TextInput
-        placeholder="Nom d'utilisateur"
-        // onChangeText={(value) => setFirstName(value)}
-        // value={firstName}
+        placeholder="Adresse email"
+        onChangeText={(value) => setEmail(value)}
+        textContentType="emailAddress"
+        value={email}
         style={styles.input}
       />
       <TextInput
         placeholder="mot de passe"
-        // onChangeText={(value) => setPassword(value)}
-        // value={password}
+        secureTextEntry={true}
+        onChangeText={(value) => setPassword(value)}
+        value={password}
         style={styles.input}
       />
+      {userERROR && <Text style={styles.error}>{errorMessage}</Text>}
       <TouchableOpacity
         onPress={() => handleSubmit()}
         style={styles.button}
@@ -78,7 +94,7 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
   title2: {
-    height : "10%",
+    height: "10%",
     fontSize: 30,
     fontWeight: "600",
     color: "white",
@@ -117,5 +133,10 @@ const styles = StyleSheet.create({
     height: 30,
     marginVertical: 8,
     fontStyle: "italic",
+  },
+  error: {
+    marginTop: 10,
+    color: "white",
+    fontSize: 17,
   },
 });
