@@ -1,36 +1,32 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useDispatch } from "react-redux";
 
-
 export default function SettingsScreen({ navigation }) {
-  
   const goToPreferencies = () => {
     navigation.navigate("Preferencies");
-  }
+  };
 
   const goToIllnesses = () => {
     navigation.navigate("Illnesses");
-  }
+  };
 
   const goToIngredients = () => {
     navigation.navigate("Ingredients");
-  }
+  };
 
-  const [isConnected, setIsconected] = useState(false)  
-  const dispatch = useDispatch(); 
+  const [isConnected, setIsconected] = useState(false);
+  const dispatch = useDispatch();
 
   const handledisconnect = () => {
-    
-     dispatch(logout())
-     setIsconected(true); 
-     navigation.navigate("Home"); 
-  }
+    dispatch(logout());
+    setIsconected(true);
+    navigation.navigate("Home");
+  };
 
   return (
     <View style={styles.container}>
-
       <TouchableOpacity
         onPress={() => goToPreferencies()}
         style={styles.button}
@@ -54,7 +50,7 @@ export default function SettingsScreen({ navigation }) {
       >
         <Text style={styles.textButton}>Maladies</Text>
       </TouchableOpacity>
-      
+
       <TouchableOpacity
         onPress={() => handledisconnect()}
         style={styles.button}
@@ -62,7 +58,6 @@ export default function SettingsScreen({ navigation }) {
       >
         <Text style={styles.textButton}>Déconnexion</Text>
       </TouchableOpacity>
-
     </View>
   );
 }
@@ -80,5 +75,5 @@ const styles = StyleSheet.create({
   },
   button: {
     fontSize: 16,
-  }
+  },
 });

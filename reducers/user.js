@@ -32,7 +32,9 @@ export const userSlice = createSlice({
     logout: (state) => {
       state.value.token = null;
     },
-    addRegime: (state, action) => {},
+    selectRegime: (state, action) => {
+      state.value.preferences.regime = action.payload;
+    },
     updateRegime: (state, action) => {},
     deleteRegime: (state, action) => {},
     addIllnesses: (state, action) => {
