@@ -7,42 +7,43 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { register } from "../reducers/user";
+import { login } from "../reducers/user";
 import { useDispatch } from "react-redux";
 
 export default function SignInScreen({ navigation }) {
- 
-    
-   // const user = useSelector((state) => state.user.value);
-  
-    // Redirect to /home if logged in
-    //const router = useRouter();
-    //if (user.token) {
-    //  router.push('/');
-    // }
-    const dispatch = useDispatch();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const EMAIL_REGEX: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const [emailERROR, setEmailERROR] = useState(false);
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailERROR, setEmailERROR] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-    const handleSubmit = () => {
-      fetch('https://plate-suggest-backend.vercel.app/users/signin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      }).then(response => response.json())
-        .then(data => {
-          data.result && dispatch(register({ token: data.token, email: data.email, password: data.password }));
-          if(EMAIL_REGEX.test(email)) {
-          navigation.navigate("Welcome")
-          } else {
-            setEmailERROR(false)
-          }
-          setEmail('');setPassword('');
-        });
-    };
-  
+  const handleSubmit = () => {
+    fetch("https://plate-suggest-backend.vercel.app/users/signin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result) {
+          dispatch(
+            login({
+              token: data.token,
+              email: data.email,
+              password: data.password,
+            })
+          );
+          navigation.navigate("Welcome");
+        } else {
+          setErrorMessage("Identifiants incorrect");
+          setEmailERROR(true);
+        }
+        setEmail("");
+        setPassword("");
+        setErrorMessage("");
+      });
+  };
+
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -51,9 +52,18 @@ export default function SignInScreen({ navigation }) {
       <Text style={styles.title}>Te revoilà!</Text>
       <Text style={styles.title2}>Connexion</Text>
 
-      <TextInput placeholder="Adresse email" textContentType="emailAdress"  style={styles.input} />
-      { emailERROR && <Text style={styles.error}>Adresse email invalide</Text>}
-      <TextInput placeholder="mot de passe" secureTextEntry={true} style={styles.input} />
+      <TextInput
+        placeholder="Adresse email"
+        textContentType="emailAddress"
+        onChangeText={(value) => setEmail(value)}
+        style={styles.input}
+      />
+      <TextInput
+        placeholder="mot de passe"
+        onChangeText={(value) => setPassword(value)}
+        secureTextEntry={true}
+        style={styles.input}
+      />
       <TouchableOpacity
         onPress={() => handleSubmit()}
         style={styles.button}
@@ -61,6 +71,7 @@ export default function SignInScreen({ navigation }) {
       >
         <Text style={styles.textButton}>Se connecter</Text>
       </TouchableOpacity>
+      {emailERROR && <Text style={styles.error}>Identifiant incorrect</Text>}
     </KeyboardAvoidingView>
   );
 }
@@ -80,7 +91,7 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
   title2: {
-    height : "10%",
+    height: "10%",
     fontSize: 30,
     fontWeight: "600",
     color: "white",
@@ -97,7 +108,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     borderRadius: 15,
     height: 55,
-    color : "#A41623",
+    color: "#A41623",
   },
   button: {
     alignItems: "center",
@@ -121,8 +132,8 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     fontStyle: "italic",
   },
-  error:{
+  error: {
     marginTop: 10,
-    color: "red",
-  }
+    color: "white",
+  },
 });

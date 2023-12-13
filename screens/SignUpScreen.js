@@ -15,23 +15,29 @@ export default function SignUpScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const [userERROR, setUserERROR] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = () => {
-    fetch("https://plate-suggest-backend.vercel.app/users/signup",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, username, password }),
-      }
-    )
+    fetch("https://plate-suggest-backend.vercel.app/users/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, username, password }),
+    })
       .then((response) => response.json())
       .then((data) => {
-         data.result &&
-           dispatch(register({ token: data.token, username, email, password }));
-           setEmail('');setPassword('');setUsername('');
-           navigation.navigate("Preferencies");
+        if (data.result) {
+          dispatch(register({ token: data.token, username, email, password }));
+
+          navigation.navigate("Preferencies");
+        } else {
+          setErrorMessage(data.error);
+          setUserERROR(true);
+        }
+        setEmail("");
+        setPassword("");
+        setUsername("");
       });
-   
   };
 
   return (
@@ -41,7 +47,6 @@ export default function SignUpScreen({ navigation }) {
     >
       <Text style={styles.title}>Bienvenue</Text>
       <Text style={styles.title2}>Creer un compte</Text>
-
       <TextInput
         placeholder="Nom d'utilisateur"
         onChangeText={(value) => setUsername(value)}
@@ -51,15 +56,18 @@ export default function SignUpScreen({ navigation }) {
       <TextInput
         placeholder="Adresse email"
         onChangeText={(value) => setEmail(value)}
+        textContentType="emailAddress"
         value={email}
         style={styles.input}
       />
       <TextInput
         placeholder="mot de passe"
+        secureTextEntry={true}
         onChangeText={(value) => setPassword(value)}
         value={password}
         style={styles.input}
       />
+      {userERROR && <Text style={styles.error}>{errorMessage}</Text>}
       <TouchableOpacity
         onPress={() => handleSubmit()}
         style={styles.button}
@@ -125,5 +133,10 @@ const styles = StyleSheet.create({
     height: 30,
     marginVertical: 8,
     fontStyle: "italic",
+  },
+  error: {
+    marginTop: 10,
+    color: "white",
+    fontSize: 17,
   },
 });

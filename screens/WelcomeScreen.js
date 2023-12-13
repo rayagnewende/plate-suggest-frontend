@@ -5,25 +5,15 @@ import { useDispatch } from "react-redux";
 import { logout } from "../reducers/user";
 import { useState } from "react";
 
+
 export default function WelcomeScreen({ navigation}) {
 
-  const [isConnected, setIsconected] = useState(false)  
-  const dispatch = useDispatch(); 
-
-  const handledisconnect = () => {
-    
-     dispatch(logout())
-     setIsconected(true); 
-     navigation.navigate("Home"); 
-  }
+  
 
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Welcome</Text>
-      <TouchableOpacity 
-       onPress={() => handledisconnect() } >
-        <Text>Se déconnecter</Text>
-        </TouchableOpacity>
+      
     </View>
   );
 }
