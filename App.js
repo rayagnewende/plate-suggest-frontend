@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./screens/HomeScreen";
 import SignInScreen from "./screens/SignInScreen";
 import SignUpScreen from "./screens/SignUpScreen";
@@ -20,6 +21,18 @@ const store = configureStore({
 
 const Stack = createNativeStackNavigator();
 
+const Tab = createBottomTabNavigator();
+
+const TabNavigator = () => {
+  return (
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Screen name="Welcome" component={WelcomeScreen} />
+      <Tab.Screen name="Map" component={MapScreen} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
+    </Tab.Navigator>
+  );
+};
+
 export default function App() {
   return (
     <Provider store={store}>
@@ -34,7 +47,7 @@ export default function App() {
           <Stack.Screen name="Preferencies" component={PreferenciesScreen} />
           <Stack.Screen name="Illness" component={IllnessesScreen} />
           <Stack.Screen name="Ingredients" component={IngredientsScreen} />
-          <Stack.Screen name="Welcome" component={WelcomeScreen} />
+          <Stack.Screen name="TabNavigator" component={TabNavigator} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
