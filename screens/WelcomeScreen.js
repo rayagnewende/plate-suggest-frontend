@@ -1,6 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React, { useState } from "react";
+import { AsyncStorage } from "react-native";
 import {
   View,
   Text,
@@ -10,12 +11,13 @@ import {
   TextInput,
   TouchableOpacity,
   FlatList,
-  useEffect,
+  KeyboardAvoidingView,
 } from "react-native";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import * as Location from "expo-location";
-
-const Tab = createBottomTabNavigator();
+import user from "../reducers/user";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 export default function WelcomeScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
@@ -24,8 +26,8 @@ export default function WelcomeScreen({ navigation }) {
   const [customerGivenLocation, setCustomerGivenLocation] = useState("");
   const [restaurants, setRestaurants] = useState([]);
   const [location, setLocation] = useState({
-    latitude: 37.78825,
-    longitude: -122.4324,
+    latitude: 0,
+    longitude: 0,
   });
 
   useEffect(() => {
@@ -50,7 +52,7 @@ export default function WelcomeScreen({ navigation }) {
                 qualification: 4.5,
                 price: "$$$",
                 distance: "0.5 miles",
-                image: require("../assets/HotDog.jpg"), // Replace with actual image source
+                image: require("../assets/HotDog.jpg"),
               },
               {
                 id: 2,
@@ -60,7 +62,7 @@ export default function WelcomeScreen({ navigation }) {
                 qualification: 4.2,
                 price: "$$",
                 distance: "0.8 miles",
-                image: require("../assets/burger.jpg "), // Replace with actual image source
+                image: require("../assets/Wendys.png"),
               },
               {
                 id: 3,
@@ -70,7 +72,7 @@ export default function WelcomeScreen({ navigation }) {
                 qualification: 4.9,
                 price: "$",
                 distance: "1.5 miles",
-                image: require("../assets/ribs.jpg"), // Replace with actual image source
+                image: require("../assets/ribs.jpg"),
               },
               {
                 id: 4,
@@ -80,7 +82,7 @@ export default function WelcomeScreen({ navigation }) {
                 qualification: 3.5,
                 price: "$$",
                 distance: "1.1 miles",
-                image: require("../assets/sushimix.jpg"), // Replace with actual image source
+                image: require("../assets/sushimix.jpg"),
               },
               {
                 id: 5,
@@ -90,7 +92,7 @@ export default function WelcomeScreen({ navigation }) {
                 qualification: 4.3,
                 price: "$$$",
                 distance: "2.5 miles",
-                image: require("../assets/poisson.jpg"), // Replace with actual image source
+                image: require("../assets/PizzaHut.png"),
               },
               {
                 id: 6,
@@ -100,7 +102,7 @@ export default function WelcomeScreen({ navigation }) {
                 qualification: 4.7,
                 price: "$$$",
                 distance: "3 miles",
-                image: require("../assets/indien.jpg"), // Replace with actual image source
+                image: require("../assets/Logo-KFC.png"),
               },
               {
                 id: 7,
@@ -110,7 +112,7 @@ export default function WelcomeScreen({ navigation }) {
                 qualification: 3.3,
                 price: "$",
                 distance: "1.7 miles",
-                image: require("../assets/mcdo.jpg"), // Replace with actual image source
+                image: require("../assets/mcdo.jpg"),
               },
               {
                 id: 8,
@@ -120,7 +122,7 @@ export default function WelcomeScreen({ navigation }) {
                 qualification: 4.1,
                 price: "$$$",
                 distance: "1.8 miles",
-                image: require("../assets/steak.jpg"), // Replace with actual image source
+                image: require("../assets/steak.jpg"),
               },
               {
                 id: 9,
@@ -130,7 +132,7 @@ export default function WelcomeScreen({ navigation }) {
                 qualification: 2.5,
                 price: "$$$",
                 distance: "0.5 miles",
-                image: require("../assets/DQ.png"), // Replace with actual image source
+                image: require("../assets/DQ.png"),
               },
               {
                 id: 10,
@@ -140,9 +142,8 @@ export default function WelcomeScreen({ navigation }) {
                 qualification: 4.9,
                 price: "$$$",
                 distance: "4.5 miles",
-                image: require("../assets/Wendys.png"), // Replace with actual image source
+                image: require("../assets/Wendys.png"),
               },
-              // Add more restaurants...
             ];
             setRestaurants(fetchedRestaurants);
           });
@@ -163,61 +164,86 @@ export default function WelcomeScreen({ navigation }) {
 
   // }
 
-  const renderRestaurant = ({ item }) => (
-    <View style={styles.restaurantContainer}>
-      <Image source={item.image} style={styles.restaurantImage} />
-      <View style={styles.restaurantInfo}>
-        <Text style={styles.restaurantName}>{item.name}</Text>
-        <Text style={styles.restaurantDescription}>{item.description}</Text>
-        <Text style={styles.restaurantQualification}>
-          Rating: {item.qualification}
-        </Text>
-        <Text style={styles.restaurantPrice}>Price: {item.price}</Text>
-        <Text style={styles.restaurantDistance}>Distance: {item.distance}</Text>
-      </View>
-    </View>
-  );
+  const renderRestaurant = ({ item }) => {
+    const maxLengthDescription =
+      item.description.length > 120
+        ? item.description.substring(0, 120) + "..."
+        : item.description;
+    return (
+      <KeyboardAvoidingView
+        style={styles.restaurantContainer}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <Image source={item.image} style={styles.restaurantImage} />
+        <View style={styles.restaurantInfo}>
+          <Text style={styles.restaurantName}>{item.name}</Text>
+          <Text style={styles.restaurantDescription}>
+            {maxLengthDescription}
+          </Text>
+          <Text style={styles.restaurantQualification}>
+            Rating: {item.qualification}
+          </Text>
+          <Text style={styles.restaurantPrice}>Price: {item.price}</Text>
+          <Text style={styles.restaurantDistance}>
+            Distance: {item.distance}
+          </Text>
+        </View>
+      </KeyboardAvoidingView>
+    );
+  };
 
   return (
-    <View style={styles.container}>
-      <Modal visible={modalVisible} animationType="fade" transparent>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <TextInput
-              placeholder="Enter your address location"
-              onChangeText={(value) => setCustomerGivenLocation(value)}
-              value={customerGivenLocation}
-              style={styles.input}
-            />
-            <TouchableOpacity
-              onPress={() => {
-                // saveCustomerLocation(customerGivenLocation);
-                setModalVisible(false);
-              }}
-              style={styles.button}
-              activeOpacity={0.8}
-            >
-              <Text style={styles.textButton}>Save</Text>
-            </TouchableOpacity>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <View style={styles.header}>
+        <Text style={styles.greeting}>Hello, {user.username}!</Text>
+        <TouchableOpacity style={styles.filterButton}>
+          <FontAwesome name="filter" size={20} color="#A41623" />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.restaurantContainer}>
+        <Modal visible={modalVisible} animationType="fade" transparent>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <TextInput
+                placeholder="Enter your address location"
+                onChangeText={(value) => setCustomerGivenLocation(value)}
+                value={customerGivenLocation}
+                style={styles.input}
+              />
+              <TouchableOpacity
+                onPress={() => {
+                  // saveCustomerLocation(customerGivenLocation);
+                  setModalVisible(false);
+                }}
+                style={styles.button}
+                activeOpacity={0.8}
+              >
+                <Text style={styles.textButton}>Save</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </Modal>
-      {permissionGranted && (
-        <FlatList
-          data={restaurants}
-          renderItem={renderRestaurant}
-          keyExtractor={(item) => item.id.toString()}
-        />
-      )}
-      {!permissionGranted && (
-        <FlatList
-          data={restaurants.reverse()}
-          renderItem={renderRestaurant}
-          keyExtractor={(item) => item.id.toString()}
-        />
-      )}
-      <Text style={styles.text}>Welcome Screen</Text>
-    </View>
+        </Modal>
+        {permissionGranted && (
+          <FlatList
+            style={{ marginTop: 5 }}
+            data={restaurants}
+            renderItem={renderRestaurant}
+            keyExtractor={(item) => item.id.toString()}
+          />
+        )}
+        {!permissionGranted && (
+          <FlatList
+            style={{ marginTop: 5 }}
+            data={restaurants.reverse()}
+            renderItem={renderRestaurant}
+            keyExtractor={(item) => item.id.toString()}
+          />
+        )}
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -225,8 +251,34 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
+    marginTop: 25,
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "lightgray",
+  },
+  greeting: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  filterButton: {
+    backgroundColor: "white",
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "#A41623",
+    padding: 10,
+    borderRadius: 5,
+  },
+  filterButtonText: {
+    color: "white",
+    fontWeight: "bold",
   },
   text: {
     fontSize: 24,
@@ -239,8 +291,8 @@ const styles = StyleSheet.create({
     borderBottomColor: "lightgray",
   },
   restaurantImage: {
-    width: 80,
-    height: 80,
+    width: 130,
+    height: "100%",
     marginRight: 10,
     borderRadius: 5,
   },

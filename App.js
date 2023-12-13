@@ -11,9 +11,12 @@ import PreferenciesScreen from "./screens/PreferenciesScreen";
 import IllnessesScreen from "./screens/IllnessesScreen";
 import IngredientsScreen from "./screens/IngredientsScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
+import MapScreen from "./screens/MapScreen";
+import SettingsScreen from "./screens/SettingsScreen";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import user from "./reducers/user";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 const store = configureStore({
   reducer: { user },
@@ -25,8 +28,27 @@ const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen name="Welcome" component={WelcomeScreen} />
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color, size }) => {
+          let iconName = "";
+
+          if (route.name === "Home") {
+            iconName = "home";
+          } else if (route.name === "Map") {
+            iconName = "map";
+          } else if (route.name === "Settings") {
+            iconName = "gear";
+          }
+
+          return <FontAwesome name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: "#A61423",
+        tabBarInactiveTintColor: "gray",
+        headerShown: false,
+      })}
+    >
+      <Tab.Screen name="Home" component={WelcomeScreen} />
       <Tab.Screen name="Map" component={MapScreen} />
       <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
