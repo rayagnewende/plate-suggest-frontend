@@ -60,7 +60,10 @@ export default function IngredientsScreen({ navigation }) {
 
       setWordList((prevList) => [...prevList, formattedWord]);
       setNewWord(" ");
-      dispatch(addIngredient({ ingredient_name: formattedWord }));
+      const ingredient = {
+        ingredient_name: formattedWord,
+      };
+      dispatch(addIngredient(ingredient));
     }
   };
   const removeWord = (wordToRemove) => {
@@ -73,7 +76,7 @@ export default function IngredientsScreen({ navigation }) {
   const saveUserData = async () => {
     try {
       const response = await fetch(
-        "Yhttps://plate-suggest-backend.vercel.app/preferences",
+        "https://plate-suggest-backend.vercel.app/preferences",
         {
           method: "POST",
           headers: {
@@ -82,8 +85,8 @@ export default function IngredientsScreen({ navigation }) {
           body: JSON.stringify({
             email: user.email,
             regime: user.preferences.regime,
-            maladie: user.preferences.illnesses,
-            preferences: user.preferences.ingredients,
+            maladies: user.preferences.illnesses,
+            ingredients: user.preferences.ingredients,
           }),
         }
       );

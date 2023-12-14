@@ -10,12 +10,6 @@ import { useDispatch } from "react-redux";
 import { styles } from "./SignInScreen";
 
 export default function SignInScreen({ navigation }) {
-  // const user = useSelector((state) => state.user.value);
-  // Redirect to /home if logged in
-  //const router = useRouter();
-  //if (user.token) {
-  //  router.push('/');
-  // }
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,32 +17,31 @@ export default function SignInScreen({ navigation }) {
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = () => {
-    console.log(email, password);
-    // fetch("https://plate-suggest-backend.vercel.app/users/signin", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({email, password}),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     if(data.result) {
-    //       dispatch(
-    //         login({
-    //           token: data.token,
-    //           email: data.email,
-    //           password: data.password,
-    //         })
-    //       );
-    //       navigation.navigate("Welcome");
-    //     }else{
-    //       setErrorMessage("Identifiants incorrect");
-    //       setEmailERROR(true);
-    //     }
-    //     setEmail("");
-    //     setPassword("");
-    //     setErrorMessage("");
-    //   });
+    fetch("https://plate-suggest-backend.vercel.app/users/signin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.result) {
+          dispatch(
+            login({
+              token: data.token,
+              email: data.email,
+              password: data.password,
+            })
+          );
+          navigation.navigate("Welcome");
+        } else {
+          setErrorMessage("Identifiants incorrect");
+          setEmailERROR(true);
+        }
+        setEmail("");
+        setPassword("");
+        setErrorMessage("");
+      });
   };
 
   return (

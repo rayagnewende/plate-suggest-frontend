@@ -33,7 +33,7 @@ export default function SignInScreen({ navigation }) {
               password: data.password,
             })
           );
-          navigation.navigate("Welcome");
+          navigation.navigate("TabNavigator");
         } else {
           setErrorMessage("Identifiants incorrect");
           setEmailERROR(true);
