@@ -14,6 +14,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import user from "./reducers/user";
 import SettingsScreen from "./screens/SettingsScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
+
 const store = configureStore({
   reducer: { user },
 });
