@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useDispatch } from "react-redux";
+import { logout } from "../reducers/user";
 
 export default function SettingsScreen({ navigation }) {
   const goToPreferencies = () => {
@@ -22,7 +23,7 @@ export default function SettingsScreen({ navigation }) {
   const handledisconnect = () => {
     dispatch(logout());
     setIsconected(true);
-    navigation.navigate("Home");
+    navigation.navigate("Welcome");
   };
 
   return (
