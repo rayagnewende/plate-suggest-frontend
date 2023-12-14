@@ -1,39 +1,39 @@
 import React, { useState, useEffect } from "react";
-import {  View, StyleSheet,  Text, TouchableOpacity, } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { Dimensions } from "react-native";
 import * as Location from "expo-location";
-import { useDispatch, useSelector } from 'react-redux';
 
-export default function MapScreen() {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.value);
-
-   const [newPlace, setNewPlace] = useState('');
-   const [tempCoordinates, setTempCoordinates] = useState(null);
-   const [position, setPosition] = useState(null)
+export default function MapScreen({ navigation }) {
+  const [position, setPosition] = useState(null);
 
   const data = [
-  {
-    name:"Fanfan", 
-    latitude: 48.520001, 
-    longitude: 2.333333,
-  }
- ]
-  const handleLongPress = (e) => {
-  setTempCoordinates(e.nativeEvent.coordinate);
-  setModalVisible(true);
-  };
+    {
+      name: "fanfan",
+      latitude: 48.86667,
+      longitude: 2.333333,
+    },
+  ];
 
-
-   const markers = data.map((data, i) => {
-    return <Marker key={i} coordinate={{ latitude: data.latitude, longitude: data.longitude }} title={data.name} />
-   })
+  const markers = data.map((e, i) => {
+    return (
+      <Marker
+        key={i}
+        coordinate={{ latitude: e.latitude, longitude: e.longitude }}
+        title={e.name}
+      />
+    );
+  });
 
   return (
     <View style={styles.container}>
-      <MapView onLongPress={(e) => handleLongPress(e)} style={styles.map} mapType="hybrid">
-         <Marker coordinate={position} name={ setPosition } pinColor="#fecb2d" />
+      <MapView 
+      // initialRegion={{
+      //   latitude:data[0].latitude,
+      //   longitude:data[0].longitude
+      // }}
+      style={styles.map}>
+        <Marker coordinate={{longitude:data[0].longitude, latitude:data[0].latitude }} name={setPosition} pinColor="#fecb2d" />
         {markers}
       </MapView>
     </View>
@@ -50,15 +50,15 @@ const styles = StyleSheet.create({
   },
   centeredView: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   modalView: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 20,
     padding: 30,
-    alignItems: 'center',
-    shadowColor: '#000',
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -69,22 +69,22 @@ const styles = StyleSheet.create({
   },
   input: {
     width: 150,
-    borderBottomColor: '#ec6e5b',
+    borderBottomColor: "#ec6e5b",
     borderBottomWidth: 1,
     fontSize: 16,
   },
   button: {
     width: 150,
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 20,
     paddingTop: 8,
-    backgroundColor: '#ec6e5b',
+    backgroundColor: "#ec6e5b",
     borderRadius: 10,
   },
   textButton: {
-    color: '#ffffff',
+    color: "#ffffff",
     height: 24,
-    fontWeight: '600',
+    fontWeight: "600",
     fontSize: 15,
   },
 });

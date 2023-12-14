@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: {
-    username: null,
+    username: "Rich",
     email: null,
     password: null,
     token: null,
@@ -32,13 +32,29 @@ export const userSlice = createSlice({
     logout: (state) => {
       state.value.token = null;
     },
-    addRegime: (state, action) => {},
+    selectRegime: (state, action) => {
+      state.value.preferences.regime = action.payload;
+    },
     updateRegime: (state, action) => {},
     deleteRegime: (state, action) => {},
-    addIllnesses: (state, action) => {},
-    deleteIllness: (state, action) => {},
-    addIngredient: (state, action) => {},
-    deleteIngredient: (state, action) => {},
+    addIllnesses: (state, action) => {
+      state.value.preferences.illnesses.push(action.payload);
+    },
+    deleteIllness: (state, action) => {
+      state.value.preferences.illnesses =
+        state.value.preferences.illnesses.filter(
+          (element) => element !== action.payload
+        );
+    },
+    addIngredient: (state, action) => {
+      state.value.preferences.ingredients.push(action.payload);
+    },
+    deleteIngredient: (state, action) => {
+      state.value.preferences.ingredients =
+        state.value.preferences.ingredients.filter(
+          (element) => element !== action.payload
+        );
+    },
   },
 });
 
@@ -46,7 +62,7 @@ export const {
   register,
   login,
   logout,
-  addRegime,
+  selectRegime,
   addIllnesses,
   addIngredient,
   updateRegime,
