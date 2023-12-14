@@ -15,13 +15,19 @@ export default function IllnessesScreen({ navigation }) {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const dispatch = useDispatch();
 
-  const handleOptionSelect = (option) => {
+  const handleOptionSelect = ({ option }) => {
     setSelectedOptions((prevOptions) => {
-      if (prevOptions.includes(option)) {
+      const isOptionSelected = prevOptions.some(
+        (prevOption) => prevOption.maladie_name === option.maladie_name
+      );
+
+      if (isOptionSelected) {
         dispatch(deleteIllness(option));
-        return prevOptions.filter((element) => element !== option);
+        return prevOptions.filter(
+          (element) => element.maladie_name !== option.maladie_name
+        );
       } else {
-        dispatch(addIllnesses(option));
+        dispatch(addIllnesses({ maladie_name: option.maladie_name }));
         return [...prevOptions, option];
       }
     });

@@ -10,16 +10,18 @@ import {
 } from "react-native";
 import { useState } from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addIngredient, deleteIngredient } from "../reducers/user";
 
-export default function IllnessesScreen({ navigation }) {
+export default function IngredientsScreen({ navigation }) {
   const [newWord, setNewWord] = useState("");
   const [wordList, setWordList] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const [suggestionSelected, setSuggestionSelected] = useState(false);
   const [showList, setShowList] = useState(false);
   const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.user.value);
 
   useEffect(() => {
     if (suggestionSelected) {
@@ -58,7 +60,7 @@ export default function IllnessesScreen({ navigation }) {
 
       setWordList((prevList) => [...prevList, formattedWord]);
       setNewWord(" ");
-      dispatch(addIngredient(formattedWord));
+      dispatch(addIngredient({ ingredient_name: formattedWord }));
     }
   };
   const removeWord = (wordToRemove) => {
@@ -68,8 +70,38 @@ export default function IllnessesScreen({ navigation }) {
     dispatch(deleteIngredient(wordToRemove));
   };
 
+  const saveUserData = async () => {
+    try {
+      const response = await fetch(
+        "Yhttps://plate-suggest-backend.vercel.app/preferences",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: user.email,
+            regime: user.preferences.regime,
+            maladie: user.preferences.illnesses,
+            preferences: user.preferences.ingredients,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("User data saved:", data);
+      navigation.navigate("TabNavigator");
+    } catch (error) {
+      console.error("Error saving user data:", error);
+    }
+  };
+
   const handleNext = () => {
-    navigation.navigate("TabNavigator");
+    saveUserData();
   };
   const handlePrevious = () => {
     navigation.navigate("Illness");
@@ -103,6 +135,8 @@ export default function IllnessesScreen({ navigation }) {
       </TouchableOpacity>
     </View>
   );
+
+  console.log(user);
 
   return (
     <KeyboardAvoidingView
