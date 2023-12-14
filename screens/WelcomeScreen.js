@@ -29,6 +29,9 @@ export default function WelcomeScreen({ navigation }) {
     latitude: 0,
     longitude: 0,
   });
+  const [selectedFilter, setSelectedFilter] = useState("price");
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [filterModalVisible, setFilterModalVisible] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -50,7 +53,7 @@ export default function WelcomeScreen({ navigation }) {
                 description:
                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
                 qualification: 4.5,
-                price: "$$$",
+                price: "8€",
                 distance: "0.5 miles",
                 image: require("../assets/HotDog.jpg"),
               },
@@ -60,7 +63,7 @@ export default function WelcomeScreen({ navigation }) {
                 description:
                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
                 qualification: 4.2,
-                price: "$$",
+                price: "7.50€",
                 distance: "0.8 miles",
                 image: require("../assets/Wendys.png"),
               },
@@ -70,7 +73,7 @@ export default function WelcomeScreen({ navigation }) {
                 description:
                   "Description 3 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
                 qualification: 4.9,
-                price: "$",
+                price: "5.5€",
                 distance: "1.5 miles",
                 image: require("../assets/ribs.jpg"),
               },
@@ -80,7 +83,7 @@ export default function WelcomeScreen({ navigation }) {
                 description:
                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
                 qualification: 3.5,
-                price: "$$",
+                price: "9€",
                 distance: "1.1 miles",
                 image: require("../assets/sushimix.jpg"),
               },
@@ -90,7 +93,7 @@ export default function WelcomeScreen({ navigation }) {
                 description:
                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
                 qualification: 4.3,
-                price: "$$$",
+                price: "13€",
                 distance: "2.5 miles",
                 image: require("../assets/PizzaHut.png"),
               },
@@ -100,7 +103,7 @@ export default function WelcomeScreen({ navigation }) {
                 description:
                   "Description 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
                 qualification: 4.7,
-                price: "$$$",
+                price: "11.50€",
                 distance: "3 miles",
                 image: require("../assets/Logo-KFC.png"),
               },
@@ -110,7 +113,7 @@ export default function WelcomeScreen({ navigation }) {
                 description:
                   "Description 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
                 qualification: 3.3,
-                price: "$",
+                price: "4€",
                 distance: "1.7 miles",
                 image: require("../assets/mcdo.jpg"),
               },
@@ -120,7 +123,7 @@ export default function WelcomeScreen({ navigation }) {
                 description:
                   "Description 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
                 qualification: 4.1,
-                price: "$$$",
+                price: "22€",
                 distance: "1.8 miles",
                 image: require("../assets/steak.jpg"),
               },
@@ -130,7 +133,7 @@ export default function WelcomeScreen({ navigation }) {
                 description:
                   "Description 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
                 qualification: 2.5,
-                price: "$$$",
+                price: "17€",
                 distance: "0.5 miles",
                 image: require("../assets/DQ.png"),
               },
@@ -140,7 +143,7 @@ export default function WelcomeScreen({ navigation }) {
                 description:
                   "Description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.1",
                 qualification: 4.9,
-                price: "$$$",
+                price: "14€",
                 distance: "4.5 miles",
                 image: require("../assets/Wendys.png"),
               },
@@ -149,6 +152,7 @@ export default function WelcomeScreen({ navigation }) {
           });
         } else {
           setModalVisible(true);
+          setRestaurants(fetchedRestaurants);
         }
       } catch (error) {
         console.error("Error obtaining location permission:", error);
@@ -163,6 +167,15 @@ export default function WelcomeScreen({ navigation }) {
   // const saveCustomerLocation =(location) => {
 
   // }
+
+  const pressFilterModal = () => {
+    setFilterModalVisible(!filterModalVisible);
+  };
+
+  const applyFilters = () => {
+    // Implement logic to apply filters based on selectedFilter and sortOrder
+    // closeFilterModal();
+  };
 
   const renderRestaurant = ({ item }) => {
     const maxLengthDescription =
@@ -192,6 +205,33 @@ export default function WelcomeScreen({ navigation }) {
     );
   };
 
+  const sortRestaurants = (restaurants) => {
+    return restaurants.sort((a, b) => {
+      switch (selectedFilter) {
+        case "price":
+          const priceA = parseFloat(a.price);
+          const priceB = parseFloat(b.price);
+          return sortOrder === "asc" ? priceA - priceB : priceB - priceA;
+
+        case "distance":
+          const distanceA = parseFloat(a.distance);
+          const distanceB = parseFloat(b.distance);
+
+          return sortOrder === "asc"
+            ? a.distance - b.distance
+            : b.distance - a.distance;
+
+        case "review":
+          return sortOrder === "asc"
+            ? a.qualification - b.qualification
+            : b.qualification - a.qualification;
+
+        default:
+          return 0;
+      }
+    });
+  };
+
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -199,10 +239,19 @@ export default function WelcomeScreen({ navigation }) {
     >
       <View style={styles.header}>
         <Text style={styles.greeting}>Hello, {user.username}!</Text>
-        <TouchableOpacity style={styles.filterButton}>
+        <TouchableOpacity
+          style={styles.filterButton}
+          onPress={pressFilterModal}
+        >
           <FontAwesome name="filter" size={20} color="#A41623" />
         </TouchableOpacity>
       </View>
+      <Modal visible={filterModalVisible} animationType="slide">
+        <TouchableOpacity onPress={applyFilters}>
+          <Text>Apply Filters</Text>
+        </TouchableOpacity>
+        {/* Add other filter controls based on your requirements */}
+      </Modal>
       <View style={styles.restaurantContainer}>
         <Modal visible={modalVisible} animationType="fade" transparent>
           <View style={styles.centeredView}>
