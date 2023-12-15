@@ -21,7 +21,10 @@ export default function IllnessesScreen({ navigation }) {
         dispatch(deleteIllness(option));
         return prevOptions.filter((element) => element !== option);
       } else {
-        dispatch(addIllnesses(option));
+        const illness = {
+          maladie_name: option,
+        };
+        dispatch(addIllnesses(illness));
         return [...prevOptions, option];
       }
     });

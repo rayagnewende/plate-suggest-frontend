@@ -8,6 +8,7 @@ import PreferenciesScreen from "./screens/PreferenciesScreen";
 import IllnessesScreen from "./screens/IllnessesScreen";
 import IngredientsScreen from "./screens/IngredientsScreen";
 import MapScreen from "./screens/MapScreen";
+import SettingsScreen from "./screens/SettingsScreen";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import user from "./reducers/user";
@@ -59,7 +60,7 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{ headerShown: false }}
-          initialRouteName="Welcome"
+          initialRouteName="Preferencies"
         >
           <Stack.Screen name="Welcome" component={HomeScreen} />
           <Stack.Screen name="SignIn" component={SignInScreen} />
@@ -68,6 +69,7 @@ export default function App() {
           <Stack.Screen name="Illness" component={IllnessesScreen} />
           <Stack.Screen name="Ingredients" component={IngredientsScreen} />
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
+          <Stack.Screen name="Detail" component={DetailScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
