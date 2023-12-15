@@ -15,13 +15,33 @@ export default function IllnessesScreen({ navigation }) {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const dispatch = useDispatch();
 
+  // const handleOptionSelect = ({ option }) => {
+  //   setSelectedOptions((prevOptions) => {
+  //     const isOptionSelected = prevOptions.some(
+  //       (prevOption) => prevOption.maladie_name === option.maladie_name
+  //     );
+
+  //     if (isOptionSelected) {
+  //       dispatch(deleteIllness(option));
+  //       return prevOptions.filter(
+  //         (element) => element.maladie_name !== option.maladie_name
+  //       );
+  //     } else {
+  //       dispatch(addIllnesses({ maladie_name: option.maladie_name }));
+  //       return [...prevOptions, option];
+  //     }
+  //   });
+  // };
   const handleOptionSelect = (option) => {
     setSelectedOptions((prevOptions) => {
       if (prevOptions.includes(option)) {
         dispatch(deleteIllness(option));
         return prevOptions.filter((element) => element !== option);
       } else {
-        dispatch(addIllnesses(option));
+        const illness = {
+          maladie_name: option,
+        };
+        dispatch(addIllnesses(illness));
         return [...prevOptions, option];
       }
     });

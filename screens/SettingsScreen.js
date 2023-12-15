@@ -38,7 +38,16 @@ export default function SettingsScreen({ navigation }) {
           style={styles.icon}
         />
       </View>
-      <Text style={{textAlign:"center", marginTop:10, fontSize:20, fontStyle:"italic"}}>{user.username}</Text>
+      <Text
+        style={{
+          textAlign: "center",
+          marginTop: 10,
+          fontSize: 20,
+          fontStyle: "italic",
+        }}
+      >
+        {user.username}
+      </Text>
       <TouchableOpacity style={styles.button} activeOpacity={0.8}>
         <Text style={styles.textButton}>Mes préférences</Text>
       </TouchableOpacity>
