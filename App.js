@@ -12,7 +12,6 @@ import SettingsScreen from "./screens/SettingsScreen";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import user from "./reducers/user";
-import SettingsScreen from "./screens/SettingsScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import { StyleSheet } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
