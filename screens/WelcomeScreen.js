@@ -319,7 +319,6 @@ export default function WelcomeScreen({ navigation }) {
                   })
                 }
               />
-              {/* Add other filter controls based on your requirements */}
             </View>
           )}
         </View>
