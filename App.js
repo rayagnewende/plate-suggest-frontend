@@ -8,13 +8,13 @@ import PreferenciesScreen from "./screens/PreferenciesScreen";
 import IllnessesScreen from "./screens/IllnessesScreen";
 import IngredientsScreen from "./screens/IngredientsScreen";
 import MapScreen from "./screens/MapScreen";
-import SettingsScreen from "./screens/SettingsScreen";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import user from "./reducers/user";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import { StyleSheet } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import DetailScreen from "./screens/DetailScreen";
 
 const store = configureStore({
   reducer: { user },
@@ -23,6 +23,15 @@ const store = configureStore({
 const Stack = createNativeStackNavigator();
 
 const Tab = createBottomTabNavigator();
+
+const HomeStackScreen = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={WelcomeScreen} />
+      <Stack.Screen name="Details" component={DetailScreen} />
+    </Stack.Navigator>
+  );
+};
 
 const TabNavigator = () => {
   return (
@@ -46,7 +55,7 @@ const TabNavigator = () => {
         headerShown: false,
       })}
     >
-      <Tab.Screen name="Home" component={WelcomeScreen} />
+      <Tab.Screen name="Home" component={HomeStackScreen} />
       <Tab.Screen name="Map" component={MapScreen} />
       <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
@@ -57,10 +66,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{ headerShown: false }}
-          initialRouteName="Preferencies"
-        >
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Welcome" component={HomeScreen} />
           <Stack.Screen name="SignIn" component={SignInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
