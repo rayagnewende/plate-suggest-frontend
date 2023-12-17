@@ -1,18 +1,19 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import {
   View,
   Text,
   StyleSheet,
   Image,
-  Modal,
   TextInput,
   TouchableOpacity,
   FlatList,
   KeyboardAvoidingView,
   Switch,
+  Animated,
+  Dimensions,
 } from "react-native";
 import { CheckBox } from "react-native-elements";
 import { useEffect } from "react";
@@ -20,6 +21,9 @@ import { useSelector } from "react-redux";
 import * as Location from "expo-location";
 import user from "../reducers/user";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import Modal from "react-native-modal";
+
+const { height, width } = Dimensions.get("window");
 
 export default function HomeScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
@@ -37,6 +41,7 @@ export default function HomeScreen({ navigation }) {
     rating: false,
   });
   const [sortOrder, setSortOrder] = useState("asc");
+
   const [filterDropdownVisible, setFilterDropdownVisible] = useState(false);
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
 
@@ -282,44 +287,86 @@ export default function HomeScreen({ navigation }) {
 
           {/* Filter Dropdown */}
           {filterDropdownVisible && (
-            <View style={styles.filterDropdown}>
-              <CheckBox
-                title="Prices"
-                style={styles.CheckBox}
-                checked={selectedFilters.price}
-                onPress={() =>
-                  setSelectedFilters({
-                    price: !selectedFilters.price,
-                    distance: false,
-                    rating: false,
-                  })
-                }
-              />
-              <CheckBox
-                title="Distance"
-                style={styles.CheckBox}
-                checked={selectedFilters.distance}
-                onPress={() =>
-                  setSelectedFilters({
-                    price: false,
-                    distance: !selectedFilters.distance,
-                    rating: false,
-                  })
-                }
-              />
-              <CheckBox
-                title="Rating"
-                style={styles.CheckBox}
-                checked={selectedFilters.rating}
-                onPress={() =>
-                  setSelectedFilters({
-                    price: false,
-                    distance: false,
-                    rating: !selectedFilters.rating,
-                  })
-                }
-              />
-            </View>
+            <Modal
+              isVisible={filterDropdownVisible}
+              onBackdropPress={() => setFilterDropdownVisible(false)}
+              style={{
+                justifyContent: "flex-end",
+                margin: 0,
+              }}
+            >
+              <View style={styles.filterDropdown}>
+                <View style={styles.divLogo}>
+                  <Image
+                    source={require("../assets/LogoPlateSuggest.png")}
+                    style={styles.logoPlateSuggest}
+                  />
+                </View>
+                <CheckBox
+                  title="Prices"
+                  containerStyle={{
+                    height: 60,
+                    justifyContent: "center",
+                    width: 150,
+                    alignItems: "center",
+                    borderRadius: 50,
+                    margin: 10,
+                  }}
+                  style={styles.CheckBox}
+                  checked={selectedFilters.price}
+                  checkedColor="#A41623"
+                  onPress={() =>
+                    setSelectedFilters({
+                      price: !selectedFilters.price,
+                      distance: false,
+                      rating: false,
+                    })
+                  }
+                />
+                <CheckBox
+                  title="Distance"
+                  containerStyle={{
+                    height: 60,
+                    justifyContent: "center",
+                    width: 150,
+                    alignItems: "center",
+                    borderRadius: 50,
+                    margin: 10,
+                  }}
+                  style={styles.CheckBox}
+                  checked={selectedFilters.distance}
+                  checkedColor="#A41623"
+                  onPress={() =>
+                    setSelectedFilters({
+                      price: false,
+                      distance: !selectedFilters.distance,
+                      rating: false,
+                    })
+                  }
+                />
+                <CheckBox
+                  title="Rating"
+                  containerStyle={{
+                    height: 60,
+                    justifyContent: "center",
+                    width: 150,
+                    alignItems: "center",
+                    borderRadius: 50,
+                    margin: 10,
+                  }}
+                  style={styles.CheckBox}
+                  checked={selectedFilters.rating}
+                  checkedColor="#A41623"
+                  onPress={() =>
+                    setSelectedFilters({
+                      price: false,
+                      distance: false,
+                      rating: !selectedFilters.rating,
+                    })
+                  }
+                />
+              </View>
+            </Modal>
           )}
         </View>
       </View>
@@ -425,17 +472,39 @@ const styles = StyleSheet.create({
   filterDropdown: {
     backgroundColor: "white",
     borderRadius: 5,
-    borderWidth: 1,
     borderColor: "lightgray",
     zIndex: 50,
-    position: "absolute",
-    right: 0,
-    width: 150,
-    height: 170,
-    top: 55,
+    height: "50%",
+    flexDirection: "row",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    // position: "absolute",
+    // right: 0,
+    // width: 150,
+    // height: 170,
+    // top: 55,
   },
   CheckBox: {
     zIndex: 50,
     backgroundColor: "white",
+    height: 40,
+    fontSize: 18,
+    margin: 30,
+  },
+  divLogo: {
+    backgroundColor: "#A41623",
+    height: 120,
+    margin: 0,
+    borderBottomRightRadius: 120,
+    borderBottomLeftRadius: 120,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    marginBottom: 20,
+  },
+  logoPlateSuggest: {
+    height: 60,
+    width: 200,
   },
 });
