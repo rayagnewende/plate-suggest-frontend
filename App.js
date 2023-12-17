@@ -15,6 +15,7 @@ import WelcomeScreen from "./screens/WelcomeScreen";
 import { StyleSheet } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import DetailScreen from "./screens/DetailScreen";
+import SettingsScreen from "./screens/SettingsScreen";
 
 const store = configureStore({
   reducer: { user },
@@ -66,7 +67,10 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Navigator
+          screenOptions={{ headerShown: false }}
+          initialRouteName="Ingredients"
+        >
           <Stack.Screen name="Welcome" component={HomeScreen} />
           <Stack.Screen name="SignIn" component={SignInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
