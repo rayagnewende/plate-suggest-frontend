@@ -13,6 +13,51 @@ export default function MapScreen({ navigation }) {
       latitude: 48.86667,
       longitude: 2.333333,
     },
+    {
+      name: "brutus",
+      latitude: 48.872885481682594,
+      longitude: 2.2952859364974865,
+    },
+    {
+      name: "restaurant , la capsule , 3 avenue pereire , 600m",
+      latitude: 48.87193396429841,
+      longitude: 2.3316108714660944,
+    },
+    {
+      name: "Franprix",
+      latitude: 48.865064084251976,
+      longitude: 2.321269645687196,
+    },
+    {
+      name: "julienne",
+      latitude: 48.856424747495474,
+      longitude: 2.295248589897114,
+    },
+    {
+      name: "Chez Celine",
+      latitude: 48.88742019440718,
+      longitude: 2.3032898404706437,
+    },
+    {
+      name: "restauraaaant",
+      latitude: 48.8729630135626,
+      longitude: 2.3456211577327446,
+    },
+    {
+      name: "encore un restauraaant",
+      latitude: 48.84323227507612,
+      longitude: 2.3415866370122362,
+    },
+    {
+      name: "Vive la BRETAGNE",
+      latitude: 48.8151133,
+      longitude: -3.4394662,
+    },
+    {
+      name: "resto pipooo",
+      latitude: 48.83965969074901,
+      longitude: 2.315517217074148,
+    },
   ];
 
   const markers = data.map((e, i) => {
@@ -33,7 +78,7 @@ export default function MapScreen({ navigation }) {
       //   longitude:data[0].longitude
       // }}
       style={styles.map}>
-        <Marker coordinate={{longitude:data[0].longitude, latitude:data[0].latitude }} name={setPosition} pinColor="#fecb2d" />
+        <Marker coordinate={{longitude:data[0].longitude, latitude:data[0].latitude }} title={data.name} pinColor="#fecb2d" />
         {markers}
       </MapView>
     </View>
