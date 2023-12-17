@@ -15,7 +15,7 @@ export default function DetailScreen({ route }) {
     </View>
   );
 }
-o
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
