@@ -424,9 +424,9 @@ const styles = StyleSheet.create({
   },
   filterDropdown: {
     backgroundColor: "white",
-    // borderRadius: 5,
-    // borderWidth: 1,
-    // borderColor: "gray",
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: "lightgray",
     zIndex: 50,
     position: "absolute",
     right: 0,
