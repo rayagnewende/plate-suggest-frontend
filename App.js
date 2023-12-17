@@ -25,15 +25,6 @@ const Stack = createNativeStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
-const HomeStackScreen = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={WelcomeScreen} />
-      <Stack.Screen name="Details" component={DetailScreen} />
-    </Stack.Navigator>
-  );
-};
-
 const TabNavigator = () => {
   return (
     <Tab.Navigator
@@ -56,7 +47,7 @@ const TabNavigator = () => {
         headerShown: false,
       })}
     >
-      <Tab.Screen name="Home" component={HomeStackScreen} />
+      <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Map" component={MapScreen} />
       <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
@@ -69,9 +60,9 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{ headerShown: false }}
-          initialRouteName="Home"
+          initialRouteName="TabNavigator"
         >
-          <Stack.Screen name="Welcome" component={HomeScreen} />
+          <Stack.Screen name="Welcome" component={WelcomeScreen} />
           <Stack.Screen name="SignIn" component={SignInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="Preferencies" component={PreferenciesScreen} />
