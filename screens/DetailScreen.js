@@ -11,9 +11,9 @@ import {
 
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
-export default function DetailScreen({ navigation }) {
+export default function DetailScreen({ route, navigation }) {
   // const [restaurants, setRestaurants] = useState([]);
-
+  const { restaurant } = route.params;
   const resto = {
     id: 1,
     name: "Restaurant 1",
@@ -42,31 +42,31 @@ export default function DetailScreen({ navigation }) {
           />
         </TouchableOpacity>
       </View>
-      <Image source={resto.image} style={styles.image} />
+      <Image source={{ uri: restaurant.dish_image }} style={styles.image} />
       <View style={styles.container2}>
         <View style={styles.bloc3}>
           <Text style={styles.name}>Enseigne : </Text>
-          <Text style={styles.namei}>{resto.name}</Text>
+          <Text style={styles.namei}>FanFan</Text>
         </View>
         <View style={styles.bloc2}>
           <Text style={styles.PlateName}>Nom du Plat : </Text>
-          <Text style={styles.PlateNamei}>{resto.NomPlat}</Text>
+          <Text style={styles.PlateNamei}>{restaurant.dish_name}</Text>
         </View>
         <View style={styles.bloc4}>
           <Text style={styles.description}>Description : </Text>
-          <Text style={styles.descriptioni}>{resto.description}</Text>
+          <Text style={styles.descriptioni}>{restaurant.dish_description}</Text>
         </View>
         <View style={styles.bloc5}>
           <Text style={styles.note}>Note: </Text>
-          <Text style={styles.notei}>{resto.qualification} </Text>
+          <Text style={styles.notei}> 4.5</Text>
         </View>
         <View style={styles.bloc6}>
           <Text style={styles.price}>Prix: </Text>
-          <Text style={styles.pricei}>{resto.price} </Text>
+          <Text style={styles.pricei}>{restaurant.price} </Text>
         </View>
         <View style={styles.bloc7}>
           <Text style={styles.distance}>Distance: </Text>
-          <Text style={styles.distancei}>{resto.distance} </Text>
+          <Text style={styles.distancei}>0.5km </Text>
         </View>
       </View>
     </View>
