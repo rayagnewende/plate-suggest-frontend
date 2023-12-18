@@ -46,7 +46,7 @@ export default function SignUpScreen({ navigation }) {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <Text style={styles.title}>Bienvenue</Text>
-      <Text style={styles.title2}>Creer un compte</Text>
+      <Text style={styles.title2}>Créer un compte</Text>
       <TextInput
         placeholder="Nom d'utilisateur"
         onChangeText={(value) => setUsername(value)}
@@ -73,7 +73,7 @@ export default function SignUpScreen({ navigation }) {
         style={styles.button}
         activeOpacity={0.8}
       >
-        <Text style={styles.textButton}>Enregistré</Text>
+        <Text style={styles.textButton}>Créer</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );

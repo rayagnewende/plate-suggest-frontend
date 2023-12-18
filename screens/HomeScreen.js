@@ -221,9 +221,13 @@ export default function HomeScreen({ navigation }) {
             <Text style={styles.restaurantDescription}>
               {maxLengthDescription}
             </Text>
-            <Text style={styles.restaurantQualification}>Rating: 4.5</Text>
+            <Text style={styles.restaurantQualification}>
+              Rating:{item.note}{" "}
+            </Text>
             <Text style={styles.restaurantPrice}>Price: {item.price}</Text>
-            <Text style={styles.restaurantDistance}>Distance: 0.5km</Text>
+            <Text style={styles.restaurantDistance}>
+              Distance:{item.distance} m
+            </Text>
           </View>
         </TouchableOpacity>
       </KeyboardAvoidingView>

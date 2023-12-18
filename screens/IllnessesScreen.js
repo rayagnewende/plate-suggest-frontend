@@ -94,7 +94,7 @@ export default function IllnessesScreen({ navigation }) {
           style={styles.previousButton}
           onPress={handlePrevious}
         >
-          <Text style={styles.previousButtonText}>Previous</Text>
+          <Text style={styles.previousButtonText}>Précèdent</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
           <Text style={styles.nextButtonText}>Next</Text>
