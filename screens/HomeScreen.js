@@ -160,7 +160,12 @@ export default function HomeScreen({ navigation }) {
           //   latitude: location.coords.latitude,
           //   longitude: location.coords.longitude,
           // });
-          setRestaurants(fetchedRestaurants);
+          // setRestaurants(fetchedRestaurants);
+          fetch(`https://plate-suggest-backend.vercel.app/places/${user.token}`)
+            .then((res) => res.json())
+            .then((data) => {
+              setRestaurants(data.plats);
+            });
           // });
         } else {
           setModalVisible(true);
@@ -196,9 +201,9 @@ export default function HomeScreen({ navigation }) {
 
   const renderRestaurant = ({ item }) => {
     const maxLengthDescription =
-      item.description.length > 120
-        ? item.description.substring(0, 120) + "..."
-        : item.description;
+      item.dish_description.length > 120
+        ? item.dish_description.substring(0, 120) + "..."
+        : item.dish_description;
     return (
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -207,19 +212,18 @@ export default function HomeScreen({ navigation }) {
           style={styles.restaurantContainer}
           onPress={() => handleSelection(item)}
         >
-          <Image source={item.image} style={styles.restaurantImage} />
+          <Image
+            source={{ uri: item.dish_image }}
+            style={styles.restaurantImage}
+          />
           <View style={styles.restaurantInfo}>
-            <Text style={styles.restaurantName}>{item.name}</Text>
+            <Text style={styles.restaurantName}>{item.dish_name}</Text>
             <Text style={styles.restaurantDescription}>
               {maxLengthDescription}
             </Text>
-            <Text style={styles.restaurantQualification}>
-              Rating: {item.qualification}
-            </Text>
+            <Text style={styles.restaurantQualification}>Rating: 4.5</Text>
             <Text style={styles.restaurantPrice}>Price: {item.price}</Text>
-            <Text style={styles.restaurantDistance}>
-              Distance: {item.distance}
-            </Text>
+            <Text style={styles.restaurantDistance}>Distance: 0.5km</Text>
           </View>
         </TouchableOpacity>
       </KeyboardAvoidingView>
@@ -377,7 +381,7 @@ export default function HomeScreen({ navigation }) {
             style={{ marginTop: 5 }}
             data={sortRestaurants(restaurants)}
             renderItem={renderRestaurant}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(index) => index}
           />
         )}
         {!permissionGranted && (
@@ -385,7 +389,7 @@ export default function HomeScreen({ navigation }) {
             style={{ marginTop: 5 }}
             data={restaurants.reverse()}
             renderItem={renderRestaurant}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(index) => index}
           />
         )}
       </View>
