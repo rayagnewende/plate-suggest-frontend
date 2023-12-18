@@ -50,7 +50,7 @@ export default function IllnessesScreen({ navigation }) {
     navigation.navigate("Ingredients");
   };
   const handlePrevious = () => {
-    navigation.navigate("Preferencies");
+    navigation.navigate("Preferences");
   };
 
   const renderOption = (option) => (
@@ -82,22 +82,22 @@ export default function IllnessesScreen({ navigation }) {
         Do you suffer from any of these illnesses?
       </Text>
 
-      {renderOption("Diabetes")}
+      {renderOption("Diabète")}
 
       {renderOption("Hypertension")}
-      {renderOption("Obesity")}
+      {renderOption("Obésité")}
 
-      {renderOption("None")}
+      {renderOption("Aucun(e)")}
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.previousButton}
           onPress={handlePrevious}
         >
-          <Text style={styles.previousButtonText}>Précèdent</Text>
+          <Text style={styles.previousButtonText}>Précédent</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
-          <Text style={styles.nextButtonText}>Next</Text>
+          <Text style={styles.nextButtonText}>Suivant</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>

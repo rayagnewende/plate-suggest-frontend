@@ -272,7 +272,7 @@ export default function HomeScreen({ navigation }) {
     >
       <View style={styles.header}>
         <View style={styles.greetingContainer}>
-          <Text style={styles.greeting}>Hello,</Text>
+          <Text style={styles.greeting}>Salut, </Text>
           <Text style={styles.name}> {user.username}!</Text>
         </View>
         <View style={styles.filterContainer}>
@@ -311,7 +311,7 @@ export default function HomeScreen({ navigation }) {
                   />
                 </View>
                 <CheckBox
-                  title="Prices"
+                  title="Prix"
                   containerStyle={{
                     height: 60,
                     justifyContent: "center",
@@ -353,7 +353,7 @@ export default function HomeScreen({ navigation }) {
                   }
                 />
                 <CheckBox
-                  title="Rating"
+                  title="Avis"
                   containerStyle={{
                     height: 60,
                     justifyContent: "center",

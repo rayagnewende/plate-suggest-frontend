@@ -29,7 +29,7 @@ export default function SignUpScreen({ navigation }) {
         if (data.result) {
           dispatch(register({ token: data.token, username, email, password }));
 
-          navigation.navigate("Preferencies");
+          navigation.navigate("Preferences");
         } else {
           setErrorMessage(data.error);
           setUserERROR(true);
@@ -73,7 +73,7 @@ export default function SignUpScreen({ navigation }) {
         style={styles.button}
         activeOpacity={0.8}
       >
-        <Text style={styles.textButton}>Créer</Text>
+        <Text style={styles.textButton}>Créez votre compte</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );
