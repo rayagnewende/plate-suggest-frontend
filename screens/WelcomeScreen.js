@@ -37,115 +37,119 @@ export default function WelcomeScreen({ navigation }) {
 
         if (status === "granted") {
           Location.watchPositionAsync({ distanceInterval: 10 }, (location) => {
-            console.log(location);
             setPermissionGranted(true);
             setLocation({
               latitude: location.coords.latitude,
               longitude: location.coords.longitude,
             });
-            const fetchedRestaurants = [
-              {
-                id: 1,
-                name: "Restaurant 1",
-                description:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
-                qualification: 4.5,
-                price: "$$$",
-                distance: "0.5 miles",
-                image: require("../assets/HotDog.jpg"),
-              },
-              {
-                id: 2,
-                name: "Restaurant 2",
-                description:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
-                qualification: 4.2,
-                price: "$$",
-                distance: "0.8 miles",
-                image: require("../assets/Wendys.png"),
-              },
-              {
-                id: 3,
-                name: "Restaurant 3",
-                description:
-                  "Description 3 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
-                qualification: 4.9,
-                price: "$",
-                distance: "1.5 miles",
-                image: require("../assets/ribs.jpg"),
-              },
-              {
-                id: 4,
-                name: "Restaurant 4",
-                description:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
-                qualification: 3.5,
-                price: "$$",
-                distance: "1.1 miles",
-                image: require("../assets/sushimix.jpg"),
-              },
-              {
-                id: 5,
-                name: "Restaurant 5",
-                description:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
-                qualification: 4.3,
-                price: "$$$",
-                distance: "2.5 miles",
-                image: require("../assets/PizzaHut.png"),
-              },
-              {
-                id: 6,
-                name: "Restaurant 6",
-                description:
-                  "Description 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
-                qualification: 4.7,
-                price: "$$$",
-                distance: "3 miles",
-                image: require("../assets/Logo-KFC.png"),
-              },
-              {
-                id: 7,
-                name: "Restaurant 7",
-                description:
-                  "Description 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
-                qualification: 3.3,
-                price: "$",
-                distance: "1.7 miles",
-                image: require("../assets/mcdo.jpg"),
-              },
-              {
-                id: 8,
-                name: "Restaurant 8",
-                description:
-                  "Description 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
-                qualification: 4.1,
-                price: "$$$",
-                distance: "1.8 miles",
-                image: require("../assets/steak.jpg"),
-              },
-              {
-                id: 9,
-                name: "Restaurant 9",
-                description:
-                  "Description 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
-                qualification: 2.5,
-                price: "$$$",
-                distance: "0.5 miles",
-                image: require("../assets/DQ.png"),
-              },
-              {
-                id: 10,
-                name: "Restaurant 10",
-                description:
-                  "Description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.1",
-                qualification: 4.9,
-                price: "$$$",
-                distance: "4.5 miles",
-                image: require("../assets/Wendys.png"),
-              },
-            ];
-            setRestaurants(fetchedRestaurants);
+            fetch(`https://plate-suggest-backend.vercel.app/places/${user.token}`)
+                 .then( res => res.json())
+                 .then( data => {
+                  setRestaurants(data.plats)
+                 })
+            // const fetchedRestaurants = [
+            //   {
+            //     id: 1,
+            //     name: "Restaurant 1",
+            //     description:
+            //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
+            //     qualification: 4.5,
+            //     price: "$$$",
+            //     distance: "0.5 miles",
+            //     image: require("../assets/HotDog.jpg"),
+            //   },
+            //   {
+            //     id: 2,
+            //     name: "Restaurant 2",
+            //     description:
+            //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
+            //     qualification: 4.2,
+            //     price: "$$",
+            //     distance: "0.8 miles",
+            //     image: require("../assets/Wendys.png"),
+            //   },
+            //   {
+            //     id: 3,
+            //     name: "Restaurant 3",
+            //     description:
+            //       "Description 3 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
+            //     qualification: 4.9,
+            //     price: "$",
+            //     distance: "1.5 miles",
+            //     image: require("../assets/ribs.jpg"),
+            //   },
+            //   {
+            //     id: 4,
+            //     name: "Restaurant 4",
+            //     description:
+            //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
+            //     qualification: 3.5,
+            //     price: "$$",
+            //     distance: "1.1 miles",
+            //     image: require("../assets/sushimix.jpg"),
+            //   },
+            //   {
+            //     id: 5,
+            //     name: "Restaurant 5",
+            //     description:
+            //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
+            //     qualification: 4.3,
+            //     price: "$$$",
+            //     distance: "2.5 miles",
+            //     image: require("../assets/PizzaHut.png"),
+            //   },
+            //   {
+            //     id: 6,
+            //     name: "Restaurant 6",
+            //     description:
+            //       "Description 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
+            //     qualification: 4.7,
+            //     price: "$$$",
+            //     distance: "3 miles",
+            //     image: require("../assets/Logo-KFC.png"),
+            //   },
+            //   {
+            //     id: 7,
+            //     name: "Restaurant 7",
+            //     description:
+            //       "Description 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
+            //     qualification: 3.3,
+            //     price: "$",
+            //     distance: "1.7 miles",
+            //     image: require("../assets/mcdo.jpg"),
+            //   },
+            //   {
+            //     id: 8,
+            //     name: "Restaurant 8",
+            //     description:
+            //       "Description 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
+            //     qualification: 4.1,
+            //     price: "$$$",
+            //     distance: "1.8 miles",
+            //     image: require("../assets/steak.jpg"),
+            //   },
+            //   {
+            //     id: 9,
+            //     name: "Restaurant 9",
+            //     description:
+            //       "Description 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
+            //     qualification: 2.5,
+            //     price: "$$$",
+            //     distance: "0.5 miles",
+            //     image: require("../assets/DQ.png"),
+            //   },
+            //   {
+            //     id: 10,
+            //     name: "Restaurant 10",
+            //     description:
+            //       "Description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.1",
+            //     qualification: 4.9,
+            //     price: "$$$",
+            //     distance: "4.5 miles",
+            //     image: require("../assets/Wendys.png"),
+            //   },
+            // ];
+            // setRestaurants(fetchedRestaurants);
           });
         } else {
           setModalVisible(true);
@@ -166,26 +170,26 @@ export default function WelcomeScreen({ navigation }) {
 
   const renderRestaurant = ({ item }) => {
     const maxLengthDescription =
-      item.description.length > 120
-        ? item.description.substring(0, 120) + "..."
-        : item.description;
+      item.dish_description.length > 120
+        ? item.dish_description.substring(0, 120) + "..."
+        : item.dish_description;
     return (
       <KeyboardAvoidingView
         style={styles.restaurantContainer}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
-        <Image source={item.image} style={styles.restaurantImage} />
+        <Image source={{uri:item.dish_image}} style={styles.restaurantImage} />
         <View style={styles.restaurantInfo}>
-          <Text style={styles.restaurantName}>{item.name}</Text>
+          <Text style={styles.restaurantName}>{item.dish_name}</Text>
           <Text style={styles.restaurantDescription}>
             {maxLengthDescription}
           </Text>
           <Text style={styles.restaurantQualification}>
-            Rating: {item.qualification}
+            Rating: 4.5
           </Text>
           <Text style={styles.restaurantPrice}>Price: {item.price}</Text>
           <Text style={styles.restaurantDistance}>
-            Distance: {item.distance}
+            Distance: 300 m
           </Text>
         </View>
       </KeyboardAvoidingView>
@@ -231,7 +235,7 @@ export default function WelcomeScreen({ navigation }) {
             style={{ marginTop: 5 }}
             data={restaurants}
             renderItem={renderRestaurant}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(index) => index}
           />
         )}
         {!permissionGranted && (
@@ -239,7 +243,7 @@ export default function WelcomeScreen({ navigation }) {
             style={{ marginTop: 5 }}
             data={restaurants.reverse()}
             renderItem={renderRestaurant}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(index) => index}
           />
         )}
       </View>

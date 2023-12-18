@@ -57,12 +57,9 @@ const TabNavigator = () => {
 
 export default function App() {
   return (
-    <Provider store={store}>
+    <Provider store={store}> 
       <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{ headerShown: false }}
-          initialRouteName="Home"
-        >
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="SignIn" component={SignInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />

@@ -10,7 +10,6 @@ import { useDispatch } from "react-redux";
 import { styles } from "./SignInScreen";
 
 export default function SignInScreen({ navigation }) {
-
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,12 +20,12 @@ export default function SignInScreen({ navigation }) {
     fetch("https://plate-suggest-backend.vercel.app/users/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({email, password}),
+      body: JSON.stringify({ email, password }),
     })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        if(data.result) {
+        if (data.result) {
           dispatch(
             login({
               token: data.token,
@@ -35,7 +34,7 @@ export default function SignInScreen({ navigation }) {
             })
           );
           navigation.navigate("Welcome");
-        }else{
+        } else {
           setErrorMessage("Identifiants incorrect");
           setEmailERROR(true);
         }
