@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 
 export default function SettingsScreen({ navigation }) {
   const goToPreferencies = () => {
-    navigation.navigate("Preferencies");
+    navigation.navigate("Preferences");
   };
 
   const goToIllnesses = () => {

@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./screens/HomeScreen";
 import SignInScreen from "./screens/SignInScreen";
 import SignUpScreen from "./screens/SignUpScreen";
-import PreferenciesScreen from "./screens/PreferenciesScreen";
+import PreferencesScreen from "./screens/PreferencesScreen";
 import IllnessesScreen from "./screens/IllnessesScreen";
 import IngredientsScreen from "./screens/IngredientsScreen";
 import MapScreen from "./screens/MapScreen";
@@ -65,7 +65,7 @@ export default function App() {
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
           <Stack.Screen name="SignIn" component={SignInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
-          <Stack.Screen name="Preferencies" component={PreferenciesScreen} />
+          <Stack.Screen name="Preferences" component={PreferencesScreen} />
           <Stack.Screen name="Illness" component={IllnessesScreen} />
           <Stack.Screen name="Ingredients" component={IngredientsScreen} />
           <Stack.Screen name="TabNavigator" component={TabNavigator} />

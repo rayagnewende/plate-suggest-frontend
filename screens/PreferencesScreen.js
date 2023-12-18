@@ -50,18 +50,18 @@ export default function PreferenciesScreen({ navigation }) {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <Text style={styles.questionText}>
-        How would you describe your food eating habits?
+        Comment décririez-vous vos habitudes alimentaires ?
       </Text>
       {renderOption("Vegetalien")}
 
       {renderOption("Vegetarien")}
       {renderOption("Pescetarien")}
       {renderOption("Flexitarien")}
-      {renderOption("I eat everything")}
+      {renderOption("Je mange tout")}
 
       {/* Next Button */}
       <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
-        <Text style={styles.nextButtonText}>Next</Text>
+        <Text style={styles.nextButtonText}>Suivant</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );
