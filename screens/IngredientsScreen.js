@@ -147,9 +147,9 @@ export default function IngredientsScreen({ navigation }) {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <Text style={styles.questionText}>
-        Tell us about the ingredients you are{" "}
-        <Text style={styles.span}>allergic</Text> to and/or{" "}
-        <Text style={styles.span}>dislike</Text>:
+        Parlez-nous des ingrédients auxquels vous êtes{" "}
+        <Text style={styles.span}>allergique</Text> et/ou que vous{" "}
+        <Text style={styles.span}>n'aimez pas! </Text>:
       </Text>
       <View style={styles.inputIngredients}>
         <TextInput
@@ -188,10 +188,10 @@ export default function IngredientsScreen({ navigation }) {
           style={styles.previousButton}
           onPress={handlePrevious}
         >
-          <Text style={styles.previousButtonText}>Previous</Text>
+          <Text style={styles.previousButtonText}>Précédent</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
-          <Text style={styles.nextButtonText}>Next</Text>
+          <Text style={styles.nextButtonText}>Suivant</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>

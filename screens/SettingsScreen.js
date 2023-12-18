@@ -8,7 +8,7 @@ export default function SettingsScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
 
   const goToPreferencies = () => {
-    navigation.navigate("Preferencies");
+    navigation.navigate("Preferences");
   };
 
   const goToIllnesses = () => {
