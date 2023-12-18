@@ -1,6 +1,3 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet } from "react-native";
-import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -10,13 +7,15 @@ import SignUpScreen from "./screens/SignUpScreen";
 import PreferenciesScreen from "./screens/PreferenciesScreen";
 import IllnessesScreen from "./screens/IllnessesScreen";
 import IngredientsScreen from "./screens/IngredientsScreen";
-import WelcomeScreen from "./screens/WelcomeScreen";
 import MapScreen from "./screens/MapScreen";
-import SettingsScreen from "./screens/SettingsScreen";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import user from "./reducers/user";
+import WelcomeScreen from "./screens/WelcomeScreen";
+import { StyleSheet } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import DetailScreen from "./screens/DetailScreen";
+import SettingsScreen from "./screens/SettingsScreen";
 
 const store = configureStore({
   reducer: { user },
@@ -48,7 +47,7 @@ const TabNavigator = () => {
         headerShown: false,
       })}
     >
-      <Tab.Screen name="Home" component={WelcomeScreen} />
+      <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Map" component={MapScreen} />
       <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
@@ -59,14 +58,18 @@ export default function App() {
   return (
     <Provider store={store}> 
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Navigator
+          screenOptions={{ headerShown: false }}
+          initialRouteName="Welcome"
+        >
+          <Stack.Screen name="Welcome" component={WelcomeScreen} />
           <Stack.Screen name="SignIn" component={SignInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="Preferencies" component={PreferenciesScreen} />
           <Stack.Screen name="Illness" component={IllnessesScreen} />
           <Stack.Screen name="Ingredients" component={IngredientsScreen} />
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
+          <Stack.Screen name="Detail" component={DetailScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
