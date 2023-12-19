@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../reducers/user";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { commonTextStyles } from "../assets/fontStyle";
 
 export default function SettingsScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
@@ -65,6 +65,7 @@ export default function SettingsScreen({ navigation }) {
           fontWeight: "bold",
           letterSpacing: 2,
           color: "#A64123",
+          // fontFamily: "Sansita Black",
         }}
       >
         {user.username}
