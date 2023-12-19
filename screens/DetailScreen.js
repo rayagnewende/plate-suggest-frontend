@@ -36,7 +36,7 @@ export default function DetailScreen({ route, navigation }) {
         <TouchableOpacity style={styles.bloc2} onPress={() => goToHome()}>
           <FontAwesome
             name="arrow-left"
-            size={40}
+            size={30}
             color="#A41623"
             style={styles.icon}
           />
@@ -48,41 +48,50 @@ export default function DetailScreen({ route, navigation }) {
         <View style={styles.bloc3}>
           <FontAwesome
             name="home"
-            size={40}
+            size={20}
             color="#A41623"
             style={styles.icon}
           />
           <Text style={styles.namei}>FanFan</Text>
         </View>
-          <View style={styles.bloc5}>
+        <View style={styles.container3}>
+          <View style={styles.bloc4}>
           <FontAwesome
             name="star-o"
-            size={40}
-            color="#DBFF00"
+            size={20}
+            color="#A41623"
             style={styles.icon}
           />
+          <Text > 3,8 </Text>
+          </View>
+          <View style={styles.bloc4}>
            <FontAwesome
             name="euro"
-            size={40}
-            color="#36CF01"
+            size={20}
+            color="#A41623"
             style={styles.icon}
           />
+          <Text > 12 </Text>
+          </View>
+          <View style={styles.bloc4}>
           <FontAwesome
             name="road"
-            size={40}
-            color="#B1E2FF"
+            size={20}
+            color="#A41623"
             style={styles.icon}
           />
+          <Text > 600 mètres </Text>
           </View>
-        <View style={styles.bloc6}>
+         </View>
+        </View>
+
+        <View style={styles.bloc5}>
           <Text style={styles.PlateNamei}>{restaurant.dish_name}</Text>
         </View>
-        <View style={styles.bloc4}>
+        <View style={styles.bloc}>
           <Text style={styles.description}></Text>
           <Text style={styles.descriptioni}>{restaurant.dish_description}</Text>
         </View>
-
-      </View>
     </View>
   );
 }
@@ -94,29 +103,29 @@ const styles = StyleSheet.create({
   },
   container2: {
     fontStyle: "italic",
-
+    flexDirection: "row",
   },
- 
+  container3: {
+    fontStyle: "italic",
+    flexDirection: "column",
+    
+  },
   bloc2: {
     flexDirection: "row",
     marginTop: 30,
-   
   },
   bloc3: {
     flexDirection: "row",
-    paddingTop: 15,
+    paddingTop: 30,
   },
   bloc4: {
     flexDirection: "row",
     paddingTop: 15,
   },
   bloc5: {
-    flexDirection: "row",
-    justifyContent: "space-around",
     paddingTop: 15,
   },
   bloc6: {
-    flexDirection: "row",
     paddingTop: 15,
   },
   image: {
@@ -125,7 +134,6 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginLeft:15,
-  
   },
   name: {
     fontSize: 16,
@@ -158,9 +166,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   namei: {
-    fontSize: 30,
+    fontSize: 20,
     fontStyle: "italic", 
-    paddingLeft: 20,
+    paddingLeft: 10,
   },
   descriptioni: {
     fontSize: 16,

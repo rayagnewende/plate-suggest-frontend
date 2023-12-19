@@ -9,14 +9,21 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../reducers/user";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import Modal from "react-native-modal";
+import { CheckBox } from "react-native-elements";
 
 const { height, width } = Dimensions.get("window");
 
 export default function SettingsScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
+  const [filterDropdownVisible, setFilterDropdownVisible] = useState(false);
+
+  const [selectedFilters, setSelectedFilters] = useState({
+    
+  });
 
   const goToPreferencies = () => {
-    navigation.navigate("Preferences");
+      setFilterDropdownVisible(!filterDropdownVisible);
   };
 
   const goToIllnesses = () => {
@@ -35,6 +42,26 @@ export default function SettingsScreen({ navigation }) {
     setIsconected(true);
     navigation.navigate("Welcome");
   };
+
+  const renderOption = (option) => (
+    <TouchableOpacity
+      style={styles.optionContainer}
+      onPress={() => handleOptionSelect(option)}
+      key={option}
+    >
+      <View style={styles.checkboxContainer}>
+        <CheckBox
+          checked={option === selectedOption}
+          onPress={() => handleOptionSelect(option)}
+          style={styles.checkbox}
+          checkedColor="#A41623"
+        />
+        <View style={styles.optionTextContainer}>
+          <Text style={styles.optionText}>{option.padEnd(20)}</Text>
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
 
   return (
     <View style={styles.container}>
@@ -61,6 +88,7 @@ export default function SettingsScreen({ navigation }) {
         </Text>
       </View>
       <View>
+       
         <TouchableOpacity style={styles.regime} onPress={() => goToPreferencies()} activeOpacity={0.8}>
         <Text style={styles.textButton}>Régimes</Text>
           <FontAwesome
@@ -70,6 +98,55 @@ export default function SettingsScreen({ navigation }) {
             style={styles.autre}
           />
         </TouchableOpacity>
+        {filterDropdownVisible && (
+          <Modal
+              isVisible={filterDropdownVisible}
+              onBackdropPress={() => setFilterDropdownVisible(false)}
+              style={{
+                justifyContent: "flex-end",
+                margin: 0,
+              }}>
+                <View style={styles.filterDropdown}>
+                <CheckBox
+                  title="Prix"
+                  containerStyle={{
+                    height: 60,
+                    justifyContent: "center",
+                    width: 150,
+                    alignItems: "center",
+                    borderRadius: 50,
+                    margin: 10,
+                  }}
+                  style={styles.CheckBox}
+                  checked={selectedFilters.price}
+                  checkedColor="#A41623"
+                  onPress={() =>
+                    setSelectedRegimes({
+                    })
+                  }
+                />
+                <CheckBox
+                  title="Prix"
+                  containerStyle={{
+                    height: 60,
+                    justifyContent: "center",
+                    width: 150,
+                    alignItems: "center",
+                    borderRadius: 50,
+                    margin: 10,
+                  }}
+                  style={styles.CheckBox}
+                  checked={selectedFilters.price}
+                  checkedColor="#A41623"
+                  onPress={() =>
+                    setSelectedRegimes({
+                    })
+                  }
+                />
+                </View>
+          </Modal>
+       )}
+
       </View>
 
       <View >
@@ -101,6 +178,28 @@ export default function SettingsScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  divLogo: {
+    backgroundColor: "#A41623",
+    height: 120,
+    margin: 0,
+    borderBottomRightRadius: 120,
+    borderBottomLeftRadius: 120,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    marginBottom: 20,
+  },
+  filterDropdown: {
+    backgroundColor: "white",
+    borderRadius: 5,
+    borderColor: "lightgray",
+    zIndex: 50,
+    height: "50%",
+    flexDirection: "row",
+    justifyContent: "center",
+    flexWrap: "wrap",
+  },
   container: {
     flex: 1,
     backgroundColor: "white",
