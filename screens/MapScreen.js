@@ -78,7 +78,7 @@ export default function MapScreen({ navigation }) {
       //   longitude:data[0].longitude
       // }}
       style={styles.map}>
-        <Marker coordinate={{longitude:data[0].longitude, latitude:data[0].latitude }} title={data.name} pinColor="#fecb2d" />
+        <Marker coordinate={{longitude:data[0].longitude, latitude:data[0].latitude }} title={data.name} pinColor="#A41623" />
         {markers}
       </MapView>
     </View>

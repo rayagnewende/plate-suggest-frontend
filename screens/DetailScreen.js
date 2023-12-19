@@ -33,7 +33,7 @@ export default function DetailScreen({ route, navigation }) {
   return (
     <View style={styles.container}>
       <View>
-        <TouchableOpacity onPress={() => goToHome()}>
+        <TouchableOpacity style={styles.bloc2} onPress={() => goToHome()}>
           <FontAwesome
             name="arrow-left"
             size={40}
@@ -45,35 +45,36 @@ export default function DetailScreen({ route, navigation }) {
       <Image source={{ uri: restaurant.dish_image }} style={styles.image} />
 
       <View style={styles.container2}>
-        <View style={styles.bloc2}>
-        <FontAwesome
+        <View style={styles.bloc3}>
+          <FontAwesome
             name="home"
             size={40}
             color="#A41623"
             style={styles.icon}
-          /><Text style={styles.namei}>FanFan</Text>
-          </View>
+          />
+          <Text style={styles.namei}>FanFan</Text>
+        </View>
           <View style={styles.bloc5}>
           <FontAwesome
             name="star-o"
             size={40}
-            color="#A41623"
+            color="#DBFF00"
             style={styles.icon}
           />
            <FontAwesome
             name="euro"
             size={40}
-            color="#A41623"
+            color="#36CF01"
             style={styles.icon}
           />
           <FontAwesome
             name="road"
             size={40}
-            color="#A41623"
+            color="#B1E2FF"
             style={styles.icon}
           />
           </View>
-        <View style={styles.bloc3}>
+        <View style={styles.bloc6}>
           <Text style={styles.PlateNamei}>{restaurant.dish_name}</Text>
         </View>
         <View style={styles.bloc4}>
@@ -93,35 +94,38 @@ const styles = StyleSheet.create({
   },
   container2: {
     fontStyle: "italic",
-    paddingRight: 100,
+
   },
+ 
   bloc2: {
     flexDirection: "row",
+    marginTop: 30,
+   
   },
   bloc3: {
     flexDirection: "row",
+    paddingTop: 15,
   },
   bloc4: {
     flexDirection: "row",
+    paddingTop: 15,
   },
   bloc5: {
     flexDirection: "row",
+    justifyContent: "space-around",
+    paddingTop: 15,
   },
   bloc6: {
     flexDirection: "row",
-  },
-  bloc7: {
-    flexDirection: "row",
+    paddingTop: 15,
   },
   image: {
     borderRadius: 15,
-    margin: 10,
     height: "50%",
   },
   icon: {
-    marginBottom: 0,
     marginLeft:15,
-    marginTop: 20,
+  
   },
   name: {
     fontSize: 16,
@@ -154,10 +158,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   namei: {
-    fontSize: 25,
+    fontSize: 30,
     fontStyle: "italic", 
-    fontWeight: "bold",
-    padding:15,
+    paddingLeft: 20,
   },
   descriptioni: {
     fontSize: 16,
