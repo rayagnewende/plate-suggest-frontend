@@ -1,11 +1,26 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  KeyboardAvoidingView,
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../reducers/user";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 export default function SettingsScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
+
+  const avatarImages = {
+    Vegetalien: require("../assets/Vegan.png"),
+    Vegetarien: require("../assets/Vegetarien.png"),
+    Pescetarien: require("../assets/Pescetarien.png"),
+    Flexitarien: require("../assets/Flexitarien.png"),
+    Everything: require("../assets/Everything.png"),
+  };
 
   const goToPreferencies = () => {
     navigation.navigate("Preferences");
@@ -29,21 +44,27 @@ export default function SettingsScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.avatar}>
-        <FontAwesome
-          name="user"
-          size={100}
-          color="#A41623"
-          style={styles.icon}
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <View style={styles.icon}>
+        <Image
+          style={styles.img}
+          source={
+            avatarImages[user.preferences.regime] || avatarImages.Everything
+          }
         />
       </View>
       <Text
         style={{
           textAlign: "center",
           marginTop: 10,
-          fontSize: 20,
+          fontSize: 30,
           fontStyle: "italic",
+          fontWeight: "bold",
+          letterSpacing: 2,
+          color: "#A64123",
         }}
       >
         {user.username}
@@ -75,7 +96,7 @@ export default function SettingsScreen({ navigation }) {
       >
         <Text style={styles.deconnect}>Déconnexion</Text>
       </TouchableOpacity>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -83,30 +104,30 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
-    justifyContent: "center",
+    // justifyContent: "center",
     padding: 15,
   },
   textButton: {
     fontSize: 19,
     fontWeight: "bold",
-    marginTop: 60,
+    marginTop: 20,
   },
   deconnect: {
     fontSize: 19,
     fontWeight: "bold",
-    marginTop: 200,
+    marginTop: 20,
   },
   icon: {
     textAlign: "center",
-    width: 110,
-    height: 110,
     alignItems: "center",
     justifyContent: "center",
-    borderWidth: 2,
-    borderRadius: 50,
+    marginTop: 50,
+    marginBottom: 20,
   },
-  avatar: {
-    flexDirection: "row",
-    justifyContent: "center",
+
+  img: {
+    height: 180,
+    width: 180,
+    borderRadius: 100,
   },
 });
