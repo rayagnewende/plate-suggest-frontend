@@ -11,9 +11,9 @@ import {
 
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
-export default function DetailScreen({ navigation }) {
+export default function DetailScreen({ route, navigation }) {
   // const [restaurants, setRestaurants] = useState([]);
-
+  const { restaurant } = route.params;
   const resto = {
     id: 1,
     name: "Restaurant 1",
@@ -36,38 +36,51 @@ export default function DetailScreen({ navigation }) {
         <TouchableOpacity onPress={() => goToHome()}>
           <FontAwesome
             name="arrow-left"
-            size={50}
+            size={40}
             color="#A41623"
             style={styles.icon}
           />
         </TouchableOpacity>
       </View>
-      <Image source={resto.image} style={styles.image} />
+      <Image source={{ uri: restaurant.dish_image }} style={styles.image} />
+
       <View style={styles.container2}>
-        <View style={styles.bloc3}>
-          <Text style={styles.name}>Enseigne : </Text>
-          <Text style={styles.namei}>{resto.name}</Text>
-        </View>
         <View style={styles.bloc2}>
-          <Text style={styles.PlateName}>Nom du Plat : </Text>
-          <Text style={styles.PlateNamei}>{resto.NomPlat}</Text>
+        <FontAwesome
+            name="home"
+            size={40}
+            color="#A41623"
+            style={styles.icon}
+          /><Text style={styles.namei}>FanFan</Text>
+          </View>
+          <View style={styles.bloc5}>
+          <FontAwesome
+            name="star-o"
+            size={40}
+            color="#A41623"
+            style={styles.icon}
+          />
+           <FontAwesome
+            name="euro"
+            size={40}
+            color="#A41623"
+            style={styles.icon}
+          />
+          <FontAwesome
+            name="road"
+            size={40}
+            color="#A41623"
+            style={styles.icon}
+          />
+          </View>
+        <View style={styles.bloc3}>
+          <Text style={styles.PlateNamei}>{restaurant.dish_name}</Text>
         </View>
         <View style={styles.bloc4}>
-          <Text style={styles.description}>Description : </Text>
-          <Text style={styles.descriptioni}>{resto.description}</Text>
+          <Text style={styles.description}></Text>
+          <Text style={styles.descriptioni}>{restaurant.dish_description}</Text>
         </View>
-        <View style={styles.bloc5}>
-          <Text style={styles.note}>Note: </Text>
-          <Text style={styles.notei}>{resto.qualification} </Text>
-        </View>
-        <View style={styles.bloc6}>
-          <Text style={styles.price}>Prix: </Text>
-          <Text style={styles.pricei}>{resto.price} </Text>
-        </View>
-        <View style={styles.bloc7}>
-          <Text style={styles.distance}>Distance: </Text>
-          <Text style={styles.distancei}>{resto.distance} </Text>
-        </View>
+
       </View>
     </View>
   );
@@ -77,16 +90,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
-    fontStyle: "italic",
   },
   container2: {
-    flex: 1,
     fontStyle: "italic",
-  },
-  bloc3: {
-    flexDirection: "row",
+    paddingRight: 100,
   },
   bloc2: {
+    flexDirection: "row",
+  },
+  bloc3: {
     flexDirection: "row",
   },
   bloc4: {
@@ -101,78 +113,72 @@ const styles = StyleSheet.create({
   bloc7: {
     flexDirection: "row",
   },
-  text: {
-    fontSize: 24,
-    fontWeight: "bold",
-  },
   image: {
     borderRadius: 15,
     margin: 10,
-    width: "50",
-    height: "30%",
+    height: "50%",
   },
   icon: {
-    marginBottom: 25,
-    margin: 30,
+    marginBottom: 0,
+    marginLeft:15,
+    marginTop: 20,
   },
   name: {
-    fontSize: 20,
+    fontSize: 16,
     fontStyle: "italic",
-    margin: 15,
     fontWeight: "bold",
   },
   description: {
     fontStyle: "italic",
-    fontSize: 20,
-    margin: 15,
+    fontSize: 16,
     fontWeight: "bold",
   },
   note: {
     fontStyle: "italic",
-    fontSize: 20,
-    margin: 15,
+    fontSize: 16,
     fontWeight: "bold",
   },
   price: {
     fontStyle: "italic",
-    fontSize: 20,
-    margin: 15,
+    fontSize: 16,
     fontWeight: "bold",
   },
   distance: {
     fontStyle: "italic",
-    fontSize: 20,
-    margin: 15,
+    fontSize: 16,
     fontWeight: "bold",
   },
   PlateName: {
     fontStyle: "italic",
-    fontSize: 20,
-    margin: 15,
+    fontSize: 16,
     fontWeight: "bold",
   },
   namei: {
-    fontSize: 20,
-    margin: 15,
+    fontSize: 25,
+    fontStyle: "italic", 
+    fontWeight: "bold",
+    padding:15,
   },
   descriptioni: {
-    fontSize: 20,
-    margin: 15,
+    fontSize: 16,
+    marginStart:10,
   },
   notei: {
-    fontSize: 20,
-    margin: 15,
+    fontSize: 16,
   },
   pricei: {
-    fontSize: 20,
-    margin: 15,
+    fontSize: 16,
   },
   distancei: {
-    fontSize: 20,
-    margin: 15,
+    fontSize: 16,
   },
   PlateNamei: {
-    fontSize: 20,
-    margin: 15,
+    fontSize: 16,
+    color:"#A41623",
+    fontWeight: "bold",
+    justifyContent:"center",
+    alignItems:"center",
+    margin:10,
+    fontStyle: "italic",
   },
 });
