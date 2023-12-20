@@ -16,18 +16,23 @@ const { height, width } = Dimensions.get("window");
 
 export default function SettingsScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
-  const [filterDropdownVisible, setFilterDropdownVisible] = useState(false);
-
+  const [regimesModalVisible, setregimesModalVisible] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({
-    
+  });
+  const [maladieModalVisible, setmaladieModalVisible] = useState(false);
+  const [selectedMaladiesParam, setSelectedMaladiesParam] = useState({
+  });
+  const [IngredientsModalVisible, setIngredientsModalVisible] = useState(false);
+  const [selectedIngredientssParam, setSelectedIngredientssParam] = useState({
   });
 
+
   const goToPreferencies = () => {
-      setFilterDropdownVisible(!filterDropdownVisible);
+      setregimesModalVisible(!regimesModalVisible);
   };
 
   const goToIllnesses = () => {
-    navigation.navigate("Illnesses");
+    navigation.navigate(!maladieModalVisible);
   };
 
   const goToIngredients = () => {
@@ -98,15 +103,15 @@ export default function SettingsScreen({ navigation }) {
             style={styles.autre}
           />
         </TouchableOpacity>
-        {filterDropdownVisible && (
+        {regimesModalVisible && maladieModalVisible && (
           <Modal
-              isVisible={filterDropdownVisible}
-              onBackdropPress={() => setFilterDropdownVisible(false)}
+              isVisible={regimesModalVisible}
+              onBackdropPress={() => setregimesModalVisible(false)}
               style={{
                 justifyContent: "flex-end",
                 margin: 0,
               }}>
-                <View style={styles.filterDropdown}>
+                <View style={styles.regimesModal}>
                 <CheckBox
                   title="Prix"
                   containerStyle={{
@@ -140,10 +145,50 @@ export default function SettingsScreen({ navigation }) {
                   checkedColor="#A41623"
                   onPress={() =>
                     setSelectedRegimes({
+                    })
+                  }
+                />
+               
+                </View>
+                <View style={styles.maladieModalVisible}>
+                <CheckBox
+                  title="Prix"
+                  containerStyle={{
+                    height: 60,
+                    justifyContent: "center",
+                    width: 150,
+                    alignItems: "center",
+                    borderRadius: 50,
+                    margin: 10,
+                  }}
+                  style={styles.CheckBox}
+                  checked={selectedMaladiesParam.price}
+                  checkedColor="#A41623"
+                  onPress={() =>
+                    setSelectedMaladiesParam({
+                    })
+                  }
+                />
+                <CheckBox
+                  title="Prix"
+                  containerStyle={{
+                    height: 60,
+                    justifyContent: "center",
+                    width: 150,
+                    alignItems: "center",
+                    borderRadius: 50,
+                    margin: 10,
+                  }}
+                  style={styles.CheckBox}
+                  checked={selectedMaladiesParam.price}
+                  checkedColor="#A41623"
+                  onPress={() =>
+                    setSelectedMaladiesParam({
                     })
                   }
                 />
                 </View>
+                
           </Modal>
        )}
 

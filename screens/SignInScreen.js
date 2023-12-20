@@ -68,7 +68,7 @@ export default function SignInScreen({ navigation }) {
       <TouchableOpacity
         onPress={() => handleSubmit()}
         style={styles.button}
-        activeOpacity={0.8}
+        activeOpacity={0.6}
       >
         <Text style={styles.textButton}>Se connecter</Text>
       </TouchableOpacity>

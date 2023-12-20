@@ -104,11 +104,12 @@ const styles = StyleSheet.create({
   container2: {
     fontStyle: "italic",
     flexDirection: "row",
+    justifyContent: "space-around",
   },
   container3: {
     fontStyle: "italic",
     flexDirection: "column",
-    
+  
   },
   bloc2: {
     flexDirection: "row",
