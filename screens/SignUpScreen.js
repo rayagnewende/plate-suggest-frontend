@@ -61,7 +61,7 @@ export default function SignUpScreen({ navigation }) {
         style={styles.input}
       />
       <TextInput
-        placeholder="mot de passe"
+        placeholder="Mot de passe"
         secureTextEntry={true}
         onChangeText={(value) => setPassword(value)}
         value={password}
