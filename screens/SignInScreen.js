@@ -35,7 +35,7 @@ export default function SignInScreen({ navigation }) {
           );
           navigation.navigate("TabNavigator");
         } else {
-          setErrorMessage("Identifiants incorrect");
+          setErrorMessage("Connexion Incorrect");
           setEmailERROR(true);
         }
         setEmail("");
@@ -64,6 +64,7 @@ export default function SignInScreen({ navigation }) {
         secureTextEntry={true}
         style={styles.input}
       />
+      {emailERROR && <Text style={styles.error}>Connexion Incorrect !</Text>}
       <TouchableOpacity
         onPress={() => handleSubmit()}
         style={styles.button}
@@ -71,7 +72,7 @@ export default function SignInScreen({ navigation }) {
       >
         <Text style={styles.textButton}>Se connecter</Text>
       </TouchableOpacity>
-      {emailERROR && <Text style={styles.error}>Identifiant incorrect</Text>}
+      
     </KeyboardAvoidingView>
   );
 }

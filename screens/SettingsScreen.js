@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function SettingsScreen({ navigation }) {
+  const user = useSelector( state => state.user.value);
   const goToPreferencies = () => {
     navigation.navigate("Preferences");
   };

@@ -46,7 +46,7 @@ export default function SignUpScreen({ navigation }) {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <Text style={styles.title}>Bienvenue</Text>
-      <Text style={styles.title2}>Creer un compte</Text>
+      <Text style={styles.title2}>Créer un compte</Text>
       <TextInput
         placeholder="Nom d'utilisateur"
         onChangeText={(value) => setUsername(value)}
