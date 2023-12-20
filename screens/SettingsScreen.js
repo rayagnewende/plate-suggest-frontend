@@ -4,6 +4,8 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  Image,
+  KeyboardAvoidingView,
   Dimensions,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,27 +18,37 @@ const { height, width } = Dimensions.get("window");
 
 export default function SettingsScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
+
+  const avatarImages = {
+    Vegetalien: require("../assets/Vegan.png"),
+    Vegetarien: require("../assets/Vegetarien.png"),
+    Pescetarien: require("../assets/Pescetarien.png"),
+    Flexitarien: require("../assets/Flexitarien.png"),
+    Everything: require("../assets/Everything.png"),
+  };
   const [regimesModalVisible, setregimesModalVisible] = useState(false);
-  const [selectedFilters, setSelectedFilters] = useState({
+  const [selectedRegimes, setSelectedRegimes] = useState({
+    //Vegetarien: false,
   });
   const [maladieModalVisible, setmaladieModalVisible] = useState(false);
   const [selectedMaladiesParam, setSelectedMaladiesParam] = useState({
+   // Obésité: false,
   });
   const [IngredientsModalVisible, setIngredientsModalVisible] = useState(false);
   const [selectedIngredientssParam, setSelectedIngredientssParam] = useState({
+    
   });
-
 
   const goToPreferencies = () => {
       setregimesModalVisible(!regimesModalVisible);
   };
 
   const goToIllnesses = () => {
-    navigation.navigate(!maladieModalVisible);
+    setmaladieModalVisible(!maladieModalVisible);
   };
 
   const goToIngredients = () => {
-    navigation.navigate("Ingredients");
+    setIngredientsModalVisible(!IngredientsModalVisible);
   };
 
   const [isConnected, setIsconected] = useState(false);
@@ -47,7 +59,7 @@ export default function SettingsScreen({ navigation }) {
     setIsconected(true);
     navigation.navigate("Welcome");
   };
-
+/*
   const renderOption = (option) => (
     <TouchableOpacity
       style={styles.optionContainer}
@@ -67,16 +79,18 @@ export default function SettingsScreen({ navigation }) {
       </View>
     </TouchableOpacity>
   );
-
+*/
   return (
-    <View style={styles.container}>
-      <Text style={styles.parametre}>Paramètres</Text>
-      <View style={styles.avatar}>
-        <FontAwesome
-          name="user"
-          size={100}
-          color="#A41623"
-          style={styles.icon}
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <View style={styles.icon}>
+        <Image
+          style={styles.img}
+          source={
+            avatarImages[user.preferences.regime] || avatarImages.Everything
+          }
         />
       </View>
 
@@ -92,8 +106,8 @@ export default function SettingsScreen({ navigation }) {
           {user.username}
         </Text>
       </View>
-      <View>
-       
+      
+      <View style={styles.parent}>
         <TouchableOpacity style={styles.regime} onPress={() => goToPreferencies()} activeOpacity={0.8}>
         <Text style={styles.textButton}>Régimes</Text>
           <FontAwesome
@@ -103,7 +117,8 @@ export default function SettingsScreen({ navigation }) {
             style={styles.autre}
           />
         </TouchableOpacity>
-        {regimesModalVisible && maladieModalVisible && (
+        </View>
+        {regimesModalVisible  && (
           <Modal
               isVisible={regimesModalVisible}
               onBackdropPress={() => setregimesModalVisible(false)}
@@ -113,7 +128,7 @@ export default function SettingsScreen({ navigation }) {
               }}>
                 <View style={styles.regimesModal}>
                 <CheckBox
-                  title="Prix"
+                  title="Vegetarien"
                   containerStyle={{
                     height: 60,
                     justifyContent: "center",
@@ -123,7 +138,7 @@ export default function SettingsScreen({ navigation }) {
                     margin: 10,
                   }}
                   style={styles.CheckBox}
-                  checked={selectedFilters.price}
+                  checked={selectedRegimes.price}
                   checkedColor="#A41623"
                   onPress={() =>
                     setSelectedRegimes({
@@ -131,7 +146,7 @@ export default function SettingsScreen({ navigation }) {
                   }
                 />
                 <CheckBox
-                  title="Prix"
+                  title="Végétalien"
                   containerStyle={{
                     height: 60,
                     justifyContent: "center",
@@ -141,18 +156,35 @@ export default function SettingsScreen({ navigation }) {
                     margin: 10,
                   }}
                   style={styles.CheckBox}
-                  checked={selectedFilters.price}
+                  checked={selectedRegimes.price}
                   checkedColor="#A41623"
                   onPress={() =>
                     setSelectedRegimes({
                     })
                   }
                 />
-               
-                </View>
-                <View style={styles.maladieModalVisible}>
+               </View>
+               </Modal>
+              )}
+
+              <View >
+                <TouchableOpacity style={styles.maladie} onPress={() => goToIllnesses()} activeOpacity={0.5}>
+                <Text style={styles.textButton}>Maladies</Text>
+                <FontAwesome name="chevron-right" size={20} color="black" />   
+               </TouchableOpacity>
+              </View>
+
+               {maladieModalVisible && (
+               <Modal
+               isVisible={maladieModalVisible}
+              onBackdropPress={() => setmaladieModalVisible(false)}
+              style={{
+                justifyContent: "flex-end",
+                margin: 0,
+              }}>  
+                <View style={styles.maladieVisible}>
                 <CheckBox
-                  title="Prix"
+                  title="Obésité"
                   containerStyle={{
                     height: 60,
                     justifyContent: "center",
@@ -170,7 +202,7 @@ export default function SettingsScreen({ navigation }) {
                   }
                 />
                 <CheckBox
-                  title="Prix"
+                  title="Diabète"
                   containerStyle={{
                     height: 60,
                     justifyContent: "center",
@@ -188,28 +220,66 @@ export default function SettingsScreen({ navigation }) {
                   }
                 />
                 </View>
-                
-          </Modal>
-       )}
+              </Modal>
+               )}
 
-      </View>
-
-      <View >
+      
+      <View style={styles.parent2}>
         <TouchableOpacity style={styles.product} onPress={() => goToIngredients()} activeOpacity={0.8}>
         <Text style={styles.textButton}>
             Produits non désiré/Allergène(s)
           </Text>
           <FontAwesome name="chevron-right" size={20} color="black" />
-          
         </TouchableOpacity>
       </View>
-
-      <View >
-        <TouchableOpacity style={styles.maladie} onPress={() => goToIllnesses()} activeOpacity={0.5}>
-        <Text style={styles.textButton}>Maladies</Text>
-          <FontAwesome name="chevron-right" size={20} color="black" />   
-        </TouchableOpacity>
-      </View>
+      {maladieModalVisible && (
+               <Modal
+               isVisible={maladieModalVisible}
+              onBackdropPress={() => setIngredientsModalVisible(false)}
+              style={{
+                justifyContent: "flex-end",
+                margin: 0,
+              }}>  
+                <View style={styles.maladieVisible}>
+                <CheckBox
+                  title="Obésité"
+                  containerStyle={{
+                    height: 60,
+                    justifyContent: "center",
+                    width: 150,
+                    alignItems: "center",
+                    borderRadius: 50,
+                    margin: 10,
+                  }}
+                  style={styles.CheckBox}
+                  checked={selectedMaladiesParam.price}
+                  checkedColor="#A41623"
+                  onPress={() =>
+                    setSelectedMaladiesParam({
+                    })
+                  }
+                />
+                <CheckBox
+                  title="Diabète"
+                  containerStyle={{
+                    height: 60,
+                    justifyContent: "center",
+                    width: 150,
+                    alignItems: "center",
+                    borderRadius: 50,
+                    margin: 10,
+                  }}
+                  style={styles.CheckBox}
+                  checked={selectedMaladiesParam.price}
+                  checkedColor="#A41623"
+                  onPress={() =>
+                    setSelectedMaladiesParam({
+                    })
+                  }
+                />
+                </View>
+              </Modal>
+               )}
 
       <TouchableOpacity
         onPress={() => handledisconnect()}
@@ -218,85 +288,70 @@ export default function SettingsScreen({ navigation }) {
       >
         <Text style={styles.deconnect}>Déconnexion</Text>
       </TouchableOpacity>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
-  divLogo: {
-    backgroundColor: "#A41623",
-    height: 120,
-    margin: 0,
-    borderBottomRightRadius: 120,
-    borderBottomLeftRadius: 120,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-    marginBottom: 20,
-  },
-  filterDropdown: {
+  regimesModal: {
     backgroundColor: "white",
     borderRadius: 5,
     borderColor: "lightgray",
     zIndex: 50,
-    height: "50%",
+    height: "75%",
     flexDirection: "row",
     justifyContent: "center",
     flexWrap: "wrap",
   },
+  maladieVisible: {
+    backgroundColor: "white",
+    borderRadius: 5,
+    borderColor: "lightgray",
+    zIndex: 50,
+    height: "75%",
+    flexDirection: "row",
+    justifyContent: "center",
+    flexWrap: "wrap",
+  },
+  parent: {
+  flexDirection:'column',
+  justifyContent:'space-around',
+  },
+  parent2: {
+    flexDirection:'row',
+    justifyContent:'space-between',
+  },
   container: {
     flex: 1,
     backgroundColor: "white",
-    justifyContent: "center",
     padding: 15,
+    flexDirection:'column',
   },
   textButton: {
     fontSize: 19,
-    fontWeight: "bold",
-    color: "#645354",
-  },
-  regime: {
-    flexDirection:'row',
-    justifyContent: "space-between",
-    borderBottomWidth: 1,
-    borderColor: "#BEBEBE",
-    paddingBottom: 10,
-    paddingTop: 15,
-  },
-  product: {
-    flexDirection:'row',
-    justifyContent: "space-between",
-    borderBottomWidth: 1,
-    borderColor: "#BEBEBE",
-    paddingBottom: 10,
-    paddingTop: 15,
-  },
-  maladie: {
-    flexDirection:'row',
-    justifyContent: "space-between",
-    borderBottomWidth: 1,
-    borderColor: "#BEBEBE",
-    paddingBottom: 10,
-    paddingTop: 15,
+    marginTop: 20,
+    fontFamily: "Sansita",
   },
   deconnect: {
     fontSize: 19,
-    fontWeight: "bold",
-    marginTop: 200,
+    marginTop: 20,
+    fontFamily: "Sansita",
+    marginTop: 100,
+  },
+  maladie: {
+   justifyContent: "space-around",
   },
   icon: {
     textAlign: "center",
-    width: 110,
-    height: 110,
     alignItems: "center",
     justifyContent: "center",
-    borderWidth: 2,
-    borderRadius: 50,
+    marginTop: 50,
+    marginBottom: 20,
   },
-  avatar: {
-    flexDirection: "row",
-    justifyContent: "center",
+  img: {
+    height: 180,
+    width: 180,
+    borderRadius: 100,
   },
   name: {
    marginBottom: 50,

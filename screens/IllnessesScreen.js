@@ -115,10 +115,11 @@ const styles = StyleSheet.create({
   },
   questionText: {
     fontSize: 20,
-    fontWeight: "bold",
+    // fontWeight: "bold",
     marginBottom: 20,
     color: "#A41623",
     textAlign: "center",
+    fontFamily: "SansitaBold",
   },
   option: {
     borderWidth: 1,
@@ -159,11 +160,15 @@ const styles = StyleSheet.create({
   },
   nextButtonText: {
     color: "white",
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "Sansita",
+    fontSize: 18,
   },
   previousButtonText: {
     color: "#A41623",
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "Sansita",
+    fontSize: 18,
   },
   buttonContainer: {
     flexDirection: "row",
@@ -181,6 +186,7 @@ const styles = StyleSheet.create({
     borderWidth: 0,
   },
   optionText: {
-    fontSize: 16,
+    fontSize: 18,
+    fontFamily: "Sansita",
   },
 });

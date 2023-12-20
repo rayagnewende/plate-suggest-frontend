@@ -23,7 +23,6 @@ export default function DetailScreen({ route, navigation }) {
     qualification: 4.5,
     price: "$$$",
     distance: "0.5 miles",
-    image: require("../assets/HotDog.jpg"),
   };
 
   const goToHome = () => {
@@ -173,7 +172,7 @@ const styles = StyleSheet.create({
   },
   descriptioni: {
     fontSize: 16,
-    marginStart:10,
+    marginStart: 10,
   },
   notei: {
     fontSize: 16,
@@ -186,11 +185,11 @@ const styles = StyleSheet.create({
   },
   PlateNamei: {
     fontSize: 16,
-    color:"#A41623",
+    color: "#A41623",
     fontWeight: "bold",
-    justifyContent:"center",
-    alignItems:"center",
-    margin:10,
+    justifyContent: "center",
+    alignItems: "center",
+    margin: 10,
     fontStyle: "italic",
   },
 });

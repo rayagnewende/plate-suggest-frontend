@@ -91,14 +91,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "600",
     color: "white",
-    fontStyle: "italic",
+    fontFamily: "SansitaBold"
   },
   title2: {
     height: "10%",
     fontSize: 30,
     fontWeight: "600",
     color: "white",
-    fontStyle: "italic",
+    fontFamily: "SansitaItalic"
   },
   input: {
     width: "80%",
@@ -111,6 +111,8 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     fontSize: 20,
     textAlign: "center",
+    fontFamily: "Sansita",
+    
   },
   button: {
     alignItems: "center",
@@ -132,11 +134,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     height: 30,
     marginVertical: 8,
-    fontStyle: "italic",
+    fontFamily: "Sansita",
   },
   error: {
     marginTop: 10,
     color: "white",
     fontSize: 17,
+    fontFamily: "Sansita",
   },
 });
