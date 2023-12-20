@@ -1,52 +1,47 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, SafeAreaView, Image } from "react-native";
+import { View, StyleSheet, Text, SafeAreaView, Image } from "react-native";
 import MapView, { Callout, Marker } from "react-native-maps";
 import { Dimensions } from "react-native";
-import * as Location from "expo-location";
 
-
-
-
-const MarkerDescription = (imageUrl,name,adresse, distance  ) => {
+const MarkerDescription = (imageUrl, name, adresse, distance) => {
   return (
     <Callout tooltip>
-         <View style={styles.callout}>
-           <Image
-             source={{
-               uri: imageUrl,
-             }}
-             resizeMode="cover"
-             style={{ width: 100, height: "100%" }}
-           ></Image>
-           <View style={{ paddingHorizontal: 16, paddingVertical: 8, flex: 1 }}>
-             <Text
-               style={{
-                 fontWeight: "bold",
-                 fontSize: 18,
-               }}
-             >
-               {name}
-             </Text>
-             <Text>{adresse}</Text>
-             <Text>{distance}</Text>
-           </View>
-         </View>
-     </Callout>
-  )
-}
+      <View style={styles.callout}>
+        <Image
+          source={{
+            uri: imageUrl,
+          }}
+          resizeMode="cover"
+          style={{ width: 100, height: "100%" }}
+        ></Image>
+        <View style={{ paddingHorizontal: 16, paddingVertical: 8, flex: 1 }}>
+          <Text
+            style={{
+              fontWeight: "bold",
+              fontSize: 18,
+            }}
+          >
+            {name}
+          </Text>
+          <Text>{adresse}</Text>
+          <Text>{distance}</Text>
+        </View>
+      </View>
+    </Callout>
+  );
+};
 
 export default function MapScreen({ navigation }) {
   const [position, setPosition] = useState(null);
-  const [places, setPlaces] = useState([]); 
+  const [places, setPlaces] = useState([]);
 
-
-  useEffect( () => {
+  useEffect(() => {
     fetch("https://plate-suggest-backend.vercel.app/places")
-         .then( res => res.json())
-         .then(data => {
-           setPlaces(data.places); 
-           //console.log(data.places[0].place_name);
-         })
+      .then((res) => res.json())
+      .then((data) => {
+        setPlaces(data.places);
+        //console.log(data.places[0].place_name);
+      });
   }, []);
 
   const data = [
@@ -56,7 +51,7 @@ export default function MapScreen({ navigation }) {
       longitude: 2.333333,
     },
     {
-      name: "brutus", 
+      name: "brutus",
       latitude: 48.872885481682594,
       longitude: 2.2952859364974865,
     },
@@ -100,8 +95,7 @@ export default function MapScreen({ navigation }) {
       latitude: 48.83965969074901,
       longitude: 2.315517217074148,
     },
-  ];                                                                                                                            
-
+  ];
 
   const markers = places.map((e, i) => {
     return (
@@ -109,40 +103,64 @@ export default function MapScreen({ navigation }) {
         key={i}
         coordinate={{ latitude: e.latitude, longitude: e.longitude }}
       >
-       <Callout tooltip>
-            <View style={styles.callout}>
-                 <Image source={{uri:e.place_image}} style={{width:Dimensions.get("window").width * 0.4, height:'100%'}} /> 
-                 <View  style={{ margin:5,}}>
-                    <View style={{marginBottom:8}}>
-                    <Text style={{ fontWeight:'bold', fontSize:20}}>Name:</Text>
-                    <Text style={{ fontWeight:'700', fontSize:15}}>{e.place_name}</Text>
-                    </View>
-                    <View style={{ margin:5,}}>
-                    <Text style={{ fontWeight:'bold', fontSize:20}}>Adresse :</Text>               
-                    <Text style={{ fontWeight:'700', fontSize:15}}>{e.adresse}</Text>
-                    </View>
-                    <View style={{ margin:5,}} >
-                        <Text style={{ fontWeight:'bold', fontSize:20}}>Distance : </Text>
-                        <Text style={{ fontWeight:'700', fontSize:15}}>{e.distance} m</Text>
-                    </View>
-                 </View>
+        <Callout tooltip>
+          <View style={styles.callout}>
+            <Image
+              source={{ uri: e.place_image }}
+              style={{
+                width: Dimensions.get("window").width * 0.4,
+                height: "100%",
+              }}
+            />
+            <View style={{ margin: 5 }}>
+              <View style={{ marginBottom: 8 }}>
+                <Text style={{ fontWeight: "bold", fontSize: 20 }}>Name:</Text>
+                <Text style={{ fontWeight: "700", fontSize: 15 }}>
+                  {e.place_name}
+                </Text>
+              </View>
+              <View style={{ margin: 5 }}>
+                <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+                  Adresse :
+                </Text>
+                <Text style={{ fontWeight: "700", fontSize: 15 }}>
+                  {e.adresse}
+                </Text>
+              </View>
+              <View style={{ margin: 5 }}>
+                <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+                  Distance :{" "}
+                </Text>
+                <Text style={{ fontWeight: "700", fontSize: 15 }}>
+                  {e.distance} m
+                </Text>
+              </View>
             </View>
-       </Callout>
+          </View>
+        </Callout>
       </Marker>
     );
   });
 
   return (
     <SafeAreaView style={styles.container}>
-      <MapView 
-      initialRegion={{ 
-        latitude:48.88774463665781,
-        longitude: 2.3038443429644446,
-        latitudeDelta:0.094,      
-        longitudeDelta:0.06
-      }}
-      style={styles.map}>
-        <Marker coordinate={{longitude:2.3038443429644446, latitude:48.88774463665781 }} title={data.name} pinColor="#fecb2d" />
+      <MapView
+        initialRegion={{
+          latitude: 48.88774463665781,
+          longitude: 2.3038443429644446,
+          latitudeDelta: 0.094,
+          longitudeDelta: 0.06,
+        }}
+        style={styles.map}
+      >
+        <Marker
+          coordinate={{
+            longitude: 2.3038443429644446,
+            latitude: 48.88774463665781,
+          }}
+          title={data.name}
+          pinColor="#fecb2d"
+        />
         {markers}
       </MapView>
     </SafeAreaView>
@@ -150,16 +168,16 @@ export default function MapScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  callout:{
+  callout: {
     backgroundColor: "white",
     width: Dimensions.get("window").width * 0.8,
     height: Dimensions.get("window").height * 0.2,
     flexDirection: "row",
     borderWidth: 2,
-    padding:5,
+    padding: 5,
     borderRadius: 12,
     overflow: "hidden",
-  }, 
+  },
   container: {
     flex: 1,
   },
@@ -205,5 +223,5 @@ const styles = StyleSheet.create({
     height: 24,
     fontWeight: "600",
     fontSize: 15,
-  }
+  },
 });
