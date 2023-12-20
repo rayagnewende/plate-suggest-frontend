@@ -35,7 +35,7 @@ export default function DetailScreen({ route, navigation }) {
         <TouchableOpacity style={styles.bloc2} onPress={() => goToHome()}>
           <FontAwesome
             name="arrow-left"
-            size={30}
+            size={45}
             color="#A41623"
             style={styles.icon}
           />

@@ -7,6 +7,7 @@ import {
   Image,
   KeyboardAvoidingView,
   Dimensions,
+  TextInput,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../reducers/user";
@@ -110,12 +111,13 @@ export default function SettingsScreen({ navigation }) {
       <View style={styles.parent}>
         <TouchableOpacity style={styles.regime} onPress={() => goToPreferencies()} activeOpacity={0.8}>
         <Text style={styles.textButton}>Régimes</Text>
+        <View style={styles.enligne}>
           <FontAwesome
             name="chevron-right"
             size={20}
             color="black"
-            style={styles.autre}
           />
+          </View>
         </TouchableOpacity>
         </View>
         {regimesModalVisible  && (
@@ -126,6 +128,7 @@ export default function SettingsScreen({ navigation }) {
                 justifyContent: "flex-end",
                 margin: 0,
               }}>
+
                 <View style={styles.regimesModal}>
                 <CheckBox
                   title="Vegetarien"
@@ -166,14 +169,14 @@ export default function SettingsScreen({ navigation }) {
                </View>
                </Modal>
               )}
-
+             <View style={styles.partie2}>
               <View >
                 <TouchableOpacity style={styles.maladie} onPress={() => goToIllnesses()} activeOpacity={0.5}>
                 <Text style={styles.textButton}>Maladies</Text>
                 <FontAwesome name="chevron-right" size={20} color="black" />   
                </TouchableOpacity>
               </View>
-
+              </View>
                {maladieModalVisible && (
                <Modal
                isVisible={maladieModalVisible}
@@ -220,10 +223,11 @@ export default function SettingsScreen({ navigation }) {
                   }
                 />
                 </View>
+                
               </Modal>
                )}
-
-      
+              
+       <View style={styles.partie3}>
       <View style={styles.parent2}>
         <TouchableOpacity style={styles.product} onPress={() => goToIngredients()} activeOpacity={0.8}>
         <Text style={styles.textButton}>
@@ -232,17 +236,18 @@ export default function SettingsScreen({ navigation }) {
           <FontAwesome name="chevron-right" size={20} color="black" />
         </TouchableOpacity>
       </View>
-      {maladieModalVisible && (
+      </View>
+      {IngredientsModalVisible && (
                <Modal
-               isVisible={maladieModalVisible}
+               isVisible={IngredientsModalVisible}
               onBackdropPress={() => setIngredientsModalVisible(false)}
               style={{
                 justifyContent: "flex-end",
                 margin: 0,
               }}>  
-                <View style={styles.maladieVisible}>
-                <CheckBox
-                  title="Obésité"
+                <View style={styles.IngredientsVisible}>
+                <TextInput
+                  title=""
                   containerStyle={{
                     height: 60,
                     justifyContent: "center",
@@ -251,15 +256,15 @@ export default function SettingsScreen({ navigation }) {
                     borderRadius: 50,
                     margin: 10,
                   }}
-                  style={styles.CheckBox}
-                  checked={selectedMaladiesParam.price}
+                  style={styles.TextInput}
+                  checked={selectedIngredientssParam.price}
                   checkedColor="#A41623"
                   onPress={() =>
-                    setSelectedMaladiesParam({
+                    setSelectedIngredientssParam({
                     })
                   }
                 />
-                <CheckBox
+                <TextInput
                   title="Diabète"
                   containerStyle={{
                     height: 60,
@@ -269,18 +274,18 @@ export default function SettingsScreen({ navigation }) {
                     borderRadius: 50,
                     margin: 10,
                   }}
-                  style={styles.CheckBox}
-                  checked={selectedMaladiesParam.price}
+                  style={styles.TextInput}
+                  checked={selectedIngredientssParam.price}
                   checkedColor="#A41623"
                   onPress={() =>
-                    setSelectedMaladiesParam({
+                    setSelectedIngredientssParam({
                     })
                   }
                 />
                 </View>
               </Modal>
                )}
-
+          
       <TouchableOpacity
         onPress={() => handledisconnect()}
         style={styles.button}
@@ -293,53 +298,11 @@ export default function SettingsScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  regimesModal: {
-    backgroundColor: "white",
-    borderRadius: 5,
-    borderColor: "lightgray",
-    zIndex: 50,
-    height: "75%",
-    flexDirection: "row",
-    justifyContent: "center",
-    flexWrap: "wrap",
-  },
-  maladieVisible: {
-    backgroundColor: "white",
-    borderRadius: 5,
-    borderColor: "lightgray",
-    zIndex: 50,
-    height: "75%",
-    flexDirection: "row",
-    justifyContent: "center",
-    flexWrap: "wrap",
-  },
-  parent: {
-  flexDirection:'column',
-  justifyContent:'space-around',
-  },
-  parent2: {
-    flexDirection:'row',
-    justifyContent:'space-between',
-  },
   container: {
     flex: 1,
     backgroundColor: "white",
     padding: 15,
     flexDirection:'column',
-  },
-  textButton: {
-    fontSize: 19,
-    marginTop: 20,
-    fontFamily: "Sansita",
-  },
-  deconnect: {
-    fontSize: 19,
-    marginTop: 20,
-    fontFamily: "Sansita",
-    marginTop: 100,
-  },
-  maladie: {
-   justifyContent: "space-around",
   },
   icon: {
     textAlign: "center",
@@ -354,11 +317,78 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   name: {
-   marginBottom: 50,
+    marginBottom: 50,
+   },
+   parent: {
+     borderBottomWidth: 2,
+     borderBottomColor:"#DFDFDF",
+    },
+   enligne: {
+    flexDirection:'row-reverse',
+   },
+    regime: {
+      flexDirection:'column',
+      justifyContent:'space-around',
+      },
+  regimesModal: {
+    backgroundColor: "white",
+    borderRadius: 5,
+    borderColor: "lightgray",
+    zIndex: 50,
+    height: "75%",
+    flexDirection: "row",
+    justifyContent: "center",
+    flexWrap: "wrap",
   },
-  parametre: {
-   fontSize: 30,
-   paddingBottom: 15,
-   fontWeight: "bold",
+  partie2: {
+    borderBottomWidth: 2,
+    borderBottomColor:"#DFDFDF",
+  },
+  textButton: {
+    fontSize: 19,
+    marginTop: 20,
+    fontFamily: "Sansita",
+  },
+  CheckBox: {
+  },
+  maladie: {
+    justifyContent: "space-around",
+   },
+  maladieVisible: {
+    backgroundColor: "white",
+    borderRadius: 5,
+    borderColor: "lightgray",
+    zIndex: 50,
+    height: "75%",
+    flexDirection: "row",
+    justifyContent: "center",
+    flexWrap: "wrap",
+  },
+  parent2: {
+    flexDirection:'row',
+    justifyContent:'space-between',
+  },
+  product: {
+
+  },
+  partie3: {
+    borderBottomWidth: 2,
+    borderBottomColor:"#DFDFDF",
+  },
+  IngredientsVisible: {
+    backgroundColor: "white",
+    borderRadius: 5,
+    borderColor: "lightgray",
+    zIndex: 50,
+    height: "75%",
+    flexDirection: "row",
+    justifyContent: "center",
+    flexWrap: "wrap",
+  },
+  deconnect: {
+    fontSize: 19,
+    marginTop: 20,
+    fontFamily: "Sansita",
+    marginTop: 100,
   },
 });

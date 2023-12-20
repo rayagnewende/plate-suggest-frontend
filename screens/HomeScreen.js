@@ -385,7 +385,7 @@ export default function HomeScreen({ navigation }) {
             style={{ marginTop: 5 }}
             data={sortRestaurants(restaurants)}
             renderItem={renderRestaurant}
-            keyExtractor={(index) => index}
+            keyExtractor={(item, index) => index.toString()}
           />
         )}
         {!permissionGranted && (
@@ -393,7 +393,7 @@ export default function HomeScreen({ navigation }) {
             style={{ marginTop: 5 }}
             data={restaurants.reverse()}
             renderItem={renderRestaurant}
-            keyExtractor={(index) => index}
+            keyExtractor={(item, index) => index.toString()}
           />
         )}
       </View>
