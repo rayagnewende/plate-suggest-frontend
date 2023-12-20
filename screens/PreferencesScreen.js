@@ -57,7 +57,7 @@ export default function PreferenciesScreen({ navigation }) {
       {renderOption("Vegetarien")}
       {renderOption("Pescetarien")}
       {renderOption("Flexitarien")}
-      {renderOption("Je mange tout")}
+      {renderOption("Mange tout")}
 
       {/* Next Button */}
       <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
@@ -78,10 +78,11 @@ const styles = StyleSheet.create({
   },
   questionText: {
     fontSize: 20,
-    fontWeight: "bold",
+    // fontWeight: "bold",
     marginBottom: 20,
     color: "#A41623",
     textAlign: "center",
+    fontFamily: "SansitaBold",
   },
   option: {
     borderWidth: 1,
@@ -103,10 +104,13 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    
   },
   nextButtonText: {
     color: "white",
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "Sansita",
+    fontSize: 18,
   },
 
   checkboxContainer: {
@@ -120,9 +124,9 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     borderWidth: 0,
     position: "relative",
-    left: 1,
   },
   optionText: {
-    fontSize: 16,
+    fontSize: 18,
+    fontFamily: "Sansita",
   },
 });

@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
     marginBottom: 80,
     borderWidth: 2,
     borderColor: "#A41623",
+    
   },
   textButton: {
     color: "#ffffff",
@@ -96,6 +97,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 20,
     marginVertical: 8,
+    fontFamily: "Sansita"
   },
   textButton2: {
     color: "#A41623",
@@ -103,5 +105,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 20,
     marginVertical: 8,
+    fontFamily: "Sansita"
   },
 });

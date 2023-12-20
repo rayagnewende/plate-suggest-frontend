@@ -23,7 +23,6 @@ export default function DetailScreen({ route, navigation }) {
     qualification: 4.5,
     price: "$$$",
     distance: "0.5 miles",
-    image: require("../assets/HotDog.jpg"),
   };
 
   const goToHome = () => {
@@ -46,21 +45,22 @@ export default function DetailScreen({ route, navigation }) {
 
       <View style={styles.container2}>
         <View style={styles.bloc2}>
-        <FontAwesome
+          <FontAwesome
             name="home"
             size={40}
             color="#A41623"
             style={styles.icon}
-          /><Text style={styles.namei}>FanFan</Text>
-          </View>
-          <View style={styles.bloc5}>
+          />
+          <Text style={styles.namei}>FanFan</Text>
+        </View>
+        <View style={styles.bloc5}>
           <FontAwesome
             name="star-o"
             size={40}
             color="#A41623"
             style={styles.icon}
           />
-           <FontAwesome
+          <FontAwesome
             name="euro"
             size={40}
             color="#A41623"
@@ -72,7 +72,7 @@ export default function DetailScreen({ route, navigation }) {
             color="#A41623"
             style={styles.icon}
           />
-          </View>
+        </View>
         <View style={styles.bloc3}>
           <Text style={styles.PlateNamei}>{restaurant.dish_name}</Text>
         </View>
@@ -80,7 +80,6 @@ export default function DetailScreen({ route, navigation }) {
           <Text style={styles.description}></Text>
           <Text style={styles.descriptioni}>{restaurant.dish_description}</Text>
         </View>
-
       </View>
     </View>
   );
@@ -120,7 +119,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginBottom: 0,
-    marginLeft:15,
+    marginLeft: 15,
     marginTop: 20,
   },
   name: {
@@ -155,13 +154,13 @@ const styles = StyleSheet.create({
   },
   namei: {
     fontSize: 25,
-    fontStyle: "italic", 
+    fontStyle: "italic",
     fontWeight: "bold",
-    padding:15,
+    padding: 15,
   },
   descriptioni: {
     fontSize: 16,
-    marginStart:10,
+    marginStart: 10,
   },
   notei: {
     fontSize: 16,
@@ -174,11 +173,11 @@ const styles = StyleSheet.create({
   },
   PlateNamei: {
     fontSize: 16,
-    color:"#A41623",
+    color: "#A41623",
     fontWeight: "bold",
-    justifyContent:"center",
-    alignItems:"center",
-    margin:10,
+    justifyContent: "center",
+    alignItems: "center",
+    margin: 10,
     fontStyle: "italic",
   },
 });

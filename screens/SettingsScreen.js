@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../reducers/user";
-import { commonTextStyles } from "../assets/fontStyle";
 
 export default function SettingsScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
@@ -61,11 +60,10 @@ export default function SettingsScreen({ navigation }) {
           textAlign: "center",
           marginTop: 10,
           fontSize: 30,
-          fontStyle: "italic",
-          fontWeight: "bold",
+         
           letterSpacing: 2,
           color: "#A64123",
-          // fontFamily: "Sansita Black",
+          fontFamily: "SansitaBold",
         }}
       >
         {user.username}
@@ -110,13 +108,15 @@ const styles = StyleSheet.create({
   },
   textButton: {
     fontSize: 19,
-    fontWeight: "bold",
+    // fontWeight: "bold",
     marginTop: 20,
+    fontFamily: "Sansita",
   },
   deconnect: {
     fontSize: 19,
-    fontWeight: "bold",
+    // fontWeight: "bold",
     marginTop: 20,
+    fontFamily: "Sansita",
   },
   icon: {
     textAlign: "center",
