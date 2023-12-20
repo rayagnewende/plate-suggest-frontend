@@ -209,10 +209,11 @@ const styles = StyleSheet.create({
   },
   questionText: {
     fontSize: 20,
-    fontWeight: "bold",
+    // fontWeight: "bold",
     marginBottom: 20,
     color: "#A41623",
     textAlign: "center",
+    fontFamily: "SansitaBold",
   },
   option: {
     borderWidth: 1,
@@ -253,11 +254,15 @@ const styles = StyleSheet.create({
   },
   nextButtonText: {
     color: "white",
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "Sansita",
+    fontSize: 18,
   },
   previousButtonText: {
     color: "#A41623",
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "Sansita",
+    fontSize: 18,
   },
   buttonContainer: {
     flexDirection: "row",
@@ -276,9 +281,11 @@ const styles = StyleSheet.create({
   },
   optionText: {
     fontSize: 16,
+    fontFamily: "Sansita",
   },
   span: {
     color: "black",
+    fontFamily: "SansitaBold",
   },
   input: {
     width: "80%",
@@ -289,6 +296,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     height: 55,
     color: "black",
+    fontFamily: "Sansita",
   },
   inputIngredients: {
     display: "flex",
@@ -311,6 +319,7 @@ const styles = StyleSheet.create({
   },
   wordItem: {
     fontSize: 20,
+    fontFamily: "Sansita",
   },
   renderWord: {
     display: "flex",
@@ -319,6 +328,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: 15,
+    fontFamily: "Sansita",
   },
   removeButton: {
     position: "absolute",
@@ -339,5 +349,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderBottomWidth: 1,
     borderBottomColor: "lightgray",
+    fontFamily: "Sansita",
   },
 });

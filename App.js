@@ -12,10 +12,12 @@ import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import user from "./reducers/user";
 import WelcomeScreen from "./screens/WelcomeScreen";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import DetailScreen from "./screens/DetailScreen";
 import SettingsScreen from "./screens/SettingsScreen";
+import { useFonts } from "expo-font";
+
 
 const store = configureStore({
   reducer: { user },
@@ -55,9 +57,24 @@ const TabNavigator = () => {
 };
 
 export default function App() {
+  
+  
+    const [fontsLoaded, fontError] = useFonts({
+    "Sansita": require("./assets/fonts/Sansita-Regular.ttf"),
+    "SansitaItalic": require("./assets/fonts/Sansita-Italic.ttf"),
+    "SansitaBold": require("./assets/fonts/Sansita-BoldItalic.ttf"),
+    "SansitaBlack": require("./assets/fonts/Sansita-Black.ttf"),
+  });
+  
+  
+  
+
+  // console.log(fontsLoaded);
+  // console.log(fontError);
+
   return (
-    <Provider store={store}> 
-      <NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer >
         <Stack.Navigator
           screenOptions={{ headerShown: false }}
           initialRouteName="Welcome"
@@ -82,5 +99,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    fontFamily: "Sansita",
   },
 });

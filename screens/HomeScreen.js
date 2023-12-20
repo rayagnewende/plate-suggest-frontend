@@ -385,7 +385,7 @@ export default function HomeScreen({ navigation }) {
             style={{ marginTop: 5 }}
             data={sortRestaurants(restaurants)}
             renderItem={renderRestaurant}
-            keyExtractor={(index) => index}
+            keyExtractor={(item, index) => index.toString()}
           />
         )}
         {!permissionGranted && (
@@ -393,7 +393,7 @@ export default function HomeScreen({ navigation }) {
             style={{ marginTop: 5 }}
             data={restaurants.reverse()}
             renderItem={renderRestaurant}
-            keyExtractor={(index) => index}
+            keyExtractor={(item, index) => index.toString()}
           />
         )}
       </View>
@@ -419,12 +419,14 @@ const styles = StyleSheet.create({
   },
   greeting: {
     fontSize: 18,
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "SansitaBold",
   },
   name: {
     fontSize: 18,
-    fontWeight: "bold",
+    // fontWeight: "bold",
     color: "#A61423",
+    fontFamily: "SansitaBold",
   },
   greetingContainer: {
     flexDirection: "row",
@@ -440,7 +442,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 24,
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "SansitaBold",
   },
   restaurantContainer: {
     flexDirection: "row",
@@ -460,22 +463,27 @@ const styles = StyleSheet.create({
   },
   restaurantName: {
     fontSize: 18,
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "SansitaBold",
   },
   restaurantDescription: {
     fontSize: 14,
     color: "gray",
+    fontFamily: "Sansita",
   },
   restaurantQualification: {
     fontSize: 16,
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "SansitaBold",
   },
   restaurantPrice: {
     fontSize: 16,
+    fontFamily: "SansitaBold",
   },
   restaurantDistance: {
     fontSize: 16,
     color: "gray",
+    fontFamily: "SansitaBold",
   },
   filterDropdown: {
     backgroundColor: "white",
@@ -498,6 +506,7 @@ const styles = StyleSheet.create({
     height: 40,
     fontSize: 18,
     margin: 30,
+    fontFamily: "SansitaBold",
   },
   divLogo: {
     backgroundColor: "#A41623",
