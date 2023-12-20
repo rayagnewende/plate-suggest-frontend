@@ -1,25 +1,18 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import React, { useRef, useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   View,
   Text,
   StyleSheet,
   Image,
-  TextInput,
   TouchableOpacity,
   FlatList,
   KeyboardAvoidingView,
-  Switch,
-  Animated,
   Dimensions,
 } from "react-native";
 import { CheckBox } from "react-native-elements";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import * as Location from "expo-location";
-import user from "../reducers/user";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Modal from "react-native-modal";
 
@@ -29,7 +22,7 @@ export default function HomeScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
   const [permissionGranted, setPermissionGranted] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const [customerGivenLocation, setCustomerGivenLocation] = useState("");
+  // const [customerGivenLocation, setCustomerGivenLocation] = useState("");
   const [restaurants, setRestaurants] = useState([]);
   const [location, setLocation] = useState({
     latitude: 0,
@@ -49,108 +42,108 @@ export default function HomeScreen({ navigation }) {
     (async () => {
       try {
         const { status } = await Location.requestForegroundPermissionsAsync();
-        const fetchedRestaurants = [
-          {
-            id: 1,
-            name: "Restaurant 1",
-            description:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
-            qualification: 4.5,
-            price: "8€",
-            distance: "0.5 miles",
-            image: require("../assets/HotDog.jpg"),
-          },
-          {
-            id: 2,
-            name: "Restaurant 2",
-            description:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
-            qualification: 4.2,
-            price: "7.50€",
-            distance: "0.8 miles",
-            image: require("../assets/Wendys.png"),
-          },
-          {
-            id: 3,
-            name: "Restaurant 3",
-            description:
-              "Description 3 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
-            qualification: 4.9,
-            price: "5.5€",
-            distance: "1.5 miles",
-            image: require("../assets/ribs.jpg"),
-          },
-          {
-            id: 4,
-            name: "Restaurant 4",
-            description:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
-            qualification: 3.5,
-            price: "9€",
-            distance: "1.1 miles",
-            image: require("../assets/sushimix.jpg"),
-          },
-          {
-            id: 5,
-            name: "Restaurant 5",
-            description:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
-            qualification: 4.3,
-            price: "13€",
-            distance: "2.5 miles",
-            image: require("../assets/PizzaHut.png"),
-          },
-          {
-            id: 6,
-            name: "Restaurant 6",
-            description:
-              "Description 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
-            qualification: 4.7,
-            price: "11.50€",
-            distance: "3 miles",
-            image: require("../assets/Logo-KFC.png"),
-          },
-          {
-            id: 7,
-            name: "Restaurant 7",
-            description:
-              "Description 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
-            qualification: 3.3,
-            price: "4€",
-            distance: "1.7 miles",
-            image: require("../assets/mcdo.jpg"),
-          },
-          {
-            id: 8,
-            name: "Restaurant 8",
-            description:
-              "Description 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
-            qualification: 4.1,
-            price: "22€",
-            distance: "1.8 miles",
-            image: require("../assets/steak.jpg"),
-          },
-          {
-            id: 9,
-            name: "Restaurant 9",
-            description:
-              "Description 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
-            qualification: 2.5,
-            price: "17€",
-            distance: "0.5 miles",
-            image: require("../assets/DQ.png"),
-          },
-          {
-            id: 10,
-            name: "Restaurant 10",
-            description:
-              "Description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.1",
-            qualification: 4.9,
-            price: "14€",
-            distance: "4.5 miles",
-            image: require("../assets/Wendys.png"),
-          },
-        ];
+        // const fetchedRestaurants = [
+        //   {
+        //     id: 1,
+        //     name: "Restaurant 1",
+        //     description:
+        //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
+        //     qualification: 4.5,
+        //     price: "8€",
+        //     distance: "0.5 miles",
+        //     image: require("../assets/HotDog.jpg"),
+        //   },
+        //   {
+        //     id: 2,
+        //     name: "Restaurant 2",
+        //     description:
+        //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
+        //     qualification: 4.2,
+        //     price: "7.50€",
+        //     distance: "0.8 miles",
+        //     image: require("../assets/Wendys.png"),
+        //   },
+        //   {
+        //     id: 3,
+        //     name: "Restaurant 3",
+        //     description:
+        //       "Description 3 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
+        //     qualification: 4.9,
+        //     price: "5.5€",
+        //     distance: "1.5 miles",
+        //     image: require("../assets/ribs.jpg"),
+        //   },
+        //   {
+        //     id: 4,
+        //     name: "Restaurant 4",
+        //     description:
+        //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
+        //     qualification: 3.5,
+        //     price: "9€",
+        //     distance: "1.1 miles",
+        //     image: require("../assets/sushimix.jpg"),
+        //   },
+        //   {
+        //     id: 5,
+        //     name: "Restaurant 5",
+        //     description:
+        //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
+        //     qualification: 4.3,
+        //     price: "13€",
+        //     distance: "2.5 miles",
+        //     image: require("../assets/PizzaHut.png"),
+        //   },
+        //   {
+        //     id: 6,
+        //     name: "Restaurant 6",
+        //     description:
+        //       "Description 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
+        //     qualification: 4.7,
+        //     price: "11.50€",
+        //     distance: "3 miles",
+        //     image: require("../assets/Logo-KFC.png"),
+        //   },
+        //   {
+        //     id: 7,
+        //     name: "Restaurant 7",
+        //     description:
+        //       "Description 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
+        //     qualification: 3.3,
+        //     price: "4€",
+        //     distance: "1.7 miles",
+        //     image: require("../assets/mcdo.jpg"),
+        //   },
+        //   {
+        //     id: 8,
+        //     name: "Restaurant 8",
+        //     description:
+        //       "Description 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
+        //     qualification: 4.1,
+        //     price: "22€",
+        //     distance: "1.8 miles",
+        //     image: require("../assets/steak.jpg"),
+        //   },
+        //   {
+        //     id: 9,
+        //     name: "Restaurant 9",
+        //     description:
+        //       "Description 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.",
+        //     qualification: 2.5,
+        //     price: "17€",
+        //     distance: "0.5 miles",
+        //     image: require("../assets/DQ.png"),
+        //   },
+        //   {
+        //     id: 10,
+        //     name: "Restaurant 10",
+        //     description:
+        //       "Description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et nibh nisl. Sed pharetra nunc massa, eu vulputate dui rutrum vel. Pellentesque elementum suscipit rhoncus.1",
+        //     qualification: 4.9,
+        //     price: "14€",
+        //     distance: "4.5 miles",
+        //     image: require("../assets/Wendys.png"),
+        //   },
+        // ];
 
         if (status === "granted") {
           // Location.watchPositionAsync({ distanceInterval: 10 }, (location) => {
@@ -169,7 +162,7 @@ export default function HomeScreen({ navigation }) {
           // });
         } else {
           setModalVisible(true);
-          setRestaurants(fetchedRestaurants);
+          setRestaurants("No restaurants available");
         }
       } catch (error) {
         console.error("Error obtaining location permission:", error);
