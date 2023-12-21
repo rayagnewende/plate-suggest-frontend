@@ -72,7 +72,6 @@ export default function SignInScreen({ navigation }) {
       >
         <Text style={styles.textButton}>Se connecter</Text>
       </TouchableOpacity>
-      
     </KeyboardAvoidingView>
   );
 }
