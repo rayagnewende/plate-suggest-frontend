@@ -182,6 +182,17 @@ export default function IngredientsScreen({ navigation }) {
         keyExtractor={(item) => item}
         contentContainerStyle={styles.listContent}
       />
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.previousButton}
+          onPress={handlePrevious}
+        >
+          <Text style={styles.previousButtonText}>Précédent</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
+          <Text style={styles.nextButtonText}>Suivant</Text>
+        </TouchableOpacity>
+      </View>
     </KeyboardAvoidingView>
   );
 }
