@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
 
   bloc2: {
     flexDirection: "row",
-    marginTop: 30,
+    marginTop: 50,
   },
   bloc3: {
     flexDirection: "row",
