@@ -414,7 +414,7 @@ export default function SettingsScreen({ navigation }) {
         </Modal>
       )}
 
-      <View style={styles.parent2}>
+      <View >
         <TouchableOpacity
           style={styles.product}
           onPress={() => goToIngredients()}
@@ -433,14 +433,17 @@ export default function SettingsScreen({ navigation }) {
           style={{
             justifyContent: "flex-end",
             margin: 0,
+           
           }}
         >
-          <Text style={styles.questionText}>
-            Parlez-nous des ingrédients auxquels vous êtes{" "}
-            <Text style={styles.span}>allergique</Text> et/ou que vous{" "}
-            <Text style={styles.span}>n'aimez pas! </Text>:
-          </Text>
+          
           <View style={styles.inputIngredients}>
+          <View style={styles.divLogo}>
+          <Image
+                source={require("../assets/LogoPlateSuggest.png")}
+                style={styles.logoPlateSuggest}
+              />
+              </View>
             <TextInput
               style={styles.input}
               placeholder="Type an ingredient..."
@@ -450,10 +453,11 @@ export default function SettingsScreen({ navigation }) {
                 fetchSuggestions();
               }}
             />
+           
             <TouchableOpacity style={styles.addButton} onPress={addWord}>
-              <FontAwesome name="plus-circle" size={40} color="#A41623" />
+              <FontAwesome name="plus-circle" size={50} color="#A41623" />
             </TouchableOpacity>
-          </View>
+            
 
           {showList && (
             <FlatList
@@ -472,6 +476,7 @@ export default function SettingsScreen({ navigation }) {
             keyExtractor={(item) => item}
             contentContainerStyle={styles.listContent}
           />
+          </View>
         </Modal>
       )}
 
@@ -492,36 +497,33 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 15,
     flexDirection: "column",
+    paddingTop: 80,
   },
 
   avatar: {
     flexDirection: "row",
     justifyContent: "center",
+
   },
   icon: {
     textAlign: "center",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 50,
-    marginBottom: 20,
   },
 
-  name: {
-    marginBottom: 50,
-  },
+
   parent: {
     borderBottomWidth: 2,
     borderBottomColor: "#DFDFDF",
     flexDirection: "row-reverse",
   },
-  enligne: {},
-  regime: {},
+
   regimesModal: {
     backgroundColor: "white",
     borderRadius: 5,
     borderColor: "lightgray",
     zIndex: 50,
-    height: "75%",
+    height: "60%",
     flexDirection: "row",
     justifyContent: "center",
     flexWrap: "wrap",
@@ -544,7 +546,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: "lightgray",
     zIndex: 50,
-    height: "75%",
+    height: "60%",
     flexDirection: "row",
     justifyContent: "center",
     flexWrap: "wrap",
@@ -562,11 +564,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: "#DFDFDF",
   },
-  IngredientsVisible: {
-    backgroundColor: "white",
-    padding: 15,
-    flexDirection: "column",
-  },
+
   textButton: {
     fontSize: 19,
     marginTop: 20,
@@ -688,14 +686,14 @@ const styles = StyleSheet.create({
     fontFamily: "Sansita",
   },
   inputIngredients: {
-    display: "flex",
-    flexDirection: "row",
-    borderStyle: "solid",
+    backgroundColor: "white",
+    borderRadius: 5,
     borderColor: "lightgray",
-    borderWidth: 1,
-    width: "85%",
-    borderRadius: 20,
-    height: 70,
+    zIndex: 50,
+    height: "60%",
+    flexDirection: "row",
+    justifyContent: "center",
+    flexWrap: "wrap",
   },
   addButton: {
     position: "relative",

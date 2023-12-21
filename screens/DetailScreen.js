@@ -45,13 +45,12 @@ export default function DetailScreen({ route, navigation }) {
           />
           <Text style={styles.namei}>Carrefour</Text>
         </View>
-        <View style={styles.container3}>
+        <View>
           <View style={styles.bloc4}>
           <FontAwesome
             name="star-o"
             size={20}
             color="#A41623"
-            style={styles.icon}
           />
           <Text > 3,8 </Text>
           </View>
@@ -60,7 +59,6 @@ export default function DetailScreen({ route, navigation }) {
             name="credit-card"
             size={20}
             color="#A41623"
-            style={styles.icon}
           />
           <Text > 12 €</Text>
           </View>
@@ -69,18 +67,17 @@ export default function DetailScreen({ route, navigation }) {
             name="road"
             size={20}
             color="#A41623"
-            style={styles.icon}
           />
           <Text > 600 mètres </Text>
           </View>
          </View>
         </View>
 
-        <View style={styles.bloc5}>
+        <View>
           <Text style={styles.PlateNamei}>{restaurant.dish_name}</Text>
         </View>
-        <View style={styles.bloc}>
-          <Text style={styles.description}></Text>
+
+        <View>
           <Text style={styles.descriptioni}>{restaurant.dish_description}</Text>
         </View>
     </View>
@@ -97,14 +94,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
   },
-  container3: {
-    fontStyle: "italic",
-    flexDirection: "column",
-  
-  },
+
   bloc2: {
     flexDirection: "row",
-    marginTop: 30,
+    marginTop: 50,
   },
   bloc3: {
     flexDirection: "row",
@@ -112,9 +105,6 @@ const styles = StyleSheet.create({
   },
   bloc4: {
     flexDirection: "row",
-    paddingTop: 15,
-  },
-  bloc5: {
     paddingTop: 15,
   },
   bloc6: {
@@ -130,11 +120,6 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     fontStyle: "italic",
-    fontWeight: "bold",
-  },
-  description: {
-    fontStyle: "italic",
-    fontSize: 16,
     fontWeight: "bold",
   },
   note: {
@@ -163,6 +148,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   descriptioni: {
+    paddingTop: 15,
     fontSize: 16,
     marginStart: 10,
     fontFamily: "SansitaBold",
@@ -177,6 +163,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   PlateNamei: {
+    paddingTop: 15,
     fontSize: 16,
     color: "#A41623",
     fontWeight: "bold",
