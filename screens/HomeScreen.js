@@ -245,8 +245,8 @@ export default function HomeScreen({ navigation }) {
 
         case selectedFilters.rating:
           return sortOrder === "desc"
-            ? a.qualification - b.qualification
-            : b.qualification - a.qualification;
+            ? a.note - b.note
+            : b.note - a.note;
 
         default:
           return 0;

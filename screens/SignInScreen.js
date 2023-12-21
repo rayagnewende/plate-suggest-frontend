@@ -17,6 +17,10 @@ export default function SignInScreen({ navigation }) {
   const [emailERROR, setEmailERROR] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+
+  const clearInputs = () => {
+
+  }
   const handleSubmit = () => {
     fetch("https://plate-suggest-backend.vercel.app/users/signin", {
       method: "POST",
@@ -35,7 +39,7 @@ export default function SignInScreen({ navigation }) {
           );
           navigation.navigate("TabNavigator");
         } else {
-          setErrorMessage("Connexion Incorrect");
+          setErrorMessage("Identifiants Incorrect!");
           setEmailERROR(true);
         }
         setEmail("");
@@ -64,7 +68,7 @@ export default function SignInScreen({ navigation }) {
         secureTextEntry={true}
         style={styles.input}
       />
-      {emailERROR && <Text style={styles.error}>Connexion Incorrect !</Text>}
+      {emailERROR && <Text style={styles.error}>Email ou Mot de passe invalide</Text>}
       <TouchableOpacity
         onPress={() => handleSubmit()}
         style={styles.button}

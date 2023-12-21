@@ -28,15 +28,17 @@ export default function SignUpScreen({ navigation }) {
       .then((data) => {
         if (data.result) {
           dispatch(register({ token: data.token, username, email, password }));
-
+          setEmail("");
+          setPassword("");
+          setUsername("");
           navigation.navigate("Preferences");
         } else {
           setErrorMessage(data.error);
           setUserERROR(true);
+          setEmail("");
+          setPassword("");
+          setUsername("");
         }
-        setEmail("");
-        setPassword("");
-        setUsername("");
       });
   };
 
@@ -52,6 +54,7 @@ export default function SignUpScreen({ navigation }) {
         onChangeText={(value) => setUsername(value)}
         value={username}
         style={styles.input}
+       
       />
       <TextInput
         placeholder="Adresse email"
@@ -59,6 +62,7 @@ export default function SignUpScreen({ navigation }) {
         textContentType="emailAddress"
         value={email}
         style={styles.input}
+        keyboardType="email-address"
       />
       <TextInput
         placeholder="Mot de passe"
@@ -66,6 +70,7 @@ export default function SignUpScreen({ navigation }) {
         onChangeText={(value) => setPassword(value)}
         value={password}
         style={styles.input}
+        keyboardType="password"
       />
       {userERROR && <Text style={styles.error}>{errorMessage}</Text>}
       <TouchableOpacity
