@@ -1,4 +1,4 @@
-/*
+
 import React, { useState } from "react";
 import {
   View,
@@ -62,37 +62,16 @@ export default function SettingsScreen({ navigation }) {
     navigation.navigate("Welcome");
   };
 
-  const renderOption = (option) => (
-    <TouchableOpacity
-      style={styles.optionContainer}
-      onPress={() => handleOptionSelect(option)}
-      key={option}
-    >
-      <View style={styles.checkboxContainer}>
-        <CheckBox
-          checked={option === selectedOption}
-          onPress={() => handleOptionSelect(option)}
-          style={styles.checkbox}
-          checkedColor="#A41623"
-        />
-        <View style={styles.optionTextContainer}>
-          <Text style={styles.optionText}>{option.padEnd(20)}</Text>
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
-
+/*
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      <View style={styles.icon}>
-        <Image
-          style={styles.img}
-          source={
-            avatarImages[user.preferences.regime] || avatarImages.Everything
-          }
+    <View style={styles.container}>
+      <Text style={styles.parametre}>Paramètres</Text>
+      <View style={styles.avatar}>
+        <FontAwesome
+          name="user"
+          size={100}
+          color="#A41623"
+          style={styles.icon}
         />
       </View>
 
@@ -108,6 +87,7 @@ export default function SettingsScreen({ navigation }) {
           {user.username}
         </Text>
       </View>
+    
       
       <View style={styles.parent}>
         <TouchableOpacity  onPress={() => goToPreferencies()} activeOpacity={0.8}>
@@ -306,6 +286,12 @@ const styles = StyleSheet.create({
     padding: 15,
     flexDirection:'column',
   },
+
+
+    avatar: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
   icon: {
     textAlign: "center",
     alignItems: "center",
@@ -313,11 +299,8 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginBottom: 20,
   },
-  img: {
-    height: 180,
-    width: 180,
-    borderRadius: 100,
-  },
+  
+
   name: {
     marginBottom: 50,
    },
@@ -396,4 +379,259 @@ const styles = StyleSheet.create({
   },
 });
    */
+
+  return (
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <View style={styles.avatar}>
+        <Image
+          style={styles.img}
+          source={
+            avatarImages[user.preferences.regime] || avatarImages.Everything
+          }
+        />
+      </View>
+
+      <View style={styles.name}>
+        <Text
+          style={{
+            textAlign: "center",
+            marginTop: 10,
+            fontSize: 20,
+            fontStyle: "italic",
+          }}
+        >
+          {user.username}
+        </Text>
+      </View>
+      
+      <View>
+        <TouchableOpacity style={styles.regime} onPress={() => goToPreferencies()} activeOpacity={0.8}>
+        <Text style={styles.textButton}>Régimes</Text>
+          <FontAwesome
+            name="chevron-right"
+            size={20}
+            color="black"
+            style={styles.autre}
+          />
+        </TouchableOpacity>
+        {regimesModalVisible && maladieModalVisible && (
+          <Modal
+              isVisible={regimesModalVisible}
+              onBackdropPress={() => setregimesModalVisible(false)}
+              style={{
+                justifyContent: "flex-end",
+                margin: 0,
+              }}>
+                <View style={styles.regimesModal}>
+                <CheckBox
+                  title="Prix"
+                  containerStyle={{
+                    height: 60,
+                    justifyContent: "center",
+                    width: 150,
+                    alignItems: "center",
+                    borderRadius: 50,
+                    margin: 10,
+                  }}
+                  style={styles.CheckBox}
+                  checked={selectedFilters.price}
+                  checkedColor="#A41623"
+                  onPress={() =>
+                    setSelectedRegimes({
+                    })
+                  }
+                />
+                <CheckBox
+                  title="Prix"
+                  containerStyle={{
+                    height: 60,
+                    justifyContent: "center",
+                    width: 150,
+                    alignItems: "center",
+                    borderRadius: 50,
+                    margin: 10,
+                  }}
+                  style={styles.CheckBox}
+                  checked={selectedFilters.price}
+                  checkedColor="#A41623"
+                  onPress={() =>
+                    setSelectedRegimes({
+                    })
+                  }
+                />
+               </View>
+                
+                <View style={styles.maladieModalVisible}>
+                <CheckBox
+                  title="Prix"
+                  containerStyle={{
+                    height: 60,
+                    justifyContent: "center",
+                    width: 150,
+                    alignItems: "center",
+                    borderRadius: 50,
+                    margin: 10,
+                  }}
+                  style={styles.CheckBox}
+                  checked={selectedMaladiesParam.price}
+                  checkedColor="#A41623"
+                  onPress={() =>
+                    setSelectedMaladiesParam({
+                    })
+                  }
+                />
+                <CheckBox
+                  title="Prix"
+                  containerStyle={{
+                    height: 60,
+                    justifyContent: "center",
+                    width: 150,
+                    alignItems: "center",
+                    borderRadius: 50,
+                    margin: 10,
+                  }}
+                  style={styles.CheckBox}
+                  checked={selectedMaladiesParam.price}
+                  checkedColor="#A41623"
+                  onPress={() =>
+                    setSelectedMaladiesParam({
+                    })
+                  }
+                />
+                </View>
+                
+          </Modal>
+       )}
+
+      </View>
+
+      <View >
+        <TouchableOpacity style={styles.product} onPress={() => goToIngredients()} activeOpacity={0.8}>
+        <Text style={styles.textButton}>
+            Produits non désiré/Allergène(s)
+          </Text>
+          <FontAwesome name="chevron-right" size={20} color="black" />
+          
+        </TouchableOpacity>
+      </View>
+
+      <View >
+        <TouchableOpacity style={styles.maladie} onPress={() => goToIllnesses()} activeOpacity={0.5}>
+        <Text style={styles.textButton}>Maladies</Text>
+          <FontAwesome name="chevron-right" size={20} color="black" />   
+        </TouchableOpacity>
+      </View>
+
+      <TouchableOpacity
+        onPress={() => handledisconnect()}
+        style={styles.button}
+        activeOpacity={0.8}
+      >
+        <Text style={styles.deconnect}>Déconnexion</Text>
+      </TouchableOpacity>
+    </KeyboardAvoidingView>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+    justifyContent: "center",
+    padding: 15,
+  },
+  textButton: {
+    fontSize: 19,
+    fontWeight: "bold",
+    color: "#645354",
+  },
+  regime: {
+    flexDirection:'row',
+    justifyContent: "space-between",
+    borderBottomWidth: 1,
+    borderColor: "#BEBEBE",
+    paddingBottom: 10,
+    paddingTop: 15,
+  },
+  img: {
+    height: 180,
+    width: 180,
+    borderRadius: 100,
+  },
+  product: {
+    flexDirection:'row',
+    justifyContent: "space-between",
+    borderBottomWidth: 1,
+    borderColor: "#BEBEBE",
+    paddingBottom: 10,
+    paddingTop: 15,
+  },
+  maladie: {
+    flexDirection:'row',
+    justifyContent: "space-between",
+    borderBottomWidth: 1,
+    borderColor: "#BEBEBE",
+    paddingBottom: 10,
+    paddingTop: 15,
+  },
+  deconnect: {
+    fontSize: 19,
+    fontWeight: "bold",
+    marginTop: 200,
+  },
+  icon: {
+    textAlign: "center",
+    width: 110,
+    height: 110,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 2,
+    borderRadius: 50,
+  },
+  avatar: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  name: {
+   marginBottom: 50,
+  },
+
+
+
+
+
+
+
   
+  parametre: {
+   fontSize: 30,
+   paddingBottom: 15,
+   fontWeight: "bold",
+  },
+  divLogo: {
+    backgroundColor: "#A41623",
+    height: 120,
+    margin: 0,
+    borderBottomRightRadius: 120,
+    borderBottomLeftRadius: 120,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    marginBottom: 20,
+  },
+  filterDropdown: {
+    backgroundColor: "white",
+    borderRadius: 5,
+    borderColor: "lightgray",
+    zIndex: 50,
+    height: "50%",
+    flexDirection: "row",
+    justifyContent: "center",
+    flexWrap: "wrap",
+  },
+});
