@@ -42,7 +42,7 @@ export default function SettingsScreen({ navigation }) {
   );
   const [maladieModalVisible, setmaladieModalVisible] = useState(false);
   const [selectedIllnesses, setSelectedIllnesses] = useState([
-    user.preferences.illnesses,
+    ...user.preferences.illnesses,
   ]);
   const [ingredientsModalVisible, setIngredientsModalVisible] = useState(false);
   const [newWord, setNewWord] = useState("");
@@ -51,7 +51,7 @@ export default function SettingsScreen({ navigation }) {
   const [suggestionSelected, setSuggestionSelected] = useState(false);
   const [showList, setShowList] = useState(false);
   const [selectedIngredients, setSelectedIngredients] = useState([
-    user.preferences.ingredients,
+    ...user.preferences.ingredients,
   ]);
 
   const goToPreferencies = () => {
@@ -60,12 +60,27 @@ export default function SettingsScreen({ navigation }) {
 
   const goToIllnesses = () => {
     setmaladieModalVisible(!maladieModalVisible);
-    setSelectedIllnesses(selectedIllnesses);
+    // setSelectedIllnesses([...selectedIllnesses])
   };
 
   const goToIngredients = () => {
     setIngredientsModalVisible(!ingredientsModalVisible);
-    setSelectedIngredients(selectedIngredients);
+  };
+
+  const searchWord = (value) => {
+    let bool = false;
+    selectedIllnesses.map((el) => {
+      if (el.maladie_name === value) bool = true;
+    });
+    return bool;
+  };
+  const ingredientsList = (value) => {
+    let ingredients = [];
+    selectedIngredients.forEach((obj) => {
+      const ing = Object.values(obj)[0];
+      ingredients.push(ing);
+    });
+    return ingredients;
   };
 
   const [isConnected, setIsconected] = useState(false);
@@ -82,19 +97,21 @@ export default function SettingsScreen({ navigation }) {
   };
 
   const handleSelectionIllnesses = (option) => {
-    setSelectedIllnesses((prevOptions) => {
-      if (prevOptions.includes(option)) {
-        dispatch(deleteIllness(option));
-        return prevOptions.filter((element) => element !== option);
-      } else {
-        const illness = {
-          maladie_name: option,
-        };
-        dispatch(addIllnesses(illness));
-        return [...prevOptions, option];
-      }
-    });
+    // setSelectedIllnesses((prevOptions) => {
+    if (selectedIllnesses.includes(option)) {
+      dispatch(deleteIllness(option));
+      setSelectedIllnesses(
+        selectedIllnesses.filter((element) => element !== option)
+      );
+    } else {
+      const illness = {
+        maladie_name: option,
+      };
+      dispatch(addIllnesses(illness));
+      setSelectedIllnesses([...selectedIllnesses, option]);
+    }
   };
+
   useEffect(() => {
     if (suggestionSelected) {
       addWord();
@@ -344,7 +361,7 @@ export default function SettingsScreen({ navigation }) {
                 margin: 10,
               }}
               style={styles.CheckBox}
-              checked={selectedIllnesses.includes("Obésité")}
+              checked={searchWord("Obésité")}
               checkedColor="#A41623"
               onPress={() => handleSelectionIllnesses("Obésité")}
             />
@@ -359,7 +376,7 @@ export default function SettingsScreen({ navigation }) {
                 margin: 10,
               }}
               style={styles.CheckBox}
-              checked={selectedIllnesses.includes("Diabète")}
+              checked={searchWord("Diabète")}
               checkedColor="#A41623"
               onPress={() => handleSelectionIllnesses("Diabète")}
             />
@@ -374,7 +391,7 @@ export default function SettingsScreen({ navigation }) {
                 margin: 10,
               }}
               style={styles.CheckBox}
-              checked={selectedIllnesses.includes("Hypertension")}
+              checked={searchWord("Hypertension")}
               checkedColor="#A41623"
               onPress={() => handleSelectionIllnesses("Hypertension")}
             />
@@ -389,7 +406,7 @@ export default function SettingsScreen({ navigation }) {
                 margin: 10,
               }}
               style={styles.CheckBox}
-              checked={selectedIllnesses.includes("Aucun(e)")}
+              checked={searchWord("Aucun(e)")}
               checkedColor="#A41623"
               onPress={() => handleSelectionIllnesses("Aucun(e)")}
             />
@@ -450,7 +467,7 @@ export default function SettingsScreen({ navigation }) {
 
           <FlatList
             style={styles.list}
-            data={selectedIngredients}
+            data={ingredientsList([...selectedIngredients])}
             renderItem={renderWord}
             keyExtractor={(item) => item}
             contentContainerStyle={styles.listContent}
