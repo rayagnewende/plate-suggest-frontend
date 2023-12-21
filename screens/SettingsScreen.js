@@ -109,7 +109,8 @@ export default function SettingsScreen({ navigation }) {
       </View>
       
       <View style={styles.parent}>
-        <TouchableOpacity style={styles.regime} onPress={() => goToPreferencies()} activeOpacity={0.8}>
+        <TouchableOpacity  onPress={() => goToPreferencies()} activeOpacity={0.8}>
+        
         <Text style={styles.textButton}>Régimes</Text>
         <View style={styles.enligne}>
           <FontAwesome
@@ -322,13 +323,14 @@ const styles = StyleSheet.create({
    parent: {
      borderBottomWidth: 2,
      borderBottomColor:"#DFDFDF",
+     flexDirection:'row',
+
     },
    enligne: {
-    flexDirection:'row-reverse',
+   
    },
     regime: {
-      flexDirection:'column',
-      justifyContent:'space-around',
+
       },
   regimesModal: {
     backgroundColor: "white",
