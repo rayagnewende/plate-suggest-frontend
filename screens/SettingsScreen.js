@@ -174,16 +174,14 @@ export default function SettingsScreen({ navigation }) {
   );
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      <View style={styles.icon}>
-        <Image
-          style={styles.img}
-          source={
-            avatarImages[user.preferences.regime] || avatarImages.Everything
-          }
+    <View style={styles.container}>
+      <Text style={styles.parametre}>Paramètres</Text>
+      <View style={styles.avatar}>
+        <FontAwesome
+          name="user"
+          size={100}
+          color="#A41623"
+          style={styles.icon}
         />
       </View>
 
@@ -211,10 +209,10 @@ export default function SettingsScreen({ navigation }) {
             name="chevron-down"
             size={20}
             color="black"
-            style={styles.autre}
           />
+          </View>
         </TouchableOpacity>
-      </View>
+      
       {regimesModalVisible && (
         <Modal
           isVisible={regimesModalVisible}
@@ -474,6 +472,42 @@ export default function SettingsScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+    padding: 15,
+    flexDirection:'column',
+  },
+
+
+    avatar: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  icon: {
+    textAlign: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 50,
+    marginBottom: 20,
+  },
+  
+
+  name: {
+    marginBottom: 50,
+   },
+   parent: {
+     borderBottomWidth: 2,
+     borderBottomColor:"#DFDFDF",
+     flexDirection:'row-reverse',
+
+    },
+   enligne: {
+   
+   },
+    regime: {
+
+      },
   regimesModal: {
     backgroundColor: "white",
     borderRadius: 5,
@@ -484,6 +518,20 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexWrap: "wrap",
   },
+  partie2: {
+    borderBottomWidth: 2,
+    borderBottomColor:"#DFDFDF",
+  },
+  textButton: {
+    fontSize: 19,
+    marginTop: 20,
+    fontFamily: "Sansita",
+  },
+  CheckBox: {
+  },
+  maladie: {
+    justifyContent: "space-around",
+   },
   maladieVisible: {
     backgroundColor: "white",
     borderRadius: 5,
@@ -502,8 +550,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  container: {
-    flex: 1,
+  product: {
+
+  },
+  partie3: {
+    borderBottomWidth: 2,
+    borderBottomColor:"#DFDFDF",
+  },
+  IngredientsVisible: {
     backgroundColor: "white",
     padding: 15,
     flexDirection: "column",
@@ -526,17 +580,71 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 50,
-    marginBottom: 20,
+    padding: 15,
+  },
+  textButton: {
+    fontSize: 19,
+    fontWeight: "bold",
+    color: "#645354",
+  },
+  regime: {
+    flexDirection:'row',
+    justifyContent: "space-between",
+    borderBottomWidth: 1,
+    borderColor: "#BEBEBE",
+    paddingBottom: 10,
+    paddingTop: 15,
   },
   img: {
     height: 180,
     width: 180,
     borderRadius: 100,
   },
+  product: {
+    flexDirection:'row',
+    justifyContent: "space-between",
+    borderBottomWidth: 1,
+    borderColor: "#BEBEBE",
+    paddingBottom: 10,
+    paddingTop: 15,
+  },
+  maladie: {
+    flexDirection:'row',
+    justifyContent: "space-between",
+    borderBottomWidth: 1,
+    borderColor: "#BEBEBE",
+    paddingBottom: 10,
+    paddingTop: 15,
+  },
+  deconnect: {
+    fontSize: 19,
+    fontWeight: "bold",
+    marginTop: 200,
+  },
+  icon: {
+    textAlign: "center",
+    width: 110,
+    height: 110,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 2,
+    borderRadius: 50,
+  },
+  avatar: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
   name: {
     marginBottom: 50,
   },
+
+
+
+
+
+
+
+  
   parametre: {
     fontSize: 30,
     paddingBottom: 15,
