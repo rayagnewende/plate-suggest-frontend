@@ -47,11 +47,11 @@ export default function DetailScreen({ route, navigation }) {
         <View style={styles.bloc3}>
           <FontAwesome
             name="home"
-            size={20}
+            size={30}
             color="#A41623"
             style={styles.icon}
           />
-          <Text style={styles.namei}>FanFan</Text>
+          <Text style={styles.namei}>Carrefour</Text>
         </View>
         <View style={styles.container3}>
           <View style={styles.bloc4}>
@@ -65,12 +65,12 @@ export default function DetailScreen({ route, navigation }) {
           </View>
           <View style={styles.bloc4}>
            <FontAwesome
-            name="euro"
+            name="credit-card"
             size={20}
             color="#A41623"
             style={styles.icon}
           />
-          <Text > 12 </Text>
+          <Text > 12 €</Text>
           </View>
           <View style={styles.bloc4}>
           <FontAwesome
@@ -166,13 +166,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   namei: {
-    fontSize: 20,
+    fontSize: 25,
     fontStyle: "italic", 
     paddingLeft: 10,
   },
   descriptioni: {
     fontSize: 16,
     marginStart: 10,
+    fontFamily: "SansitaBold",
   },
   notei: {
     fontSize: 16,
