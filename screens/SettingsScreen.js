@@ -28,7 +28,7 @@ const { height, width } = Dimensions.get("window");
 export default function SettingsScreen({ navigation }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
-  console.log(user);
+
   const avatarImages = {
     Végétalien: require("../assets/Vegan.png"),
     Vegetarien: require("../assets/Vegetarien.png"),
@@ -174,14 +174,16 @@ export default function SettingsScreen({ navigation }) {
   );
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.parametre}>Paramètres</Text>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
       <View style={styles.avatar}>
-        <FontAwesome
-          name="user"
-          size={100}
-          color="#A41623"
-          style={styles.icon}
+        <Image
+          style={styles.img}
+          source={
+            avatarImages[user.preferences.regime] || avatarImages.Everything
+          }
         />
       </View>
 
@@ -205,14 +207,10 @@ export default function SettingsScreen({ navigation }) {
           activeOpacity={0.8}
         >
           <Text style={styles.textButton}>Régimes</Text>
-          <FontAwesome
-            name="chevron-down"
-            size={20}
-            color="black"
-          />
-          </View>
+          <FontAwesome name="chevron-down" size={20} color="black" />
         </TouchableOpacity>
-      
+      </View>
+
       {regimesModalVisible && (
         <Modal
           isVisible={regimesModalVisible}
@@ -476,11 +474,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     padding: 15,
-    flexDirection:'column',
+    flexDirection: "column",
   },
 
-
-    avatar: {
+  avatar: {
     flexDirection: "row",
     justifyContent: "center",
   },
@@ -491,23 +488,17 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginBottom: 20,
   },
-  
 
   name: {
     marginBottom: 50,
-   },
-   parent: {
-     borderBottomWidth: 2,
-     borderBottomColor:"#DFDFDF",
-     flexDirection:'row-reverse',
-
-    },
-   enligne: {
-   
-   },
-    regime: {
-
-      },
+  },
+  parent: {
+    borderBottomWidth: 2,
+    borderBottomColor: "#DFDFDF",
+    flexDirection: "row-reverse",
+  },
+  enligne: {},
+  regime: {},
   regimesModal: {
     backgroundColor: "white",
     borderRadius: 5,
@@ -520,18 +511,17 @@ const styles = StyleSheet.create({
   },
   partie2: {
     borderBottomWidth: 2,
-    borderBottomColor:"#DFDFDF",
+    borderBottomColor: "#DFDFDF",
   },
   textButton: {
     fontSize: 19,
     marginTop: 20,
     fontFamily: "Sansita",
   },
-  CheckBox: {
-  },
+  CheckBox: {},
   maladie: {
     justifyContent: "space-around",
-   },
+  },
   maladieVisible: {
     backgroundColor: "white",
     borderRadius: 5,
@@ -550,12 +540,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  product: {
-
-  },
+  product: {},
   partie3: {
     borderBottomWidth: 2,
-    borderBottomColor:"#DFDFDF",
+    borderBottomColor: "#DFDFDF",
   },
   IngredientsVisible: {
     backgroundColor: "white",
@@ -588,7 +576,7 @@ const styles = StyleSheet.create({
     color: "#645354",
   },
   regime: {
-    flexDirection:'row',
+    flexDirection: "row",
     justifyContent: "space-between",
     borderBottomWidth: 1,
     borderColor: "#BEBEBE",
@@ -601,7 +589,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   product: {
-    flexDirection:'row',
+    flexDirection: "row",
     justifyContent: "space-between",
     borderBottomWidth: 1,
     borderColor: "#BEBEBE",
@@ -609,7 +597,7 @@ const styles = StyleSheet.create({
     paddingTop: 15,
   },
   maladie: {
-    flexDirection:'row',
+    flexDirection: "row",
     justifyContent: "space-between",
     borderBottomWidth: 1,
     borderColor: "#BEBEBE",
@@ -638,13 +626,6 @@ const styles = StyleSheet.create({
     marginBottom: 50,
   },
 
-
-
-
-
-
-
-  
   parametre: {
     fontSize: 30,
     paddingBottom: 15,
