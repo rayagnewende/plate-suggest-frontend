@@ -1,3 +1,4 @@
+/*
 import React, { useState } from "react";
 import {
   View,
@@ -60,7 +61,7 @@ export default function SettingsScreen({ navigation }) {
     setIsconected(true);
     navigation.navigate("Welcome");
   };
-/*
+
   const renderOption = (option) => (
     <TouchableOpacity
       style={styles.optionContainer}
@@ -80,7 +81,7 @@ export default function SettingsScreen({ navigation }) {
       </View>
     </TouchableOpacity>
   );
-*/
+
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -323,7 +324,7 @@ const styles = StyleSheet.create({
    parent: {
      borderBottomWidth: 2,
      borderBottomColor:"#DFDFDF",
-     flexDirection:'row',
+     flexDirection:'row-reverse',
 
     },
    enligne: {
@@ -394,3 +395,5 @@ const styles = StyleSheet.create({
     marginTop: 100,
   },
 });
+   */
+  
