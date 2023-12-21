@@ -421,11 +421,12 @@ export default function SettingsScreen({ navigation }) {
         >
           
           <View style={styles.inputIngredients}>
-          <Text style={styles.questionText}>
-            Parlez-nous des ingrédients auxquels vous êtes{" "}
-            <Text style={styles.span}>allergique</Text> et/ou que vous{" "}
-            <Text style={styles.span}>n'aimez pas! </Text>
-          </Text>
+          <View style={styles.divLogo}>
+          <Image
+                source={require("../assets/LogoPlateSuggest.png")}
+                style={styles.logoPlateSuggest}
+              />
+              </View>
             <TextInput
               style={styles.input}
               placeholder="Type an ingredient..."
@@ -505,7 +506,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: "lightgray",
     zIndex: 50,
-    height: "50%",
+    height: "60%",
     flexDirection: "row",
     justifyContent: "center",
     flexWrap: "wrap",
@@ -528,7 +529,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: "lightgray",
     zIndex: 50,
-    height: "50%",
+    height: "60%",
     flexDirection: "row",
     justifyContent: "center",
     flexWrap: "wrap",
@@ -672,7 +673,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: "lightgray",
     zIndex: 50,
-    height: "50%",
+    height: "60%",
     flexDirection: "row",
     justifyContent: "center",
     flexWrap: "wrap",
