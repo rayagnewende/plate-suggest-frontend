@@ -41,7 +41,6 @@ export default function SignUpScreen({ navigation }) {
         }
       });
   };
-
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -83,7 +82,6 @@ export default function SignUpScreen({ navigation }) {
     </KeyboardAvoidingView>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

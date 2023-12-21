@@ -28,7 +28,7 @@ const { height, width } = Dimensions.get("window");
 export default function SettingsScreen({ navigation }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
-  console.log(user);
+
   const avatarImages = {
     Végétalien: require("../assets/Vegan.png"),
     Vegetarien: require("../assets/Vegetarien.png"),
@@ -178,7 +178,7 @@ export default function SettingsScreen({ navigation }) {
       style={styles.container}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <View style={styles.icon}>
+      <View style={styles.avatar}>
         <Image
           style={styles.img}
           source={
@@ -207,14 +207,10 @@ export default function SettingsScreen({ navigation }) {
           activeOpacity={0.8}
         >
           <Text style={styles.textButton}>Régimes</Text>
-          <FontAwesome
-            name="chevron-down"
-            size={20}
-            color="black"
-            style={styles.autre}
-          />
+          <FontAwesome name="chevron-down" size={20} color="black" />
         </TouchableOpacity>
       </View>
+
       {regimesModalVisible && (
         <Modal
           isVisible={regimesModalVisible}
@@ -401,7 +397,7 @@ export default function SettingsScreen({ navigation }) {
         </Modal>
       )}
 
-      <View style={styles.parent2}>
+      <View >
         <TouchableOpacity
           style={styles.product}
           onPress={() => goToIngredients()}
@@ -420,14 +416,17 @@ export default function SettingsScreen({ navigation }) {
           style={{
             justifyContent: "flex-end",
             margin: 0,
+           
           }}
         >
-          <Text style={styles.questionText}>
-            Parlez-nous des ingrédients auxquels vous êtes{" "}
-            <Text style={styles.span}>allergique</Text> et/ou que vous{" "}
-            <Text style={styles.span}>n'aimez pas! </Text>:
-          </Text>
+          
           <View style={styles.inputIngredients}>
+          <View style={styles.divLogo}>
+          <Image
+                source={require("../assets/LogoPlateSuggest.png")}
+                style={styles.logoPlateSuggest}
+              />
+              </View>
             <TextInput
               style={styles.input}
               placeholder="Type an ingredient..."
@@ -437,10 +436,11 @@ export default function SettingsScreen({ navigation }) {
                 fetchSuggestions();
               }}
             />
+           
             <TouchableOpacity style={styles.addButton} onPress={addWord}>
-              <FontAwesome name="plus-circle" size={40} color="#A41623" />
+              <FontAwesome name="plus-circle" size={50} color="#A41623" />
             </TouchableOpacity>
-          </View>
+            
 
           {showList && (
             <FlatList
@@ -459,6 +459,7 @@ export default function SettingsScreen({ navigation }) {
             keyExtractor={(item) => item}
             contentContainerStyle={styles.listContent}
           />
+          </View>
         </Modal>
       )}
 
@@ -474,22 +475,61 @@ export default function SettingsScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+    padding: 15,
+    flexDirection: "column",
+    paddingTop: 80,
+  },
+
+  avatar: {
+    flexDirection: "row",
+    justifyContent: "center",
+
+  },
+  icon: {
+    textAlign: "center",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+
+  parent: {
+    borderBottomWidth: 2,
+    borderBottomColor: "#DFDFDF",
+    flexDirection: "row-reverse",
+  },
+
   regimesModal: {
     backgroundColor: "white",
     borderRadius: 5,
     borderColor: "lightgray",
     zIndex: 50,
-    height: "75%",
+    height: "60%",
     flexDirection: "row",
     justifyContent: "center",
     flexWrap: "wrap",
+  },
+  partie2: {
+    borderBottomWidth: 2,
+    borderBottomColor: "#DFDFDF",
+  },
+  textButton: {
+    fontSize: 19,
+    marginTop: 20,
+    fontFamily: "Sansita",
+  },
+  CheckBox: {},
+  maladie: {
+    justifyContent: "space-around",
   },
   maladieVisible: {
     backgroundColor: "white",
     borderRadius: 5,
     borderColor: "lightgray",
     zIndex: 50,
-    height: "75%",
+    height: "60%",
     flexDirection: "row",
     justifyContent: "center",
     flexWrap: "wrap",
@@ -502,12 +542,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-    padding: 15,
-    flexDirection: "column",
+  product: {},
+  partie3: {
+    borderBottomWidth: 2,
+    borderBottomColor: "#DFDFDF",
   },
+
   textButton: {
     fontSize: 19,
     marginTop: 20,
@@ -526,17 +566,64 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 50,
-    marginBottom: 20,
+    padding: 15,
+  },
+  textButton: {
+    fontSize: 19,
+    fontWeight: "bold",
+    color: "#645354",
+  },
+  regime: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderBottomWidth: 1,
+    borderColor: "#BEBEBE",
+    paddingBottom: 10,
+    paddingTop: 15,
   },
   img: {
     height: 180,
     width: 180,
     borderRadius: 100,
   },
+  product: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderBottomWidth: 1,
+    borderColor: "#BEBEBE",
+    paddingBottom: 10,
+    paddingTop: 15,
+  },
+  maladie: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderBottomWidth: 1,
+    borderColor: "#BEBEBE",
+    paddingBottom: 10,
+    paddingTop: 15,
+  },
+  deconnect: {
+    fontSize: 19,
+    fontWeight: "bold",
+    marginTop: 200,
+  },
+  icon: {
+    textAlign: "center",
+    width: 110,
+    height: 110,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 2,
+    borderRadius: 50,
+  },
+  avatar: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
   name: {
     marginBottom: 50,
   },
+
   parametre: {
     fontSize: 30,
     paddingBottom: 15,
@@ -582,14 +669,14 @@ const styles = StyleSheet.create({
     fontFamily: "Sansita",
   },
   inputIngredients: {
-    display: "flex",
-    flexDirection: "row",
-    borderStyle: "solid",
+    backgroundColor: "white",
+    borderRadius: 5,
     borderColor: "lightgray",
-    borderWidth: 1,
-    width: "85%",
-    borderRadius: 20,
-    height: 70,
+    zIndex: 50,
+    height: "60%",
+    flexDirection: "row",
+    justifyContent: "center",
+    flexWrap: "wrap",
   },
   addButton: {
     position: "relative",

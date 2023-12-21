@@ -39,48 +39,45 @@ export default function DetailScreen({ route, navigation }) {
         <View style={styles.bloc3}>
           <FontAwesome
             name="home"
-            size={20}
+            size={30}
             color="#A41623"
             style={styles.icon}
           />
-          <Text style={styles.namei}>FanFan</Text>
+          <Text style={styles.namei}>Carrefour</Text>
         </View>
-        <View style={styles.container3}>
+        <View>
           <View style={styles.bloc4}>
           <FontAwesome
             name="star-o"
             size={20}
             color="#A41623"
-            style={styles.icon}
           />
           <Text > 3,8 </Text>
           </View>
           <View style={styles.bloc4}>
            <FontAwesome
-            name="euro"
+            name="credit-card"
             size={20}
             color="#A41623"
-            style={styles.icon}
           />
-          <Text > 12 </Text>
+          <Text > 12 €</Text>
           </View>
           <View style={styles.bloc4}>
           <FontAwesome
             name="road"
             size={20}
             color="#A41623"
-            style={styles.icon}
           />
           <Text > 600 mètres </Text>
           </View>
          </View>
         </View>
 
-        <View style={styles.bloc5}>
+        <View>
           <Text style={styles.PlateNamei}>{restaurant.dish_name}</Text>
         </View>
-        <View style={styles.bloc}>
-          <Text style={styles.description}></Text>
+
+        <View>
           <Text style={styles.descriptioni}>{restaurant.dish_description}</Text>
         </View>
     </View>
@@ -97,11 +94,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
   },
-  container3: {
-    fontStyle: "italic",
-    flexDirection: "column",
-  
-  },
+
   bloc2: {
     flexDirection: "row",
     marginTop: 30,
@@ -112,9 +105,6 @@ const styles = StyleSheet.create({
   },
   bloc4: {
     flexDirection: "row",
-    paddingTop: 15,
-  },
-  bloc5: {
     paddingTop: 15,
   },
   bloc6: {
@@ -130,11 +120,6 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     fontStyle: "italic",
-    fontWeight: "bold",
-  },
-  description: {
-    fontStyle: "italic",
-    fontSize: 16,
     fontWeight: "bold",
   },
   note: {
@@ -158,13 +143,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   namei: {
-    fontSize: 20,
+    fontSize: 25,
     fontStyle: "italic", 
     paddingLeft: 10,
   },
   descriptioni: {
+    paddingTop: 15,
     fontSize: 16,
     marginStart: 10,
+    fontFamily: "SansitaBold",
   },
   notei: {
     fontSize: 16,
@@ -176,6 +163,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   PlateNamei: {
+    paddingTop: 15,
     fontSize: 16,
     color: "#A41623",
     fontWeight: "bold",
