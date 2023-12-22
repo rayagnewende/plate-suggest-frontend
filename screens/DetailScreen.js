@@ -47,39 +47,27 @@ export default function DetailScreen({ route, navigation }) {
         </View>
         <View>
           <View style={styles.bloc4}>
-          <FontAwesome
-            name="star-o"
-            size={20}
-            color="#A41623"
-          />
-          <Text > 3,8 </Text>
+            <FontAwesome name="star-o" size={20} color="#A41623" />
+            <Text> 3,8 </Text>
           </View>
           <View style={styles.bloc4}>
-           <FontAwesome
-            name="credit-card"
-            size={20}
-            color="#A41623"
-          />
-          <Text > 12 €</Text>
+            <FontAwesome name="credit-card" size={20} color="#A41623" />
+            <Text> 12 €</Text>
           </View>
           <View style={styles.bloc4}>
-          <FontAwesome
-            name="road"
-            size={20}
-            color="#A41623"
-          />
-          <Text > 600 mètres </Text>
+            <FontAwesome name="road" size={20} color="#A41623" />
+            <Text> 600 mètres </Text>
           </View>
-         </View>
         </View>
+      </View>
 
-        <View>
-          <Text style={styles.PlateNamei}>{restaurant.dish_name}</Text>
-        </View>
+      <View>
+        <Text style={styles.PlateNamei}>{restaurant.dish_name}</Text>
+      </View>
 
-        <View>
-          <Text style={styles.descriptioni}>{restaurant.dish_description}</Text>
-        </View>
+      <View>
+        <Text style={styles.descriptioni}>{restaurant.dish_description}</Text>
+      </View>
     </View>
   );
 }
@@ -88,6 +76,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
+    padding: 15,
   },
   container2: {
     fontStyle: "italic",
@@ -97,7 +86,7 @@ const styles = StyleSheet.create({
 
   bloc2: {
     flexDirection: "row",
-    marginTop: 50,
+    marginTop: 25,
   },
   bloc3: {
     flexDirection: "row",
@@ -115,7 +104,7 @@ const styles = StyleSheet.create({
     height: "50%",
   },
   icon: {
-    marginLeft:15,
+    marginLeft: 15,
   },
   name: {
     fontSize: 16,
@@ -144,7 +133,7 @@ const styles = StyleSheet.create({
   },
   namei: {
     fontSize: 25,
-    fontStyle: "italic", 
+    fontStyle: "italic",
     paddingLeft: 10,
   },
   descriptioni: {
