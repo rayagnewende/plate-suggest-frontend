@@ -53,6 +53,10 @@ export default function SettingsScreen({ navigation }) {
   const [selectedIngredients, setSelectedIngredients] = useState([
     ...user.preferences.ingredients,
   ]);
+  const [diabeteChecked, setDiabeteChecked]= useState(false); 
+  const [obesiteChecked, setObesiteChecked]= useState(false); 
+  const [hypertensionChecked, setHypertensionChecked]= useState(false); 
+  const [aucuneChecked, setAucuneChecked]= useState(false); 
 
   const goToPreferencies = () => {
     setregimesModalVisible(!regimesModalVisible);
@@ -122,6 +126,13 @@ export default function SettingsScreen({ navigation }) {
     }
   }, [suggestionSelected]);
 
+  useEffect( () => {
+      setObesiteChecked(searchWord('Obésité')); 
+      setDiabeteChecked(searchWord('Diabète'));
+      setHypertensionChecked(searchWord('Hypertension'))
+      setAucuneChecked(searchWord("Aucun(e)"))
+  }, [])
+
   const fetchSuggestions = async () => {
     try {
       const response = await fetch(
@@ -137,6 +148,61 @@ export default function SettingsScreen({ navigation }) {
       console.error("Error fetching suggestions:", error);
     }
   };
+
+  const handleRegimeModal = () => {
+    setregimesModalVisible(false)
+
+    fetch(`https://plate-suggest-backend.vercel.app/preferences/regime/${user.token}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({regime:user.preferences.regime}),
+    })
+    .then((response) => response.json())
+    .then( data => {
+      if(data.result)
+      {
+        console.log("regime enregistré avec succès");
+      }
+    })
+  }
+
+  const handleMaladieseModal = () => {
+    setmaladieModalVisible(false)
+
+    fetch(`https://plate-suggest-backend.vercel.app/preferences/maladies/${user.token}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({regime:user.preferences.maladies}),
+    })
+    .then((response) => response.json())
+    .then( data => {
+      if(data.result)
+      {
+        console.log("maladies enregistré avec succès");
+      }
+    })
+  }
+
+
+  const handleChangeObesité = () => {
+   setObesiteChecked(!obesiteChecked); 
+   handleSelectionIllnesses("Obésité")
+  }
+
+  const handleChangeDiabete = () => {
+    setDiabeteChecked(!diabeteChecked); 
+    handleSelectionIllnesses("Diabète")
+  }
+
+  const handleChangeHypertension = () => {
+    setHypertensionChecked(!hypertensionChecked); 
+    handleSelectionIllnesses("Hypertension")
+   }
+
+   const handleChangeAucune = () => {
+    setAucuneChecked(!aucuneChecked); 
+    handleSelectionIllnesses("Aucun(e)")
+   }
 
   const addWord = () => {
     if (newWord.trim() !== "") {
@@ -231,7 +297,7 @@ export default function SettingsScreen({ navigation }) {
       {regimesModalVisible && (
         <Modal
           isVisible={regimesModalVisible}
-          onBackdropPress={() => setregimesModalVisible(false)}
+          onBackdropPress={() => handleRegimeModal()}
           style={{
             justifyContent: "flex-end",
             margin: 0,
@@ -337,7 +403,7 @@ export default function SettingsScreen({ navigation }) {
       {maladieModalVisible && (
         <Modal
           isVisible={maladieModalVisible}
-          onBackdropPress={() => setmaladieModalVisible(false)}
+          onBackdropPress={() => handleMaladieseModal()}
           style={{
             justifyContent: "flex-end",
             margin: 0,
@@ -361,9 +427,9 @@ export default function SettingsScreen({ navigation }) {
                 margin: 10,
               }}
               style={styles.CheckBox}
-              checked={searchWord("Obésité")}
+              checked={obesiteChecked}
               checkedColor="#A41623"
-              onPress={() => handleSelectionIllnesses("Obésité")}
+              onPress={() => handleChangeObesité()}
             />
             <CheckBox
               title="Diabète"
@@ -376,9 +442,9 @@ export default function SettingsScreen({ navigation }) {
                 margin: 10,
               }}
               style={styles.CheckBox}
-              checked={searchWord("Diabète")}
+              checked={diabeteChecked}
               checkedColor="#A41623"
-              onPress={() => handleSelectionIllnesses("Diabète")}
+              onPress={() => handleChangeDiabete()}
             />
             <CheckBox
               title="Hypertension"
@@ -391,9 +457,9 @@ export default function SettingsScreen({ navigation }) {
                 margin: 10,
               }}
               style={styles.CheckBox}
-              checked={searchWord("Hypertension")}
+              checked={hypertensionChecked}
               checkedColor="#A41623"
-              onPress={() => handleSelectionIllnesses("Hypertension")}
+              onPress={() => handleChangeHypertension()}
             />
             <CheckBox
               title="Aucun(e)"
@@ -406,9 +472,9 @@ export default function SettingsScreen({ navigation }) {
                 margin: 10,
               }}
               style={styles.CheckBox}
-              checked={searchWord("Aucun(e)")}
+              checked={aucuneChecked}
               checkedColor="#A41623"
-              onPress={() => handleSelectionIllnesses("Aucun(e)")}
+              onPress={() => handleChangeAucune()}
             />
           </View>
         </Modal>
