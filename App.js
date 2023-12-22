@@ -33,11 +33,11 @@ const TabNavigator = () => {
         tabBarIcon: ({ color, size }) => {
           let iconName = "";
 
-          if (route.name === "Home") {
+          if (route.name === "Accueil") {
             iconName = "home";
-          } else if (route.name === "Map") {
+          } else if (route.name === "Carte") {
             iconName = "map";
-          } else if (route.name === "Settings") {
+          } else if (route.name === "Paramètres") {
             iconName = "gear";
           }
 
@@ -48,9 +48,9 @@ const TabNavigator = () => {
         headerShown: false,
       })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Map" component={MapScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
+      <Tab.Screen name="Accueil" component={HomeScreen} />
+      <Tab.Screen name="Carte" component={MapScreen} />
+      <Tab.Screen name="Paramètres" component={SettingsScreen} />
     </Tab.Navigator>
   );
 };
@@ -93,6 +93,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    fontFamily: "Sansita",
+    //fontFamily: "SansitaItalic",
   },
 });

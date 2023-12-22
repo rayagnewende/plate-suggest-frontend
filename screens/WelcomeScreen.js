@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     // fontWeight: "600",
     fontSize: 20,
     marginVertical: 8,
-    fontFamily: "Sansita",
+  //  fontFamily: "SansitaItalic",
   },
   textButton2: {
     color: "#A41623",
@@ -104,6 +104,6 @@ const styles = StyleSheet.create({
     // fontWeight: "600",
     fontSize: 20,
     marginVertical: 8,
-    fontFamily: "Sansita",
+   // fontFamily: "SansitaItalic",
   },
 });

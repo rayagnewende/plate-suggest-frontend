@@ -18,7 +18,7 @@ export default function DetailScreen({ route, navigation }) {
   };
 
   const goToHome = () => {
-    navigation.navigate("Home");
+    navigation.navigate("Accueil");
   };
 
   return (
@@ -43,7 +43,7 @@ export default function DetailScreen({ route, navigation }) {
             color="#A41623"
             style={styles.icon}
           />
-          <Text style={styles.namei}>Carrefour</Text>
+          <Text style={styles.namei}>{restaurant.place_name}</Text>
         </View>
         <View>
           <View style={styles.bloc4}>

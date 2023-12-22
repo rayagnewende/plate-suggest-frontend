@@ -215,9 +215,9 @@ export default function HomeScreen({ navigation }) {
               {maxLengthDescription}
             </Text>
             <Text style={styles.restaurantQualification}>
-              Rating:{item.note}{" "}
+              Note:{item.note}{" "}
             </Text>
-            <Text style={styles.restaurantPrice}>Price: {item.price}</Text>
+            <Text style={styles.restaurantPrice}>Prix: {item.price}</Text>
             <Text style={styles.restaurantDistance}>
               Distance:{item.distance} m
             </Text>
