@@ -31,8 +31,8 @@ export default function SettingsScreen({ navigation }) {
 
   const avatarImages = {
     Végétalien: require("../assets/Vegan.png"),
-    Vegetarien: require("../assets/Vegetarien.png"),
-    Pescetarien: require("../assets/Pescetarien.png"),
+    Végétarien: require("../assets/Vegetarien.png"),
+    Pescétarien: require("../assets/Pescetarien.png"),
     Flexitarien: require("../assets/Flexitarien.png"),
     Everything: require("../assets/Everything.png"),
   };
@@ -53,10 +53,10 @@ export default function SettingsScreen({ navigation }) {
   const [selectedIngredients, setSelectedIngredients] = useState([
     ...user.preferences.ingredients,
   ]);
-  const [diabeteChecked, setDiabeteChecked]= useState(false); 
-  const [obesiteChecked, setObesiteChecked]= useState(false); 
-  const [hypertensionChecked, setHypertensionChecked]= useState(false); 
-  const [aucuneChecked, setAucuneChecked]= useState(false); 
+  const [diabeteChecked, setDiabeteChecked] = useState(false);
+  const [obesiteChecked, setObesiteChecked] = useState(false);
+  const [hypertensionChecked, setHypertensionChecked] = useState(false);
+  const [aucuneChecked, setAucuneChecked] = useState(false);
 
   const goToPreferencies = () => {
     setregimesModalVisible(!regimesModalVisible);
@@ -126,12 +126,12 @@ export default function SettingsScreen({ navigation }) {
     }
   }, [suggestionSelected]);
 
-  useEffect( () => {
-      setObesiteChecked(searchWord('Obésité')); 
-      setDiabeteChecked(searchWord('Diabète'));
-      setHypertensionChecked(searchWord('Hypertension'))
-      setAucuneChecked(searchWord("Aucun(e)"))
-  }, [])
+  useEffect(() => {
+    setObesiteChecked(searchWord("Obésité"));
+    setDiabeteChecked(searchWord("Diabète"));
+    setHypertensionChecked(searchWord("Hypertension"));
+    setAucuneChecked(searchWord("Aucun(e)"));
+  }, []);
 
   const fetchSuggestions = async () => {
     try {
@@ -150,59 +150,62 @@ export default function SettingsScreen({ navigation }) {
   };
 
   const handleRegimeModal = () => {
-    setregimesModalVisible(false)
+    setregimesModalVisible(false);
 
-    fetch(`https://plate-suggest-backend.vercel.app/preferences/regime/${user.token}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({regime:user.preferences.regime}),
-    })
-    .then((response) => response.json())
-    .then( data => {
-      if(data.result)
+    fetch(
+      `https://plate-suggest-backend.vercel.app/preferences/regime/${user.token}`,
       {
-        console.log("regime enregistré avec succès");
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ regime: user.preferences.regime }),
       }
-    })
-  }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result) {
+          console.log("regime enregistré avec succès");
+        }
+      });
+  };
 
   const handleMaladieseModal = () => {
-    setmaladieModalVisible(false)
+    setmaladieModalVisible(false);
 
-    fetch(`https://plate-suggest-backend.vercel.app/preferences/maladies/${user.token}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({regime:user.preferences.maladies}),
-    })
-    .then((response) => response.json())
-    .then( data => {
-      if(data.result)
+    fetch(
+      `https://plate-suggest-backend.vercel.app/preferences/maladies/${user.token}`,
       {
-        console.log("maladies enregistré avec succès");
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ regime: user.preferences.maladies }),
       }
-    })
-  }
-
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result) {
+          console.log("maladies enregistré avec succès");
+        }
+      });
+  };
 
   const handleChangeObesité = () => {
-   setObesiteChecked(!obesiteChecked); 
-   handleSelectionIllnesses("Obésité")
-  }
+    setObesiteChecked(!obesiteChecked);
+    handleSelectionIllnesses("Obésité");
+  };
 
   const handleChangeDiabete = () => {
-    setDiabeteChecked(!diabeteChecked); 
-    handleSelectionIllnesses("Diabète")
-  }
+    setDiabeteChecked(!diabeteChecked);
+    handleSelectionIllnesses("Diabète");
+  };
 
   const handleChangeHypertension = () => {
-    setHypertensionChecked(!hypertensionChecked); 
-    handleSelectionIllnesses("Hypertension")
-   }
+    setHypertensionChecked(!hypertensionChecked);
+    handleSelectionIllnesses("Hypertension");
+  };
 
-   const handleChangeAucune = () => {
-    setAucuneChecked(!aucuneChecked); 
-    handleSelectionIllnesses("Aucun(e)")
-   }
+  const handleChangeAucune = () => {
+    setAucuneChecked(!aucuneChecked);
+    handleSelectionIllnesses("Aucun(e)");
+  };
 
   const addWord = () => {
     if (newWord.trim() !== "") {
@@ -311,7 +314,7 @@ export default function SettingsScreen({ navigation }) {
               />
             </View>
             <CheckBox
-              title="Vegetarien"
+              title="Végétarien"
               containerStyle={{
                 height: 60,
                 justifyContent: "center",
@@ -321,9 +324,9 @@ export default function SettingsScreen({ navigation }) {
                 margin: 10,
               }}
               style={styles.CheckBox}
-              checked={selectedRegimes === "Vegetarien"}
+              checked={selectedRegimes === "Végétarien"}
               checkedColor="#A41623"
-              onPress={() => handleSelectionRegime("Vegetarien")}
+              onPress={() => handleSelectionRegime("Végétarien")}
             />
             <CheckBox
               title="Végétalien"
@@ -341,7 +344,7 @@ export default function SettingsScreen({ navigation }) {
               onPress={() => handleSelectionRegime("Végétalien")}
             />
             <CheckBox
-              title="Pescetarien"
+              title="Pescétarien"
               containerStyle={{
                 height: 60,
                 justifyContent: "center",
@@ -351,9 +354,9 @@ export default function SettingsScreen({ navigation }) {
                 margin: 10,
               }}
               style={styles.CheckBox}
-              checked={selectedRegimes === "Pescetarien"}
+              checked={selectedRegimes === "Pescétarien"}
               checkedColor="#A41623"
-              onPress={() => handleSelectionRegime("Pescetarien")}
+              onPress={() => handleSelectionRegime("Pescétarien")}
             />
             <CheckBox
               title="Flexitarien"
@@ -480,14 +483,14 @@ export default function SettingsScreen({ navigation }) {
         </Modal>
       )}
 
-      <View >
+      <View>
         <TouchableOpacity
           style={styles.product}
           onPress={() => goToIngredients()}
           activeOpacity={0.8}
         >
           <Text style={styles.textButton}>
-            Produits non désiré/Allergène(s)
+            Produits non désirés/Allergène(s)
           </Text>
           <FontAwesome name="chevron-down" size={20} color="black" />
         </TouchableOpacity>
@@ -499,49 +502,46 @@ export default function SettingsScreen({ navigation }) {
           style={{
             justifyContent: "flex-end",
             margin: 0,
-           
           }}
         >
-          
           <View style={styles.inputIngredients}>
-          <View style={styles.divLogo}>
-          <Image
+            <View style={styles.divLogo}>
+              <Image
                 source={require("../assets/LogoPlateSuggest.png")}
                 style={styles.logoPlateSuggest}
               />
-              </View>
+            </View>
             <TextInput
               style={styles.input}
-              placeholder="Type an ingredient..."
+              placeholder="Écrivez un ingrédient..."
               value={newWord}
               onChangeText={(text) => {
                 setNewWord(text);
                 fetchSuggestions();
               }}
             />
-           
+
             <TouchableOpacity style={styles.addButton} onPress={addWord}>
               <FontAwesome name="plus-circle" size={50} color="#A41623" />
             </TouchableOpacity>
-            
 
-          {showList && (
+            {showList && (
+              <FlatList
+                style={styles.suggestionsList}
+                data={suggestions}
+                renderItem={renderSuggestion}
+                keyExtractor={(item) => item}
+                contentContainerStyle={styles.listContent}
+              />
+            )}
+
             <FlatList
-              style={styles.suggestionsList}
-              data={suggestions}
-              renderItem={renderSuggestion}
+              style={styles.list}
+              data={ingredientsList([...selectedIngredients])}
+              renderItem={renderWord}
               keyExtractor={(item) => item}
               contentContainerStyle={styles.listContent}
             />
-          )}
-
-          <FlatList
-            style={styles.list}
-            data={ingredientsList([...selectedIngredients])}
-            renderItem={renderWord}
-            keyExtractor={(item) => item}
-            contentContainerStyle={styles.listContent}
-          />
           </View>
         </Modal>
       )}
@@ -569,14 +569,12 @@ const styles = StyleSheet.create({
   avatar: {
     flexDirection: "row",
     justifyContent: "center",
-
   },
   icon: {
     textAlign: "center",
     alignItems: "center",
     justifyContent: "center",
   },
-
 
   parent: {
     borderBottomWidth: 2,

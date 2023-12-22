@@ -44,7 +44,7 @@ export default function IngredientsScreen({ navigation }) {
       setSuggestions(autoAnswer);
       setShowList(true);
     } catch (error) {
-      console.error("Error fetching suggestions:", error);
+      console.error("Error:", error);
     }
   };
 
@@ -153,7 +153,7 @@ export default function IngredientsScreen({ navigation }) {
       <View style={styles.inputIngredients}>
         <TextInput
           style={styles.input}
-          placeholder="Type an ingredient..."
+          placeholder="Écrivez un ingrédient..."
           value={newWord}
           onChangeText={(text) => {
             setNewWord(text);

@@ -52,10 +52,10 @@ export default function PreferenciesScreen({ navigation }) {
       <Text style={styles.questionText}>
         Comment décririez-vous vos habitudes alimentaires ?
       </Text>
-      {renderOption("Vegetalien")}
+      {renderOption("Végétalien")}
 
-      {renderOption("Vegetarien")}
-      {renderOption("Pescetarien")}
+      {renderOption("Végétarien")}
+      {renderOption("Pescétarien")}
       {renderOption("Flexitarien")}
       {renderOption("Mange tout")}
 
@@ -104,7 +104,6 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    
   },
   nextButtonText: {
     color: "white",

@@ -162,13 +162,13 @@ export default function HomeScreen({ navigation }) {
           // });
         } else {
           setModalVisible(true);
-          setRestaurants("No restaurants available");
+          setRestaurants("Aucune Resultat");
         }
       } catch (error) {
-        console.error("Error obtaining location permission:", error);
+        console.error("Error:", error);
         Alert.alert(
           "Error",
-          "There was an issue obtaining location permission. Please try again."
+          "Pas de location trouvéz. Vous voulez reesayer?"
         );
       }
     })();
@@ -215,9 +215,9 @@ export default function HomeScreen({ navigation }) {
               {maxLengthDescription}
             </Text>
             <Text style={styles.restaurantQualification}>
-              Rating:{item.note}{" "}
+              Note: {item.note}{" "}
             </Text>
-            <Text style={styles.restaurantPrice}>Price: {item.price}</Text>
+            <Text style={styles.restaurantPrice}>Prix: {item.price}</Text>
             <Text style={styles.restaurantDistance}>
               Distance:{item.distance} m
             </Text>
@@ -346,7 +346,7 @@ export default function HomeScreen({ navigation }) {
                   }
                 />
                 <CheckBox
-                  title="Avis"
+                  title="Note"
                   containerStyle={{
                     height: 60,
                     justifyContent: "center",

@@ -79,7 +79,7 @@ export default function IllnessesScreen({ navigation }) {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <Text style={styles.questionText}>
-        Do you suffer from any of these illnesses?
+      Souffrez-vous de l'une de ces maladies ?
       </Text>
 
       {renderOption("Diabète")}
