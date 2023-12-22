@@ -41,6 +41,7 @@ export default function SignUpScreen({ navigation }) {
         }
       });
   };
+
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -69,7 +70,6 @@ export default function SignUpScreen({ navigation }) {
         onChangeText={(value) => setPassword(value)}
         value={password}
         style={styles.input}
-        keyboardType="password"
       />
       {userERROR && <Text style={styles.error}>{errorMessage}</Text>}
       <TouchableOpacity
@@ -82,6 +82,7 @@ export default function SignUpScreen({ navigation }) {
     </KeyboardAvoidingView>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     fontSize: 20,
     textAlign: "center",
-    fontFamily: "Sansita",
+   // fontFamily: "SansitaItalic",
     
   },
   button: {
@@ -137,12 +138,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     height: 30,
     marginVertical: 8,
-    fontFamily: "Sansita",
+   // fontFamily: "SansitaItalic",
   },
   error: {
     marginTop: 10,
     color: "white",
     fontSize: 17,
-    fontFamily: "Sansita",
+   // fontFamily: "SansitaItalic",
   },
 });

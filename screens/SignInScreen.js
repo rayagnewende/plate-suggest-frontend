@@ -61,6 +61,7 @@ export default function SignInScreen({ navigation }) {
         textContentType="emailAddress"
         onChangeText={(value) => setEmail(value)}
         style={styles.input}
+        keyboardType="email-address"
       />
       <TextInput
         placeholder="Mot de passe"

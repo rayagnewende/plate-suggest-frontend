@@ -244,7 +244,7 @@ export default function SettingsScreen({ navigation }) {
 
   const renderWord = ({ item }) => (
     <View style={styles.renderWord}>
-      <Text style={styles.wordItem}>{`\u2022 ${item}`}</Text>
+      <View style={styles.wordItem}><Text >{`\u2022 ${item}`}</Text></View>
       <TouchableOpacity
         style={styles.removeButton}
         onPress={() => removeWord(item)}
@@ -766,7 +766,6 @@ const styles = StyleSheet.create({
   list: {
     margin: 20,
     width: "50%",
-    display: "flex",
   },
   suggestionsList: {
     marginVertical: 10,
@@ -775,6 +774,12 @@ const styles = StyleSheet.create({
     zIndex: 5,
   },
   listContent: {
-    justifyContent: "flex-start",
+    flexDirection:"column"
   },
+  renderWord:{
+    flexDirection:"row", 
+  }, 
+  wordItem:{
+    marginRight:50
+  }
 });

@@ -166,10 +166,7 @@ export default function HomeScreen({ navigation }) {
         }
       } catch (error) {
         console.error("Error:", error);
-        Alert.alert(
-          "Error",
-          "Pas de location trouvéz. Vous voulez reesayer?"
-        );
+        Alert.alert("Error", "Pas de location trouvéz. Vous voulez reesayer?");
       }
     })();
   }, []);
@@ -215,7 +212,7 @@ export default function HomeScreen({ navigation }) {
               {maxLengthDescription}
             </Text>
             <Text style={styles.restaurantQualification}>
-              Note: {item.note}{" "}
+              Note:{item.note}{" "}
             </Text>
             <Text style={styles.restaurantPrice}>Prix: {item.price}</Text>
             <Text style={styles.restaurantDistance}>
@@ -244,9 +241,7 @@ export default function HomeScreen({ navigation }) {
             : distanceB - distanceA;
 
         case selectedFilters.rating:
-          return sortOrder === "desc"
-            ? a.note - b.note
-            : b.note - a.note;
+          return sortOrder === "desc" ? a.note - b.note : b.note - a.note;
 
         default:
           return 0;
